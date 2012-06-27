@@ -51,8 +51,8 @@ public:
     }
 
     void reset() {
-       eyePoint = Vector(-10, -100, 50);
-       forward = Vector(10, 140, -35);
+       eyePoint = Vector(-10, -160, 70);
+       forward = Vector(10, 136, -45);
 
         Vector along = CROSS(forward, Vector(0, 0, 1));
         up = along * forward;

@@ -10,7 +10,9 @@
       <itemPath>Logger.h</itemPath>
       <itemPath>Resource.h</itemPath>
       <itemPath>SpaceShip.h</itemPath>
+      <itemPath>Texture.h</itemPath>
       <itemPath>TrashA.h</itemPath>
+      <itemPath>TrashAPkg.h</itemPath>
       <itemPath>TrashB.h</itemPath>
       <itemPath>UIElement.h</itemPath>
       <itemPath>Vector.h</itemPath>
@@ -26,6 +28,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Texture.cpp</itemPath>
+      <itemPath>TrashAPkg.cpp</itemPath>
       <itemPath>Vector.cpp</itemPath>
       <itemPath>drawing.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -66,7 +70,6 @@
             <linkerLibLibItem>opengl32</linkerLibLibItem>
             <linkerLibLibItem>glu32</linkerLibLibItem>
             <linkerLibLibItem>glut32</linkerLibLibItem>
-            <linkerLibLibItem>glaux</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>

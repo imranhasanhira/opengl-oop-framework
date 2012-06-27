@@ -18,6 +18,8 @@ public:
 	void static DrawGrid();
 	void static DrawAxies();
 	void static DrawRectangle(GLdouble height,GLdouble width);
+	void static DrawRectangleWithTexture(GLdouble height,GLdouble width);
+	
 	void static DrawCircle(GLdouble x,GLdouble y);
 	void static DrawElipse(GLdouble x_radius,GLdouble y_radius,GLdouble height);
 	void static DrawCylinder(GLdouble bottom_radius,GLdouble top_radius,GLdouble cyl_higiht, GLint slices=1000,GLint loops=1000);

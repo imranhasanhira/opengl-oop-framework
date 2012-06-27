@@ -34,10 +34,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Texture.o \
 	${OBJECTDIR}/drawing.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Vector.o \
-	${OBJECTDIR}/trashA.o
+	${OBJECTDIR}/trashA.o \
+	${OBJECTDIR}/TrashAPkg.o
 
 
 # C Compiler Flags
@@ -64,6 +66,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/startrekspaceship.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/startrekspaceship ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/Texture.o: Texture.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Texture.o Texture.cpp
+
 ${OBJECTDIR}/drawing.o: drawing.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -83,6 +90,11 @@ ${OBJECTDIR}/trashA.o: trashA.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/trashA.o trashA.cpp
+
+${OBJECTDIR}/TrashAPkg.o: TrashAPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashAPkg.o TrashAPkg.cpp
 
 # Subprojects
 .build-subprojects:

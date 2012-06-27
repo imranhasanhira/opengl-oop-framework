@@ -60,6 +60,7 @@ public:
         position = Vector(positionX, positionY, positionZ);
         forward = Vector(targetX, targetY, targetZ);
         up = Vector(topX, topY, topZ);
+	yow(.1);
     }
 
     double getAngle(Vector a, Vector b) {

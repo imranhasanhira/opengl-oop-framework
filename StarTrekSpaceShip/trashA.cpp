@@ -7,18 +7,28 @@
 
 #include "TrashA.h"
 
+GLuint TrashA::texid = -1;
+
+TrashA::TrashA(double w, double l) : UIElement(0, 0, 0){    
+    this->width = w;
+    this->length = l;
+    Init();
+}
 TrashA::TrashA(double x, double y, double z, double w, double l) : UIElement(x, y, z) {
     this->width = w;
     this->length = l;
-    this->trashAngleLineAngle  = 60;    
-    this->trashBaseLineWidth  = 6;
+    Init();
+}
+
+void TrashA::Init(){
+    this->trashAngleLineAngle = 60;
+    this->trashBaseLineWidth = 6;
     this->triangleBaseLength = 20;
-    this->trashAngleLineWidth  = 2;    
+    this->trashAngleLineWidth = 2;
     this->triangleDistance = 10;
-    this->triangleCount = this->length/this->triangleBaseLength - 1;
-    this->trashBaseLineLength = this->length + this->triangleCount * this->triangleDistance;
-    this->trashAngleLineLength = sqrt(S(this->triangleBaseLength/2) + S(this->width)) + this->trashBaseLineWidth/4;
-    
+    this->triangleCount = this->length / (this->triangleBaseLength + this->triangleDistance);
+    this->trashBaseLineLength = this->length ;
+    this->trashAngleLineLength = sqrt(S(this->triangleBaseLength / 2) + S(this->width)) + this->trashBaseLineWidth / 4;    
 }
 
 TrashA::~TrashA() {
@@ -40,57 +50,91 @@ void TrashA::setLength(int l) {
     this->length = l;
 }
 
+void TrashA::Test() {
+    glEnable(GL_TEXTURE_2D);
+    {
+
+	glColor3f(1, 1, 1);
+	glBindTexture(GL_TEXTURE_2D, this->texid); /*  texid isa variablecorrespondsto  the  image*/
+	glNormal3f(0.0, -1.0, 0.0); //  Normal vector  to  the  polygon
+	Drawing::DrawRectangleWithTexture(30, 100);
+    }
+    glDisable(GL_TEXTURE_2D);
+}
+
 void TrashA::paint() {
- 
-    glTranslatef(-60,0,0);
-    glColor3f(.2,.2,.3);
+
+
+    //    glEnable(GL_TEXTURE_2D);
+    //    {
+    glColor3f(1, 1, 1);
     glPushMatrix();
     {
-	Drawing::DrawRectangle(this->trashAngleLineWidth,this->trashBaseLineLength);	
-	glTranslatef(0,0,this->width);
-	Drawing::DrawRectangle(this->trashAngleLineWidth,this->trashBaseLineLength);	
+	glEnable(GL_TEXTURE_2D);
+	{	    
+	    glBindTexture(GL_TEXTURE_2D, texid); /*  texid isa variablecorrespondsto  the  image*/
+	    glNormal3f(0.0, -1.0, 0.0);
+	    Drawing::DrawRectangleWithTexture(this->trashAngleLineWidth, this->trashBaseLineLength);
+	    glTranslatef(0, 0, this->width);
+	    glNormal3f(0.0, -1.0, 0.0);
+	    Drawing::DrawRectangleWithTexture(this->trashAngleLineWidth, this->trashBaseLineLength);
+	}
+	glDisable(GL_TEXTURE_2D);
     }
-    glPopMatrix();        
+    glPopMatrix();
     glPushMatrix();
-    {		
-	glTranslatef(this->trashAngleLineWidth,0,0);
-	for(int i=0;i<this->triangleCount;i++){	    
+    {
+	glTranslatef(this->trashAngleLineWidth, 0, 0);
+
+	for (int i = 0; i<this->triangleCount; i++) {
 	    glPushMatrix();
-	    {			
-		glTranslatef( i*(this->triangleBaseLength + this->triangleDistance) ,0,this->trashBaseLineWidth/4);
-		glRotatef(-this->trashAngleLineAngle,0,1,0);
-		Drawing::DrawRectangle(this->trashAngleLineWidth,this->trashAngleLineLength);
-		glRotatef(this->trashAngleLineAngle,0,1,0);
-		glTranslatef( this->triangleBaseLength + this->triangleDistance/2 + this->trashAngleLineWidth/2, 0 , 0 );		
-		glRotatef(-2*this->trashAngleLineAngle,0,1,0);
-		Drawing::DrawRectangle(this->trashAngleLineWidth,this->trashAngleLineLength);
-		
+	    {
+		glEnable(GL_TEXTURE_2D);
+		{
+		    glBindTexture(GL_TEXTURE_2D, texid); /*  texid isa variablecorrespondsto  the  image*/		    
+		    glTranslatef(i * (this->triangleBaseLength + this->triangleDistance), 0, this->trashBaseLineWidth / 4);
+		    glRotatef(-this->trashAngleLineAngle, 0, 1, 0);
+		    glNormal3f(0.0, -1.0, 0.0);
+		    Drawing::DrawRectangleWithTexture(this->trashAngleLineWidth, this->trashAngleLineLength);
+		    
+		    glRotatef(this->trashAngleLineAngle, 0, 1, 0);
+		    glTranslatef(this->triangleBaseLength + this->triangleDistance / 2 + this->trashAngleLineWidth / 2, 0, 0);
+		    glRotatef(-2 * this->trashAngleLineAngle, 0, 1, 0);
+		    
+		    glNormal3f(0.0, -1.0, 0.0);
+		    Drawing::DrawRectangleWithTexture(this->trashAngleLineWidth, this->trashAngleLineLength);
+		}
+		glDisable(GL_TEXTURE_2D);
+
 	    }
 	    glPopMatrix();
 	}
+
+
     }
-    
-    
-    
-//    glPushMatrix();
-//    {	
-//	
-//	for(int i=1;i<=this->triangleCount;i++){
-//	    glPushMatrix();
-//	    {
-////		printI(i*this->triangleBaseLength + this->trashAngleLineWidth);		
-//		glTranslatef( i*(this->triangleBaseLength) + this->triangleDistance + 2*this->trashAngleLineWidth,0,this->trashBaseLineWidth/2);
-//		glRotatef(-2*this->trashAngleLineAngle,0,1,0);
-//		Drawing::DrawRectangle(this->trashAngleLineWidth,this->trashAngleLineLength);
-//		
-//	    }
-//	    glPopMatrix();
-//	}
-//    }
-//    glPopMatrix();
+    //    }glDisable(GL_TEXTURE_2D);
+
+
+
+    //    glPushMatrix();
+    //    {	
+    //	
+    //	for(int i=1;i<=this->triangleCount;i++){
+    //	    glPushMatrix();
+    //	    {
+    ////		printI(i*this->triangleBaseLength + this->trashAngleLineWidth);		
+    //		glTranslatef( i*(this->triangleBaseLength) + this->triangleDistance + 2*this->trashAngleLineWidth,0,this->trashBaseLineWidth/2);
+    //		glRotatef(-2*this->trashAngleLineAngle,0,1,0);
+    //		Drawing::DrawRectangle(this->trashAngleLineWidth,this->trashAngleLineLength);
+    //		
+    //	    }
+    //	    glPopMatrix();
+    //	}
+    //    }
+    //    glPopMatrix();
 }
 
-void TrashA::print(){
+void TrashA::print() {
     printf("Width :%d\n", this->width);
     printf("Height :%d\n", this->length);
     printf("TrashBaseLineWidth :%d\n", this->trashBaseLineWidth);
@@ -99,17 +143,3 @@ void TrashA::print(){
     printf("tTrasAngleLineHeight :%d\n", this->trashAngleLineLength);
 }
 
-void TrashA::InitTextures(void)
-{
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-
-	Tex1.LoadFromFile("tex1.bmp");
-	Tex2.LoadFromFile("tex2.bmp");
-
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-}

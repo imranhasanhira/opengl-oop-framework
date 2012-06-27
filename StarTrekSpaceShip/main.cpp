@@ -8,7 +8,8 @@
 #include "cmath"
 #include <windows.h>
 #include <GL/glut.h>         /* glut.h includes gl.h and glu.h*/
-#include <GL/glaux.h>   //Used for loading the textures 
+
+
 #include <stdio.h>
 #include <iostream>
 
@@ -16,10 +17,12 @@
 #include "Logger.h"
 #include "World.h"
 #include "SpaceShip.h"
-#include "TrashA.h"
+#include "trashA.h"
 #include "TrashB.h"
 #include "Camera.h"
-#include "textures.h"
+
+#include "Texture.h"
+#include "TrashAPkg.h"
 
 
 using namespace std;
@@ -39,8 +42,8 @@ Logger logger;
 World world;
 Camera camera;
 SpaceShip spaceShip(10, 10, 0);
-TrashA trashA(0,0,0,20,100); 
-TrashB trashB(10,10,0); 
+
+TrashB trashB(10, 10, 0);
 
 void resize(int w, int h) {
 
@@ -52,35 +55,39 @@ void resize(int w, int h) {
     //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
 }
 
+void LoadTexture() {
 
+    char filename[100] = "D:\\trashA.bmp";
+    TrashA::texid = Texture::LoadMyBitmap(filename);
+}
 
 void handlekey() {
 
     /*  Start -- Spaceship step*/
     if (keys['w']) {
-        spaceShip.pitchClockWise();
-        trashA.pitchClockWise();
+	spaceShip.pitchClockWise();
+	//	trashA1.pitchClockWise();
     }
     if (keys['s']) {
-        spaceShip.pitchCounterClockWise();
-        trashA.pitchCounterClockWise();
+	spaceShip.pitchCounterClockWise();
+	//	trashA1.pitchCounterClockWise();
     }
     if (keys['a']) {
-        spaceShip.roleLeft();
-        trashA.roleLeft();
+	spaceShip.roleLeft();
+	//	trashA1.roleLeft();
     }
     if (keys['d']) {
-        spaceShip.roleRight();
-        trashA.roleRight();
+	spaceShip.roleRight();
+	//	trashA1.roleRight();
     }
     if (keys['q']) {
-        spaceShip.yowDown();
-        trashA.yowDown();
+	spaceShip.yowDown();
+	//	trashA1.yowDown();
     }
     if (keys['e']) {
-        spaceShip.yowUp();
+	spaceShip.yowUp();
 	trashB.yowUp();
-	trashA.yowUp();
+	//	trashA1.yowUp();
     }
     /* END -- Spaceship Step */
 
@@ -88,58 +95,58 @@ void handlekey() {
 
     /*  Start -- Spaceship Rotation*/
     if (keys['i']) {
-        spaceShip.stepDown();
-        trashA.stepDown();
+	spaceShip.stepDown();
+	//	trashA1.stepDown();
     }
     if (keys['k']) {
-        spaceShip.stepUp();
-        trashA.stepUp();
+	spaceShip.stepUp();
+	//	trashA1.stepUp();
     }
     if (keys['j']) {
-        spaceShip.stepLeft();
-	trashA.stepLeft();
+	spaceShip.stepLeft();
+	//	trashA1.stepLeft();
     }
     if (keys['l']) {
-        spaceShip.stepRight();
-        trashA.stepRight();
+	spaceShip.stepRight();
+	//	trashA1.stepRight();
     }
     if (keys['u']) {
-        spaceShip.stepForward();
-        trashA.stepForward();
+	spaceShip.stepForward();
+	//	trashA1.stepForward();
     }
     if (keys['o']) {
-        spaceShip.stepBackward();
-        trashA.stepBackward();
+	spaceShip.stepBackward();
+	//	trashA1.stepBackward();	
     }
     /* END -- Spaceship Rotation */
 
 
     if (keys['R']) {
-        camera.reset();
+	camera.reset();
     }
 
     /* Start -- Camera Step */
     if (keys['f']) {
-        camera.stepRight();
+	camera.stepRight();
     }
 
     if (keys['h']) {
-        camera.stepLeft();
+	camera.stepLeft();
     }
 
     if (keys['t']) {
-        camera.stepForward();
+	camera.stepForward();
     }
     if (keys['g']) {
-        camera.stepBackward();
+	camera.stepBackward();
     }
 
     if (keys['r']) {
-        camera.stepUp();
+	camera.stepUp();
     }
 
     if (keys['y']) {
-        camera.stepDown();
+	camera.stepDown();
     }
     /*
      *   END -- Camera Step */
@@ -147,31 +154,31 @@ void handlekey() {
     /* Start -- Camera Rotation 
      */
     if (keys['1']) {
-        camera.pitchClockWise();
+	camera.pitchClockWise();
     }
 
     if (keys['/']) {
-        camera.pitchCounterClockWise();
+	camera.pitchCounterClockWise();
     }
-    
+
     if (keys['0']) {
 	camera.print();
-	trashA.print();
+	//	trashA1.print();	
     }
 
     if (keys[VIRTUAL_KEY_DOWN]) {
-        camera.yowDown();
+	camera.yowDown();
     }
     if (keys[VIRTUAL_KEY_UP]) {
-        camera.yowUp();
+	camera.yowUp();
     }
 
     if (keys[VIRTUAL_KEY_RIGHT]) {
-        camera.roleRight();
+	camera.roleRight();
     }
 
     if (keys[VIRTUAL_KEY_LEFT]) {
-        camera.roleLeft();
+	camera.roleLeft();
     }
     /*
      *  END -- Camera Rotation */
@@ -185,7 +192,7 @@ void handlekey() {
 
 
     if (keys[27]) {
-        exit(0);
+	exit(0);
     }
 }
 
@@ -206,41 +213,41 @@ void specialKeyListener(int key, int x, int y) {
     //cout << "SPECIAL_KEY PRESSED : (" << key << "(" << (int) key << "), " << x << ", " << y << ")" << endl;
 
     switch (key) {
-        case GLUT_KEY_DOWN: //down arrow key
-            keys[VIRTUAL_KEY_DOWN] = true;
-            break;
+	case GLUT_KEY_DOWN: //down arrow key
+	    keys[VIRTUAL_KEY_DOWN] = true;
+	    break;
 
-        case GLUT_KEY_UP: // up arrow key
-            keys[VIRTUAL_KEY_UP] = true;
-            break;
+	case GLUT_KEY_UP: // up arrow key
+	    keys[VIRTUAL_KEY_UP] = true;
+	    break;
 
-        case GLUT_KEY_RIGHT:
-            keys[VIRTUAL_KEY_RIGHT] = true;
-            break;
+	case GLUT_KEY_RIGHT:
+	    keys[VIRTUAL_KEY_RIGHT] = true;
+	    break;
 
-        case GLUT_KEY_LEFT:
-            keys[VIRTUAL_KEY_LEFT] = true;
-            break;
+	case GLUT_KEY_LEFT:
+	    keys[VIRTUAL_KEY_LEFT] = true;
+	    break;
 
-        case GLUT_KEY_PAGE_UP:
-            keys[VIRTUAL_KEY_PAGE_UP] = true;
-            break;
+	case GLUT_KEY_PAGE_UP:
+	    keys[VIRTUAL_KEY_PAGE_UP] = true;
+	    break;
 
-        case GLUT_KEY_PAGE_DOWN:
-            keys[VIRTUAL_KEY_PAGE_DOWN] = true;
-            break;
+	case GLUT_KEY_PAGE_DOWN:
+	    keys[VIRTUAL_KEY_PAGE_DOWN] = true;
+	    break;
 
-        case GLUT_KEY_INSERT:
+	case GLUT_KEY_INSERT:
 
-            break;
+	    break;
 
-        case GLUT_KEY_HOME:
-            break;
-        case GLUT_KEY_END:
-            break;
+	case GLUT_KEY_HOME:
+	    break;
+	case GLUT_KEY_END:
+	    break;
 
-        default:
-            break;
+	default:
+	    break;
     }
 
 }
@@ -253,40 +260,40 @@ void specialKeyUpListener(int key, int x, int y) {
     //cout << "SPECIAL_KEY RELEASED: (" << key << "(" << (int) key << "), " << x << ", " << y << ")" << endl;
 
     switch (key) {
-        case GLUT_KEY_DOWN: //down arrow key
-            keys[VIRTUAL_KEY_DOWN] = false;
-            break;
+	case GLUT_KEY_DOWN: //down arrow key
+	    keys[VIRTUAL_KEY_DOWN] = false;
+	    break;
 
-        case GLUT_KEY_UP: // up arrow key
-            keys[VIRTUAL_KEY_UP] = false;
-            break;
+	case GLUT_KEY_UP: // up arrow key
+	    keys[VIRTUAL_KEY_UP] = false;
+	    break;
 
-        case GLUT_KEY_RIGHT:
-            keys[VIRTUAL_KEY_RIGHT] = false;
-            break;
+	case GLUT_KEY_RIGHT:
+	    keys[VIRTUAL_KEY_RIGHT] = false;
+	    break;
 
-        case GLUT_KEY_LEFT:
-            keys[VIRTUAL_KEY_LEFT] = false;
-            break;
+	case GLUT_KEY_LEFT:
+	    keys[VIRTUAL_KEY_LEFT] = false;
+	    break;
 
-        case GLUT_KEY_PAGE_UP:
-            keys[VIRTUAL_KEY_PAGE_UP] = false;
-            break;
+	case GLUT_KEY_PAGE_UP:
+	    keys[VIRTUAL_KEY_PAGE_UP] = false;
+	    break;
 
-        case GLUT_KEY_PAGE_DOWN:
-            keys[VIRTUAL_KEY_PAGE_DOWN] = false;
-            break;
+	case GLUT_KEY_PAGE_DOWN:
+	    keys[VIRTUAL_KEY_PAGE_DOWN] = false;
+	    break;
 
-        case GLUT_KEY_INSERT:
-            break;
+	case GLUT_KEY_INSERT:
+	    break;
 
-        case GLUT_KEY_HOME:
-            break;
-        case GLUT_KEY_END:
-            break;
+	case GLUT_KEY_HOME:
+	    break;
+	case GLUT_KEY_END:
+	    break;
 
-        default:
-            break;
+	default:
+	    break;
     }
 
 }
@@ -294,19 +301,19 @@ void specialKeyUpListener(int key, int x, int y) {
 void mouseListener(int button, int state, int x, int y) { //x, y is the x-y of the screen (2D)
 
     switch (button) {
-        case GLUT_LEFT_BUTTON:
-            break;
+	case GLUT_LEFT_BUTTON:
+	    break;
 
-        case GLUT_RIGHT_BUTTON:
-            //........
-            break;
+	case GLUT_RIGHT_BUTTON:
+	    //........
+	    break;
 
-        case GLUT_MIDDLE_BUTTON:
-            //........
-            break;
+	case GLUT_MIDDLE_BUTTON:
+	    //........
+	    break;
 
-        default:
-            break;
+	default:
+	    break;
     }
 }
 
@@ -318,6 +325,39 @@ void mousePassiveMotionListener(int x, int y) {
     cout << "Move : " << x << ", " << y << endl;
 }
 
+void TestGuassian(){
+    glPushMatrix();
+    {
+	glTranslatef(0,0,15);    
+	glScalef(5,0,5);
+	for (double x = -40.0; x < 40; x+=.01) {
+	    double y = Gauss(x);
+	    glBegin(GL_LINES);
+	    {	    	    
+		glVertex3f(x,10,y);
+		glVertex3f(x,10,y+.5);	    
+	    }
+	    glEnd();
+	}
+    }
+    glPopMatrix();
+
+    
+    glTranslatef(0,0,5);    
+    glScalef(5,0,0);
+    for (double i = 0; i < 180; i+=.1) {
+
+	double x = 40*cos(D2R(i));
+	double y = 20*sin(D2R(i));
+	glBegin(GL_LINE_STRIP);
+	{	    
+	    glVertex3f(x,0,y);
+	    glVertex3f(x,0,y+.5);	    
+	}
+	glEnd();
+    }
+}
+
 void display(void) {
     /* clear window */
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -326,7 +366,7 @@ void display(void) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    
+
 
     //Exposing camera
     camera.expose();
@@ -336,15 +376,20 @@ void display(void) {
     world.drawAxis();
 
     //Drawing spaceship details
-//    spaceShip.paintUIElement();
+    //spaceShip.paintUIElement();
+//    glRotatef(90, 0, 0, 1);
+//    glTranslatef(0, -60, 0);
 
+    //world.drawBridgeTrashA();
+
+    glColor3f(1,0.5,.8);
     
-    trashA.paintUIElement();
     
+
 
 
     glutSwapBuffers();
-    
+
 }
 
 void init() {
@@ -354,10 +399,12 @@ void init() {
     glEnable(GL_DEPTH);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_SMOOTH);
     glEnable(GL_BLEND);
-    //glEnable(GL_LINE_SMOOTH);
+    glEnable(GL_LINE_SMOOTH);
+    glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
 
 
@@ -366,7 +413,10 @@ void init() {
     gluPerspective(50, 1.0f, 1.0f, 1000.0f);
 
     glutIgnoreKeyRepeat(1);
-    memset(keys,0,sizeof(keys));
+    memset(keys, 0, sizeof (keys));
+
+    LoadTexture();
+
 
 }
 
@@ -377,6 +427,8 @@ int main(int argc, char** argv) {
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(50, 0);
     glutCreateWindow("simple");
+
+
 
     glutDisplayFunc(display);
     glutIdleFunc(animate);

@@ -106,6 +106,18 @@ void Drawing::DrawRectangle( GLdouble width,GLdouble height) {
 
 }
 
+void Drawing::DrawRectangleWithTexture( GLdouble width,GLdouble height) {
+    glBegin(GL_QUAD_STRIP);
+    {	
+	glTexCoord2f(0, 0);glVertex3f(0, 0, 0);
+	glTexCoord2f(1, 0);glVertex3f(0, 0, width);
+	glTexCoord2f(0, 1);glVertex3f(height, 0, 0);
+	glTexCoord2f(1, 1);glVertex3f(height, 0, width);
+    }
+    glEnd();
+
+}
+
 void Drawing::DrawBox(GLdouble height, GLdouble width1, GLdouble width2) {
     glBegin(GL_QUAD_STRIP);
     {

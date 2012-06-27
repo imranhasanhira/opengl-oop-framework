@@ -9,6 +9,7 @@
 #define	WORLD_H
 
 #include <GL/glut.h>
+#include "TrashAPkg.h"
 
 class World {
 public:
@@ -74,6 +75,18 @@ public:
             }
         }
         glEnd();
+    }
+    
+    
+    void drawBridgeTrashA(){
+		
+	TrashAPkg trashAPkg(20,120,100);
+	trashAPkg.paintUIElement();
+
+	glTranslatef(0,100,0);
+
+	TrashAPkg trashAPkg1(20,120,100);
+	trashAPkg1.paintUIElement();
     }
 private:
 

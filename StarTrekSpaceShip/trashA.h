@@ -11,10 +11,13 @@
 #include "UIElement.h"
 #include <cmath>
 
+#include "Texture.h"
+
 
 class TrashA : public UIElement{
 public:
     TrashA(double x, double y, double z,double w=10,double l=50);
+    TrashA(double w=10,double l=50);
     virtual ~TrashA();
     
     int getWidth();
@@ -22,7 +25,10 @@ public:
     int getLength();
     void setLength(int l);
     void print();
-    void InitTextures(void);
+    void Test();
+    void Init();
+    static GLuint texid;
+  
     
 protected:
     void paint();
@@ -38,7 +44,9 @@ private:
     int triangleBaseLength;
     int triangleCount;
     int triangleDistance;
-    COGLTexture Tex1, Tex2;
+    
+    
+    
 };
 
 #endif	/* TRASHA_H */
