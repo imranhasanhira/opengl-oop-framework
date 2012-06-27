@@ -1,0 +1,18 @@
+build/Debug/MinGW-Windows/trashA.o: trashA.cpp TrashA.h UIElement.h \
+ Logger.h Vector.h macros.h Element.h Resource.h drawing.h
+
+TrashA.h:
+
+UIElement.h:
+
+Logger.h:
+
+Vector.h:
+
+macros.h:
+
+Element.h:
+
+Resource.h:
+
+drawing.h:

@@ -103,3 +103,7 @@ Vector rotateVector(Vector rotatee, Vector axis, double angle) {
     double r = projectLength(rotatee, mid);
     return (r * mid * cos(angle) + r * normal * sin(angle) + projectVector(rotatee, axis));
 }
+
+void Vector::print(){
+    printf("%lf %lf %lf\n",this->x,this->y,this->z);
+}

@@ -34,8 +34,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/drawing.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/Vector.o
+	${OBJECTDIR}/Vector.o \
+	${OBJECTDIR}/trashA.o
 
 
 # C Compiler Flags
@@ -52,7 +54,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lopengl32 -lglu32 -lglut32
+LDLIBSOPTIONS=-lopengl32 -lglu32 -lglut32 -lglaux
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -62,15 +64,25 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/startrekspaceship.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/startrekspaceship ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/drawing.o: drawing.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/drawing.o drawing.cpp
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/Vector.o: Vector.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
+
+${OBJECTDIR}/trashA.o: trashA.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/trashA.o trashA.cpp
 
 # Subprojects
 .build-subprojects:

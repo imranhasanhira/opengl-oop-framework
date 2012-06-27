@@ -51,8 +51,8 @@ public:
     }
 
     void reset() {
-        eyePoint = Vector(70, 70, -30);
-        forward = Vector(-100, -100, 100);
+       eyePoint = Vector(-10, -100, 50);
+       forward = Vector(10, 140, -35);
 
         Vector along = CROSS(forward, Vector(0, 0, 1));
         up = along * forward;
@@ -64,6 +64,15 @@ public:
     void expose() {
         Vector target = eyePoint + forward;
         gluLookAt(eyePoint.x, eyePoint.y, eyePoint.z, target.x, target.y, target.z, up.x, up.y, up.z);
+    }
+    
+    void print(){
+	printf("Eye Vector : ");
+	this->eyePoint.print();
+	printf("Forward Vector : ");
+	this->forward.print();
+	printf("Up Vector : ");
+	this->up.print();
     }
 
 };

@@ -11,6 +11,8 @@
 #include "Logger.h"
 #include "Vector.h"
 #include "Element.h"
+#include "math.h"
+#include "drawing.h"
 #include <GL/glut.h>
 
 extern Logger logger;

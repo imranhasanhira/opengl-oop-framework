@@ -8,7 +8,7 @@
 #include "cmath"
 #include <windows.h>
 #include <GL/glut.h>         /* glut.h includes gl.h and glu.h*/
-
+#include <GL/glaux.h>   //Used for loading the textures 
 #include <stdio.h>
 #include <iostream>
 
@@ -16,7 +16,11 @@
 #include "Logger.h"
 #include "World.h"
 #include "SpaceShip.h"
+#include "TrashA.h"
+#include "TrashB.h"
 #include "Camera.h"
+#include "textures.h"
+
 
 using namespace std;
 
@@ -35,6 +39,8 @@ Logger logger;
 World world;
 Camera camera;
 SpaceShip spaceShip(10, 10, 0);
+TrashA trashA(0,0,0,20,100); 
+TrashB trashB(10,10,0); 
 
 void resize(int w, int h) {
 
@@ -46,32 +52,35 @@ void resize(int w, int h) {
     //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
 }
 
-void animate() {
 
-
-    glutPostRedisplay(); //Redraw the view port
-}
 
 void handlekey() {
 
     /*  Start -- Spaceship step*/
     if (keys['w']) {
         spaceShip.pitchClockWise();
+        trashA.pitchClockWise();
     }
     if (keys['s']) {
         spaceShip.pitchCounterClockWise();
+        trashA.pitchCounterClockWise();
     }
     if (keys['a']) {
         spaceShip.roleLeft();
+        trashA.roleLeft();
     }
     if (keys['d']) {
         spaceShip.roleRight();
+        trashA.roleRight();
     }
     if (keys['q']) {
         spaceShip.yowDown();
+        trashA.yowDown();
     }
     if (keys['e']) {
         spaceShip.yowUp();
+	trashB.yowUp();
+	trashA.yowUp();
     }
     /* END -- Spaceship Step */
 
@@ -80,21 +89,27 @@ void handlekey() {
     /*  Start -- Spaceship Rotation*/
     if (keys['i']) {
         spaceShip.stepDown();
+        trashA.stepDown();
     }
     if (keys['k']) {
         spaceShip.stepUp();
+        trashA.stepUp();
     }
     if (keys['j']) {
         spaceShip.stepLeft();
+	trashA.stepLeft();
     }
     if (keys['l']) {
         spaceShip.stepRight();
+        trashA.stepRight();
     }
     if (keys['u']) {
         spaceShip.stepForward();
+        trashA.stepForward();
     }
     if (keys['o']) {
         spaceShip.stepBackward();
+        trashA.stepBackward();
     }
     /* END -- Spaceship Rotation */
 
@@ -138,6 +153,11 @@ void handlekey() {
     if (keys['/']) {
         camera.pitchCounterClockWise();
     }
+    
+    if (keys['0']) {
+	camera.print();
+	trashA.print();
+    }
 
     if (keys[VIRTUAL_KEY_DOWN]) {
         camera.yowDown();
@@ -167,6 +187,12 @@ void handlekey() {
     if (keys[27]) {
         exit(0);
     }
+}
+
+void animate() {
+
+    handlekey();
+    glutPostRedisplay(); //Redraw the view port
 }
 
 void keyboardListener(unsigned char key, int x, int y) {
@@ -300,23 +326,25 @@ void display(void) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    handlekey();
+    
 
     //Exposing camera
     camera.expose();
 
     //Drawing world details
-    world.drawGrid();
+    //world.drawGrid();
     world.drawAxis();
 
     //Drawing spaceship details
-    spaceShip.paintUIElement();
+//    spaceShip.paintUIElement();
 
-
+    
+    trashA.paintUIElement();
+    
 
 
     glutSwapBuffers();
-
+    
 }
 
 void init() {
@@ -338,6 +366,7 @@ void init() {
     gluPerspective(50, 1.0f, 1.0f, 1000.0f);
 
     glutIgnoreKeyRepeat(1);
+    memset(keys,0,sizeof(keys));
 
 }
 

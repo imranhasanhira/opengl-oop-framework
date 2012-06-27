@@ -5,6 +5,8 @@
 #define S(a) a*a
 #define PI 3.1415926535897932
 
+#include "macros.h"
+
 struct Vector {
     double x, y, z;
     Vector();
@@ -16,6 +18,7 @@ struct Vector {
     Vector unit();
     void show();
     void showln();
+    void print();
 };
 
 Vector operator+(Vector a, Vector b);

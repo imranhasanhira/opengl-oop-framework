@@ -13,10 +13,13 @@ public:
 
     double delTheta;
     double delStep;
+    
 
     Resource() {
         delTheta = 0.5;
-        delStep = 0.1;
+        delStep = 0.5;
+
+	
     }
 private:
 
