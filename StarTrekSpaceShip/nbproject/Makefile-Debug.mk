@@ -38,9 +38,12 @@ OBJECTFILES= \
 	${OBJECTDIR}/drawing.o \
 	${OBJECTDIR}/TtrashC.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/TrashCPkg.o \
 	${OBJECTDIR}/Vector.o \
 	${OBJECTDIR}/TrashA.o \
 	${OBJECTDIR}/TrashB.o \
+	${OBJECTDIR}/Road.o \
+	${OBJECTDIR}/RoadPkg.o \
 	${OBJECTDIR}/TrashAPkg.o
 
 
@@ -88,6 +91,11 @@ ${OBJECTDIR}/main.o: main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
+${OBJECTDIR}/TrashCPkg.o: TrashCPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashCPkg.o TrashCPkg.cpp
+
 ${OBJECTDIR}/Vector.o: Vector.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -102,6 +110,16 @@ ${OBJECTDIR}/TrashB.o: TrashB.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashB.o TrashB.cpp
+
+${OBJECTDIR}/Road.o: Road.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/Road.o Road.cpp
+
+${OBJECTDIR}/RoadPkg.o: RoadPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/RoadPkg.o RoadPkg.cpp
 
 ${OBJECTDIR}/TrashAPkg.o: TrashAPkg.cpp 
 	${MKDIR} -p ${OBJECTDIR}

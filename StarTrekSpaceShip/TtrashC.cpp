@@ -21,9 +21,9 @@ TrashC::TrashC(double x, double y, double z, double w, double l) : UIElement(x, 
 }
 
 void TrashC::Init(){        
-    this->trashWidth  = 3;
-    this->trashAngleLineLength = sqrt(S(this->length / 2) + S(this->width));
-    this->trashAngleLineAngle = R2D(atan(this->width/this->length));
+    this->trashWidth  = 4;    
+    this->trashAngleLineLength = sqrt(S(this->length) + S(this->width  - this->trashWidth));
+    this->trashAngleLineAngle = R2D(atan( (this->width - this->trashWidth)/this->length));    
 }
 
 TrashC::~TrashC() {
@@ -57,8 +57,8 @@ void TrashC::TestTexture() {
     glDisable(GL_TEXTURE_2D);
 }
 
-void TrashC::paint() {
 
+void TrashC::paintOneFace(){
     glColor3f(1, 1, 1);
     glPushMatrix();
     {
@@ -77,12 +77,12 @@ void TrashC::paint() {
 	    }
 	    glPopMatrix();
 	    	    
-	    glTranslatef(0, 0, this->width/2);
+	    glTranslatef(0, 0, this->width/2 - this->trashWidth/2);
 	    
 	    glNormal3f(0.0, -1.0, 0.0);
 	    Drawing::DrawRectangleWithTexture(this->trashWidth, this->length);
 	    
-	    glTranslatef(0, 0, this->width/2);
+	    glTranslatef(0, 0, this->width/2 - this->trashWidth/2);
 	    
 	    glNormal3f(0.0, -1.0, 0.0);
 	    Drawing::DrawRectangleWithTexture(this->trashWidth, this->length);
@@ -96,6 +96,22 @@ void TrashC::paint() {
 	    glPopMatrix();
 	}
 	glDisable(GL_TEXTURE_2D);
+    }
+    glPopMatrix();
+}
+
+void TrashC::paint() {
+
+    glPushMatrix();
+    {
+	paintOneFace();
+	glTranslatef(0,this->width,0);
+	paintOneFace();
+	glRotatef(90,1,0,0);
+	paintOneFace();
+	glTranslatef(0,this->width,0);	
+	paintOneFace();	
+		
     }
     glPopMatrix();
     

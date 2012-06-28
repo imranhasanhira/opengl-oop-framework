@@ -20,10 +20,14 @@
 #include "TrashA.h"
 #include "TrashB.h"
 #include "TrashC.h"
+#include "TrashAPkg.h"
+#include "TrashCPkg.h"
+#include "RoadPkg.h"
+
 #include "Camera.h"
 
 #include "Texture.h"
-#include "TrashAPkg.h"
+
 
 
 using namespace std;
@@ -59,6 +63,8 @@ void LoadTexture() {
     TrashA::texid = Texture::LoadMyBitmap("D:\\trashA.bmp");
     TrashB::texid = Texture::LoadMyBitmap("D:\\trashB.bmp");
     TrashC::texid = TrashA::texid;
+    Road::roadTexId = Texture::LoadMyBitmap("D:\\road.bmp");
+    Road::railTexId = Texture::LoadMyBitmap("D:\\rail.bmp");
 }
 
 void handlekey() {
@@ -388,8 +394,15 @@ void display(void) {
 //    TrashB trashB(40.0,40.0,3.0,30.0);
 //    trashB.paintUIElement();
     
-    TrashC trashC(20,60);
-    trashC.paintUIElement();
+//    TrashC trashC(20,60);
+//    trashC.paintUIElement();
+    
+    
+//    RoadPkg roadPkg(130,300);
+//    roadPkg.paintUIElement();
+    
+//    TrashCPkg trashCPkg(20,200);
+//    trashCPkg.paintUIElement();
     
     glutSwapBuffers();
 
@@ -429,7 +442,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(50, 0);
-    glutCreateWindow("simple");
+    glutCreateWindow("Hell Gate");
 
 
 

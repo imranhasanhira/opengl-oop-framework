@@ -32,6 +32,7 @@ public:
     
 protected:
     void paint();
+    void paintOneFace();
     
 private:
     double width;
