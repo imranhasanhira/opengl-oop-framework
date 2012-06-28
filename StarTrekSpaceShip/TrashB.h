@@ -1,107 +1,47 @@
 /* 
- * File:   SpaceShip.h
- * Author: Md Imran Hasan
+ * File:   trashA.h
+ * Author: Ibrahim
  *
- * Created on May 31, 2012, 11:42 PM
+ * Created on June 24, 2012, 1:22 AM
  */
 
 #ifndef TRASHB_H
 #define	TRASHB_H
 
 #include "UIElement.h"
-#include "Vector.h"
+#include <cmath>
 
-class TrashB : public UIElement {
+#include "Texture.h"
+
+
+class TrashB : public UIElement{
 public:
-
-    TrashB(double x, double y, double z) : UIElement(x, y, z) {
-
-    }
-
+    TrashB(double x, double y, double z,double len1, double len2, double trashWidth,double angle);
+    TrashB(double len1,double len2,double trashWidth,double angle);
+    virtual ~TrashB();
+    
+  
+    void print();
+    void TestTexture();
+    void Init();
+    static GLuint texid;
+    
+    double straightLineLen;
+    double angleLineLen;
+    double angle;
+    double trashWidth;
+    double jointTriangleBaseWidth;
+    double jointTriangleHeight;
+    
 protected:
-
-    void paint() {
-
-        //Transalate the world to spaceship center
-        //glTranslatef(origin.x, origin.y, origin.z);
-
-        glPushMatrix(); //Upper Disk
-        {
-
-            glScaled(0.2, 0.2, 1);
-            glColor3f(1.0, 0.9, 0.5);
-            glutSolidSphere(3.2, 100, 100);
-        }
-        glPopMatrix();
-
-        glPushMatrix(); //Upper Disk
-        {
-
-            glScaled(1, 1, 0.15);
-            glColor3f(0.2, 0.2, 0.1);
-            glutSolidSphere(15, 100, 100);
-        }
-        glPopMatrix();
-
-        glTranslated(0, -8, 1);
-        glPushMatrix(); // Joint between Upper Disk and Body
-        {
-            glRotated(40, 1, 0, 0);
-            glScaled(0.2, 1, 1);
-            GLUquadric* quad = gluNewQuadric();
-            gluCylinder(quad, 2, 1.6, 13, 100, 100);
-        }
-        glPopMatrix();
-
-        glTranslated(0, 0, 10);
-        glPushMatrix(); // Body
-        {
-            glRotated(90, 1, 0, 0);
-            GLUquadric* quad = gluNewQuadric();
-            gluCylinder(quad, 2.5, 2.2, 20, 100, 100);
-            glColor3f(1, .6, 0);
-            glutSolidSphere(2.4, 30, 30);
-        }
-        glPopMatrix();
-
-
-        glPushMatrix(); // Left Cylinder
-        {
-            glTranslated(5, -10, -5);
-            glRotated(90, 1, 0, 0);
-            //glScaled(0.2, 1, 1);
-            GLUquadric* quad = gluNewQuadric();
-            glColor3f(.5, .5, .5);
-            gluCylinder(quad, 1.8, 1.6, 15, 100, 100);
-            glColor3f(.8, .7, .5);
-            glutSolidSphere(1.6, 30, 30);
-        }
-        glPopMatrix();
-
-
-        glPushMatrix(); // Right Cylinder
-        {
-            glTranslated(-5, -10, -5);
-            glRotated(90, 1, 0, 0);
-            //glScaled(0.2, 1, 1);
-            GLUquadric* quad = gluNewQuadric();
-            glColor3f(.5, .5, .5);
-            gluCylinder(quad, 1.8, 1.6, 15, 100, 100);
-            glColor3f(.8, .7, .5);
-            glutSolidSphere(1.6, 30, 30);
-        }
-        glPopMatrix();
-
-
-        //translate the world back to where it was before drawing this spaceship
-        //glTranslatef(-origin.x, -origin.y, -origin.z);
-
-    }
-
+    void paint();
+    
+private:
+   
+    
+    
+    
 };
 
-
-
-
-#endif	/* SPACESHIP_H */
+#endif	/* TRASHA_H */
 

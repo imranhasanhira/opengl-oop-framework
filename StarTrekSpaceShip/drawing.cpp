@@ -157,3 +157,20 @@ void Drawing::DrawRoundedBox(GLdouble radius, GLdouble height) {
     }
     glEnd();
 }
+
+void Drawing::DrawTriangles(GLdouble baseWidth,GLdouble height){
+    glBegin(GL_TRIANGLES);{	
+	glVertex3f(baseWidth/2,0,height);
+	glVertex3f(baseWidth,0,0);
+	glVertex3f(0,0,0);
+	
+    }glEnd();
+}
+
+void Drawing::DrawFlipedTriangles(GLdouble baseWidth,GLdouble height){
+    glBegin(GL_TRIANGLES);{	
+	glVertex3f(0,0,height);
+	glVertex3f(baseWidth,0,height);	
+	glVertex3f(baseWidth/2,0,0);			
+    }glEnd();
+}

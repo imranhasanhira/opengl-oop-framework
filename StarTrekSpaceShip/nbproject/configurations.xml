@@ -14,6 +14,7 @@
       <itemPath>TrashA.h</itemPath>
       <itemPath>TrashAPkg.h</itemPath>
       <itemPath>TrashB.h</itemPath>
+      <itemPath>TrashC.h</itemPath>
       <itemPath>UIElement.h</itemPath>
       <itemPath>Vector.h</itemPath>
       <itemPath>World.h</itemPath>
@@ -29,11 +30,13 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Texture.cpp</itemPath>
+      <itemPath>TrashA.cpp</itemPath>
       <itemPath>TrashAPkg.cpp</itemPath>
+      <itemPath>TrashB.cpp</itemPath>
+      <itemPath>TtrashC.cpp</itemPath>
       <itemPath>Vector.cpp</itemPath>
       <itemPath>drawing.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
-      <itemPath>trashA.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"

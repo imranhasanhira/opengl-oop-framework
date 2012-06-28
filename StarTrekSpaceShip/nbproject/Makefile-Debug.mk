@@ -36,9 +36,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Texture.o \
 	${OBJECTDIR}/drawing.o \
+	${OBJECTDIR}/TtrashC.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Vector.o \
-	${OBJECTDIR}/trashA.o \
+	${OBJECTDIR}/TrashA.o \
+	${OBJECTDIR}/TrashB.o \
 	${OBJECTDIR}/TrashAPkg.o
 
 
@@ -76,6 +78,11 @@ ${OBJECTDIR}/drawing.o: drawing.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/drawing.o drawing.cpp
 
+${OBJECTDIR}/TtrashC.o: TtrashC.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/TtrashC.o TtrashC.cpp
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -86,10 +93,15 @@ ${OBJECTDIR}/Vector.o: Vector.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
 
-${OBJECTDIR}/trashA.o: trashA.cpp 
+${OBJECTDIR}/TrashA.o: TrashA.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/trashA.o trashA.cpp
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashA.o TrashA.cpp
+
+${OBJECTDIR}/TrashB.o: TrashB.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashB.o TrashB.cpp
 
 ${OBJECTDIR}/TrashAPkg.o: TrashAPkg.cpp 
 	${MKDIR} -p ${OBJECTDIR}

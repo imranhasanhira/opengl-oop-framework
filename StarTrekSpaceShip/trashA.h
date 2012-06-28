@@ -25,7 +25,7 @@ public:
     int getLength();
     void setLength(int l);
     void print();
-    void Test();
+    void TestTexture();
     void Init();
     static GLuint texid;
   

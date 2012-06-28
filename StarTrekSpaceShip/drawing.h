@@ -17,6 +17,8 @@ public:
 	GLint static loops;	
 	void static DrawGrid();
 	void static DrawAxies();
+	void static DrawTriangles(GLdouble baseWidth,GLdouble height);
+	void static DrawFlipedTriangles(GLdouble baseWidth,GLdouble height);
 	void static DrawRectangle(GLdouble height,GLdouble width);
 	void static DrawRectangleWithTexture(GLdouble height,GLdouble width);
 	

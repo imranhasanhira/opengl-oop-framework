@@ -17,8 +17,9 @@
 #include "Logger.h"
 #include "World.h"
 #include "SpaceShip.h"
-#include "trashA.h"
+#include "TrashA.h"
 #include "TrashB.h"
+#include "TrashC.h"
 #include "Camera.h"
 
 #include "Texture.h"
@@ -43,8 +44,6 @@ World world;
 Camera camera;
 SpaceShip spaceShip(10, 10, 0);
 
-TrashB trashB(10, 10, 0);
-
 void resize(int w, int h) {
 
     glViewport(0, 0, w, h);
@@ -56,9 +55,10 @@ void resize(int w, int h) {
 }
 
 void LoadTexture() {
-
-    char filename[100] = "D:\\trashA.bmp";
-    TrashA::texid = Texture::LoadMyBitmap(filename);
+    
+    TrashA::texid = Texture::LoadMyBitmap("D:\\trashA.bmp");
+    TrashB::texid = Texture::LoadMyBitmap("D:\\trashB.bmp");
+    TrashC::texid = TrashA::texid;
 }
 
 void handlekey() {
@@ -85,8 +85,7 @@ void handlekey() {
 	//	trashA1.yowDown();
     }
     if (keys['e']) {
-	spaceShip.yowUp();
-	trashB.yowUp();
+	spaceShip.yowUp();	
 	//	trashA1.yowUp();
     }
     /* END -- Spaceship Step */
@@ -380,14 +379,18 @@ void display(void) {
 //    glRotatef(90, 0, 0, 1);
 //    glTranslatef(0, -60, 0);
 
-    //world.drawBridgeTrashA();
+//    world.drawBridgeTrashA();
+    
+    
 
     glColor3f(1,0.5,.8);
     
+//    TrashB trashB(40.0,40.0,3.0,30.0);
+//    trashB.paintUIElement();
     
-
-
-
+    TrashC trashC(20,60);
+    trashC.paintUIElement();
+    
     glutSwapBuffers();
 
 }

@@ -50,7 +50,7 @@ void TrashA::setLength(int l) {
     this->length = l;
 }
 
-void TrashA::Test() {
+void TrashA::TestTexture() {
     glEnable(GL_TEXTURE_2D);
     {
 
