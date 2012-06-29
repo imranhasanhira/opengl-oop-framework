@@ -6,6 +6,12 @@
 void UIElement::paint() {
 }
 
+UIElement::UIElement(double posX, double posY, double posZ) {
+    position = Vector(posX, posY, posZ);
+    forward = Vector(0, 1, 0);
+    up = Vector(0, 0, 1);
+}
+
 UIElement::UIElement(Vector tPosition, Vector tForward, Vector tUp) {
     position = tPosition;
     forward = tForward;
@@ -35,20 +41,20 @@ void UIElement::render() {
     glPushMatrix();
     {
         glTranslated(position.x, position.y, position.z);
-/*
-        Vector tempForward = forward;
+        /*
+                Vector tempForward = forward;
         
-        Vector yAxis(0, 1, 0);
-        Vector zAxis(0, 0, 1);
+                Vector yAxis(0, 1, 0);
+                Vector zAxis(0, 0, 1);
 
-        Vector surfaceRotatingAxis = up * zAxis;
-        double thetaUpVsZ = getAngle(up, zAxis) * 180 / PI;
-        glRotated(-thetaUpVsZ, surfaceRotatingAxis.x, surfaceRotatingAxis.y, surfaceRotatingAxis.z);
-        tempForward = rotateVector(forward, surfaceRotatingAxis, thetaUpVsZ);
+                Vector surfaceRotatingAxis = up * zAxis;
+                double thetaUpVsZ = getAngle(up, zAxis) * 180 / PI;
+                glRotated(-thetaUpVsZ, surfaceRotatingAxis.x, surfaceRotatingAxis.y, surfaceRotatingAxis.z);
+                tempForward = rotateVector(forward, surfaceRotatingAxis, thetaUpVsZ);
 
-        surfaceRotatingAxis = tempForward * yAxis;
-        double thetaY = getAngle(tempForward, yAxis) * 180 / PI;
-        glRotated(-thetaY, zAxis.x, zAxis.y, zAxis.z);
+                surfaceRotatingAxis = tempForward * yAxis;
+                double thetaY = getAngle(tempForward, yAxis) * 180 / PI;
+                glRotated(-thetaY, zAxis.x, zAxis.y, zAxis.z);
          */
 
         paint();

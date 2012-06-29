@@ -1,6 +1,8 @@
 #ifndef __VECTOR_IS_INCLUDED__
 #define __VECTOR_IS_INCLUDED__
 
+#include "macros.h"
+
 #define CO(V)	V.x,V.y,V.z
 #define S(a) a*a
 #define PI 3.1415926535897932

@@ -34,14 +34,28 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Pillar.o \
+	${OBJECTDIR}/Texture.o \
+	${OBJECTDIR}/drawing.o \
+	${OBJECTDIR}/TtrashC.o \
 	${OBJECTDIR}/World.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Camera.o \
 	${OBJECTDIR}/Light.o \
 	${OBJECTDIR}/UIElement.o \
+	${OBJECTDIR}/TrashCPkg.o \
 	${OBJECTDIR}/Vector.o \
+	${OBJECTDIR}/Water.o \
 	${OBJECTDIR}/Element.o \
-	${OBJECTDIR}/SpaceShip.o
+	${OBJECTDIR}/BridgeBeamPkg.o \
+	${OBJECTDIR}/trashA.o \
+	${OBJECTDIR}/TrashBPkg.o \
+	${OBJECTDIR}/SpaceShip.o \
+	${OBJECTDIR}/TrashB.o \
+	${OBJECTDIR}/Road.o \
+	${OBJECTDIR}/RoadPkg.o \
+	${OBJECTDIR}/TrashAPkg.o \
+	${OBJECTDIR}/bridgeBeam.o
 
 
 # C Compiler Flags
@@ -68,6 +82,26 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/hellgatebridge.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/hellgatebridge ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/Pillar.o: Pillar.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Pillar.o Pillar.cpp
+
+${OBJECTDIR}/Texture.o: Texture.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Texture.o Texture.cpp
+
+${OBJECTDIR}/drawing.o: drawing.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/drawing.o drawing.cpp
+
+${OBJECTDIR}/TtrashC.o: TtrashC.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TtrashC.o TtrashC.cpp
+
 ${OBJECTDIR}/World.o: World.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -93,20 +127,70 @@ ${OBJECTDIR}/UIElement.o: UIElement.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/UIElement.o UIElement.cpp
 
+${OBJECTDIR}/TrashCPkg.o: TrashCPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashCPkg.o TrashCPkg.cpp
+
 ${OBJECTDIR}/Vector.o: Vector.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
+
+${OBJECTDIR}/Water.o: Water.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Water.o Water.cpp
 
 ${OBJECTDIR}/Element.o: Element.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Element.o Element.cpp
 
+${OBJECTDIR}/BridgeBeamPkg.o: BridgeBeamPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/BridgeBeamPkg.o BridgeBeamPkg.cpp
+
+${OBJECTDIR}/trashA.o: trashA.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/trashA.o trashA.cpp
+
+${OBJECTDIR}/TrashBPkg.o: TrashBPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashBPkg.o TrashBPkg.cpp
+
 ${OBJECTDIR}/SpaceShip.o: SpaceShip.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/SpaceShip.o SpaceShip.cpp
+
+${OBJECTDIR}/TrashB.o: TrashB.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashB.o TrashB.cpp
+
+${OBJECTDIR}/Road.o: Road.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Road.o Road.cpp
+
+${OBJECTDIR}/RoadPkg.o: RoadPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/RoadPkg.o RoadPkg.cpp
+
+${OBJECTDIR}/TrashAPkg.o: TrashAPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashAPkg.o TrashAPkg.cpp
+
+${OBJECTDIR}/bridgeBeam.o: bridgeBeam.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/bridgeBeam.o bridgeBeam.cpp
 
 # Subprojects
 .build-subprojects:

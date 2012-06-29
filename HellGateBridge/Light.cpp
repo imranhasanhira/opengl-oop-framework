@@ -50,11 +50,11 @@ void Light::step() {
 void Light::expose() {
     GLfloat lightPosition[4] = {CO(position), 1};
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-    GLfloat lightAmbiant[4] = {1, 0, 0, 1};
+    GLfloat lightAmbiant[4] = {1, 1, 1, 1};
     glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbiant);
-    GLfloat lightDiffuse[4] = {0, 1, 0, 1};
+    GLfloat lightDiffuse[4] = {1, 1, 1, 1};
     glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
-    GLfloat lightSpecular[4] = {0, 0, 1, 1};
+    GLfloat lightSpecular[4] = {1, 1, 1, 1};
     glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
 
     glColor3f(lightAmbiant[0], lightAmbiant[1], lightAmbiant[2]);

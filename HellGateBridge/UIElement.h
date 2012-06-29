@@ -12,6 +12,7 @@
 #include <vector>
 #include "Vector.h"
 #include "Element.h"
+#include "drawing.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ protected:
     virtual void paint();
 
 public:
+    UIElement(double posX, double posY, double posZ);
     UIElement(Vector tPosition = Vector(0, 0, 0), Vector tForward = Vector(0, 1, 0), Vector tUp = Vector(0, 0, 1));
     int getChildsCount();
     UIElement getChildAt(int index);

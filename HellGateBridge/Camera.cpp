@@ -30,7 +30,7 @@ void Camera::expose() {
 
 void Camera::setFaceToOrigin() {
 
-    position.showln();
+    //position.showln();
 
     double rad = position.mag();
 

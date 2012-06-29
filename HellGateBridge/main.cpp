@@ -9,6 +9,7 @@
 #include <windows.h>
 #include <GL/glut.h>         /* glut.h includes gl.h and glu.h*/
 
+
 #include <stdio.h>
 #include <iostream>
 
@@ -16,8 +17,22 @@
 #include "Logger.h"
 #include "World.h"
 #include "SpaceShip.h"
+#include "TrashAPkg.h"
+#include "TrashBPkg.h"
+#include "TrashCPkg.h"
+#include "RoadPkg.h"
+#include "BridgeBeamPkg.h"
+#include "Water.h"
+
 #include "Camera.h"
 #include "Light.h"
+
+#include "Texture.h"
+#include "Pillar.h"
+
+#include "macros.h"
+
+
 
 using namespace std;
 
@@ -36,7 +51,8 @@ Logger logger;
 
 Camera camera(Vector(100, 100, 50), Vector(-100, -100, -20), Vector(0, 0, 1));
 World world;
-Light light(0, 0, 1, 80, 70);
+Light light(0, 0, 1, 100, 100);
+Water water(400, 400);
 SpaceShip spaceShip(10, 10, 0);
 
 void resize(int w, int h) {
@@ -49,10 +65,17 @@ void resize(int w, int h) {
     //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
 }
 
-void animate() {
+void LoadTexture() {
 
+    TrashA::texid = Texture::LoadMyBitmap("images/trashA.bmp");
+    TrashB::texid = Texture::LoadMyBitmap("images/trashB.bmp");
+    TrashC::texid = TrashA::texid;
+    Road::roadTexId = Texture::LoadMyBitmap("images/road.bmp");
+    Road::railTexId = Texture::LoadMyBitmap("images/rail.bmp");
+    BridgeBeam::texid = Texture::LoadMyBitmap("images/beam.bmp");
+    Water::texid = Texture::LoadMyBitmap("images/water.bmp");
+    Pillar::baseTexId = Texture::LoadMyBitmap("images/pillerBaseTexture.bmp");
 
-    glutPostRedisplay(); //Redraw the view port
 }
 
 void handlekey() {
@@ -130,11 +153,19 @@ void handlekey() {
 
     }
 
+
+
+
+
     if (keys['1']) {
 
     }
 
     if (keys['/']) {
+
+
+
+
 
     }
 
@@ -289,40 +320,58 @@ void mousePassiveMotionListener(int x, int y) {
     //cout << "Move : " << x << ", " << y << endl;
 }
 
-void drawAxis() {
-    glBegin(GL_LINES);
+void TestGuassian() {
+    glPushMatrix();
     {
-
-        // X'O line
-        glColor3f(0.5, 0, 0);
-        glVertex3f(-100, 0, 0);
-        glVertex3f(0, 0, 0);
-
-
-        //OX line
-        glColor3f(1.0, 0, 0);
-        glVertex3f(0, 0, 0);
-        glVertex3f(100, 0, 0);
-
-        //Y'O line
-        glColor3f(0, 0.5, 0);
-        glVertex3f(0, -100, 0);
-        glVertex3f(0, 0, 0);
-        //OY line
-        glColor3f(0, 1.0, 0);
-        glVertex3f(0, 0, 0);
-        glVertex3f(0, 100, 0);
-
-        //Z'O line
-        glColor3f(0, 0, 0.5);
-        glVertex3f(0, 0, -100);
-        glVertex3f(0, 0, 0);
-        //OZ line
-        glColor3f(0, 0, 1.0);
-        glVertex3f(0, 0, 0);
-        glVertex3f(0, 0, 100);
+        glTranslatef(0, 0, 15);
+        glScalef(5, 0, 5);
+        for (double x = -40.0; x < 40; x += .01) {
+            double y = Gauss(x);
+            glBegin(GL_LINES);
+            {
+                glVertex3f(x, 10, y);
+                glVertex3f(x, 10, y + .5);
+            }
+            glEnd();
+        }
     }
-    glEnd();
+    glPopMatrix();
+
+
+
+
+
+
+
+
+
+
+    glTranslatef(0, 0, 5);
+    glScalef(5, 0, 0);
+    for (double i = 0; i < 180; i += .1) {
+
+
+
+
+
+
+
+        double x = 40 * cos(D2R(i));
+        double y = 20 * sin(D2R(i));
+        glBegin(GL_LINE_STRIP);
+        {
+            glVertex3f(x, 0, y);
+            glVertex3f(x, 0, y + .5);
+        }
+        glEnd();
+    }
+
+}
+
+void animate() {
+
+
+    glutPostRedisplay(); //Redraw the view port
 }
 
 void display(void) {
@@ -339,6 +388,9 @@ void display(void) {
 
     //Exposing camera
     camera.expose();
+    light.expose();
+    
+    
     //light.expose();
 
     // drawAxis();
@@ -347,8 +399,52 @@ void display(void) {
     world.render();
     //spaceShip.render();
 
+    //water.render();
     //Drawing spaceship details
-    //spaceShip.paintUIElement();
+    //spaceShip.render();
+
+
+    //    glRotatef(90, 0, 0, 1);
+    //    glTranslatef(0, -60, 0);
+
+    //    world.drawBridgeTrashA();
+
+
+
+    glColor3f(1, 0.5, .8);
+
+    //TrashB trashB(40.0,40.0,3.0,30.0);
+    //trashB.render();
+
+    //    TrashC trashC(20,60);
+    //    trashC.render();
+
+
+    //   RoadPkg roadPkg(130,300);
+    //  roadPkg.render();
+
+        //TrashBPkg trashBPkg(40,120);
+        //trashBPkg.render();
+
+    //TrashCPkg trashCPkg(20,200);
+    //trashCPkg.render();
+
+    //    glRotatef(90,1,0,0);
+    //    
+     //   BridgeBeam bridgeBeam(21,100);
+    //    bridgeBeam.render();
+
+       BridgeBeamPkg bridgeBeamPkg(21,400);
+        bridgeBeamPkg.render();
+
+
+    //Pillar pillar;
+    //pillar.render();
+
+
+
+
+
 
 
     glutSwapBuffers();
@@ -362,7 +458,9 @@ void init() {
 
     glEnable(GL_SMOOTH);
     glEnable(GL_BLEND);
-    //glEnable(GL_LINE_SMOOTH);
+    glEnable(GL_LINE_SMOOTH);
+
+    glEnable(GL_NORMALIZE);
 
     //Lighting
     glEnable(GL_COLOR_MATERIAL);
@@ -379,6 +477,12 @@ void init() {
 
 
 
+    memset(keys, 0, sizeof (keys));
+
+    LoadTexture();
+
+
+
 
 }
 
@@ -388,7 +492,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(50, 0);
-    glutCreateWindow("simple");
+    glutCreateWindow("Hell Gate");
 
     glutDisplayFunc(display);
     glutIdleFunc(animate);
@@ -405,11 +509,6 @@ int main(int argc, char** argv) {
 
     //ADD mouse listeners:
     glutMouseFunc(mouseListener);
-
-
-    world.addChild(spaceShip);
-
-
 
 
     init();
