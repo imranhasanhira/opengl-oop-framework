@@ -13,14 +13,22 @@
 #define	Texture_H
 
 class Texture {
-public:    
-    Texture();    
+public:
+    Texture();
     static int LoadMyBitmap(char* filename);
-    virtual ~Texture();   
+    virtual ~Texture();
     char* filename;
+
+    static GLuint TEX_ASH_BRICK;
+    static GLuint TEX_PILLER_SMALL;
+    static GLuint TEX_PILLER_BIG;
+
+    static void initTextures();
+
+
 private:
     static int num_texture;
-    
+
 };
 
 #endif	/* Texture_H */

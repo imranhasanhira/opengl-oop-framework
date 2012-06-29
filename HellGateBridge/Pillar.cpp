@@ -5,14 +5,10 @@
  * Created on June 29, 2012, 2:44 PM
  */
 
-
-
 #include "Pillar.h"
 #include "drawing.h"
 #include "Texture.h"
 #include <math.h>
-
-GLuint Pillar::textureID = -1;
 
 Pillar::Pillar(Vector position, double length, double width, double height) : UIElement(position) {
 
@@ -82,66 +78,20 @@ void Pillar::drawPillerPartial() {
 
 }
 
-void Pillar::drawPillerMiddle() {
-
-    int totalStep = 100;
-
-    glEnable(GL_TEXTURE_2D);
-    glBegin(GL_QUAD_STRIP);
-    for (int theta = 0, i = 0; theta < 180; theta += 180.0 / totalStep, i++) {
-        double uy = h - dh;
-        double lx1 = d * cos(D2R(theta)) / 2;
-        double ly1 = uy * sin(D2R(theta)) / 2;
-        glTexCoord2f(0, i % 2);
-        glVertex3f(lx1, 0, ly1);
-        glTexCoord2f(1, i % 2);
-        glVertex3f(lx1, 0, uy);
-    }
-    glEnd();
-
-    glBegin(GL_QUAD_STRIP);
-    for (int theta = 0, i = 0; theta < 180; theta += 180.0 / totalStep, i++) {
-        double uy = h - dh;
-        double lx1 = d * cos(D2R(theta)) / 2;
-        double ly1 = uy * sin(D2R(theta)) / 2;
-        glTexCoord2f(i % 2, 0);
-        glVertex3f(lx1, 0, ly1);
-        glTexCoord2f(i % 2, 1);
-        glVertex3f(lx1, w, ly1);
-    }
-    glEnd();
-
-    glBegin(GL_QUAD_STRIP);
-    for (int theta = 0, i = 0; theta < 180; theta += 180.0 / totalStep, i++) {
-        double uy = h - dh;
-        double lx1 = d * cos(D2R(theta)) / 2;
-        double ly1 = uy * sin(D2R(theta)) / 2;
-        glTexCoord2f(i % 2, 0);
-        glVertex3f(lx1, w, ly1);
-        glTexCoord2f(i % 2, 1);
-        glVertex3f(lx1, w, uy);
-    }
-    glEnd();
-
-
-    glDisable(GL_TEXTURE_2D);
-
-}
-
 void Pillar::paint() {
 
     glPushMatrix();
     {
         glColor3f(1, 1, 1);
-        glBindTexture(GL_TEXTURE_2D, textureID); /*  texid isa variablecorrespondsto  the  image*/
+        glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_SMALL); /*  texid isa variablecorrespondsto  the  image*/
 
         drawPillerPartial();
         glPushMatrix();
         {
-            glTranslatef(l + iel + d / 2, 0, dh);
-            drawPillerMiddle();
+            glTranslatef(l + iel + d / 2, 0, 10);
+            Drawing::DrawDoor(d, w, h-10, 100);
 
-            glTranslatef(l + iel + d / 2, w, -dh);
+            glTranslatef(l + iel + d / 2, w, -10);
             glRotatef(180, 0, 0, 1);
             drawPillerPartial();
         }

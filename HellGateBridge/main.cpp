@@ -31,6 +31,7 @@
 #include "Pillar.h"
 
 #include "macros.h"
+#include "BigPillar.h"
 
 
 
@@ -77,8 +78,6 @@ void LoadTexture() {
     Road::railTexId = Texture::LoadMyBitmap("images/rail.bmp");
     BridgeBeam::texid = Texture::LoadMyBitmap("images/beam.bmp");
     Water::texid = Texture::LoadMyBitmap("images/water.bmp");
-    //Pillar::textureID = Texture::LoadMyBitmap("images/water.bmp");
-    Pillar::textureID = Texture::LoadMyBitmap("images/pillar_b.bmp");
 
 }
 
@@ -427,8 +426,11 @@ void display(void) {
 
 
 
-//    pillar.render();
-//    pillar2.render();
+//        pillar.render();
+//        pillar2.render();
+
+    BigPillar bigPillar(Vector(0, 0, 0));
+    bigPillar.render(); 
 
 
     glutSwapBuffers();
@@ -464,9 +466,7 @@ void init() {
     memset(keys, 0, sizeof (keys));
 
     LoadTexture();
-
-
-
+    Texture::initTextures();
 
 }
 

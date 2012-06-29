@@ -16,13 +16,11 @@ public:
     Pillar(Vector position, double length, double width, double height);
     Pillar(const Pillar& orig);
     virtual ~Pillar();
-    static GLuint textureID;
 
 protected:
     void paint();
     void calcPoints();
     void drawPillerPartial();
-    void drawPillerMiddle();
     void drawPillerTop();
     Point3f points[20];
 
@@ -35,7 +33,7 @@ private:
     double iel; //inner extra length
     double d; //distance
     double dh; //door height
-    
+
 };
 
 #endif	/* PILLAR_H */

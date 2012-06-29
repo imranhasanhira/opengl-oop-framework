@@ -48,6 +48,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Water.o \
 	${OBJECTDIR}/Element.o \
 	${OBJECTDIR}/BridgeBeamPkg.o \
+	${OBJECTDIR}/BigPillar.o \
 	${OBJECTDIR}/trashA.o \
 	${OBJECTDIR}/TrashBPkg.o \
 	${OBJECTDIR}/SpaceShip.o \
@@ -151,6 +152,11 @@ ${OBJECTDIR}/BridgeBeamPkg.o: BridgeBeamPkg.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/BridgeBeamPkg.o BridgeBeamPkg.cpp
+
+${OBJECTDIR}/BigPillar.o: BigPillar.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/BigPillar.o BigPillar.cpp
 
 ${OBJECTDIR}/trashA.o: trashA.cpp 
 	${MKDIR} -p ${OBJECTDIR}

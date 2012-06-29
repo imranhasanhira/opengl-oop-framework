@@ -37,6 +37,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>BigPillar.cpp</itemPath>
+      <itemPath>BigPillar.h</itemPath>
       <itemPath>BridgeBeamPkg.cpp</itemPath>
       <itemPath>Camera.cpp</itemPath>
       <itemPath>Element.cpp</itemPath>
