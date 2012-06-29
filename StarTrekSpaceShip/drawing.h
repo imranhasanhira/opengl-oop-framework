@@ -21,6 +21,8 @@ public:
 	void static DrawFlipedTriangles(GLdouble baseWidth,GLdouble height);
 	void static DrawRectangle(GLdouble height,GLdouble width);
 	void static DrawRectangleWithTexture(GLdouble width,GLdouble height);
+	void static DrawRectangleWithTextureXY(GLdouble width,GLdouble height);
+	void static DrawBoxWithTexture(GLdouble height, GLdouble width1, GLdouble width2);
 	
 	void static DrawCircle(GLdouble x,GLdouble y);
 	void static DrawElipse(GLdouble x_radius,GLdouble y_radius,GLdouble height);

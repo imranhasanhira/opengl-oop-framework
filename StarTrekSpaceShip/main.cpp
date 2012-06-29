@@ -17,17 +17,17 @@
 #include "Logger.h"
 #include "World.h"
 #include "SpaceShip.h"
-#include "TrashA.h"
-#include "TrashB.h"
-#include "TrashC.h"
 #include "TrashAPkg.h"
 #include "TrashBPkg.h"
 #include "TrashCPkg.h"
 #include "RoadPkg.h"
+#include "BridgeBeamPkg.h"
+#include "Water.h"
 
 #include "Camera.h"
 
 #include "Texture.h"
+#include "Pillar.h"
 
 
 
@@ -47,6 +47,7 @@ Logger logger;
 
 World world;
 Camera camera;
+Water water(400,400);
 SpaceShip spaceShip(10, 10, 0);
 
 void resize(int w, int h) {
@@ -66,6 +67,10 @@ void LoadTexture() {
     TrashC::texid = TrashA::texid;
     Road::roadTexId = Texture::LoadMyBitmap("D:\\road.bmp");
     Road::railTexId = Texture::LoadMyBitmap("D:\\rail.bmp");
+    BridgeBeam::texid = Texture::LoadMyBitmap("D:\\beam.bmp");
+    Water::texid = Texture::LoadMyBitmap("D:\\water.bmp");
+    Pillar::baseTexId = Texture::LoadMyBitmap("D:\\pillerBaseTexture.bmp");
+    
 }
 
 void handlekey() {
@@ -378,9 +383,12 @@ void display(void) {
     camera.expose();
 
     //Drawing world details
-    //world.drawGrid();
+    //world.drawGrid();    
     world.drawAxis();
-
+    
+    water.paintUIElement();
+    
+    
     //Drawing spaceship details
     //spaceShip.paintUIElement();
 //    glRotatef(90, 0, 0, 1);
@@ -402,11 +410,24 @@ void display(void) {
 //    RoadPkg roadPkg(130,300);
 //    roadPkg.paintUIElement();
 
-    TrashBPkg trashBPkg(40,120);
-    trashBPkg.paintUIElement();
+//    TrashBPkg trashBPkg(40,120);
+//    trashBPkg.paintUIElement();
     
 //    TrashCPkg trashCPkg(20,200);
 //    trashCPkg.paintUIElement();
+    
+//    glRotatef(90,1,0,0);
+//    
+//    BridgeBeam bridgeBeam(21,100);
+//    bridgeBeam.paintUIElement();
+    
+//    BridgeBeamPkg bridgeBeamPkg(21,400);
+//    bridgeBeamPkg.paintUIElement();
+    
+    
+    Pillar pillar;
+    pillar.paintUIElement();
+    
     
     glutSwapBuffers();
 
@@ -419,7 +440,7 @@ void init() {
     glEnable(GL_DEPTH);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
+    glEnable(GL_LIGHT1);    
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_SMOOTH);
     glEnable(GL_BLEND);

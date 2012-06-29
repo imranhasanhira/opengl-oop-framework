@@ -34,13 +34,17 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Pillar.o \
 	${OBJECTDIR}/Texture.o \
 	${OBJECTDIR}/drawing.o \
 	${OBJECTDIR}/TtrashC.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/TrashCPkg.o \
 	${OBJECTDIR}/Vector.o \
+	${OBJECTDIR}/Water.o \
 	${OBJECTDIR}/TrashA.o \
+	${OBJECTDIR}/BridgeBeamPkg.o \
+	${OBJECTDIR}/BridgeBeam.o \
 	${OBJECTDIR}/TrashBPkg.o \
 	${OBJECTDIR}/TrashB.o \
 	${OBJECTDIR}/Road.o \
@@ -72,6 +76,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/startrekspaceship.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/startrekspaceship ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/Pillar.o: Pillar.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/Pillar.o Pillar.cpp
+
 ${OBJECTDIR}/Texture.o: Texture.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -102,10 +111,25 @@ ${OBJECTDIR}/Vector.o: Vector.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
 
+${OBJECTDIR}/Water.o: Water.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/Water.o Water.cpp
+
 ${OBJECTDIR}/TrashA.o: TrashA.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashA.o TrashA.cpp
+
+${OBJECTDIR}/BridgeBeamPkg.o: BridgeBeamPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/BridgeBeamPkg.o BridgeBeamPkg.cpp
+
+${OBJECTDIR}/BridgeBeam.o: BridgeBeam.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -I/C/Program\ Files\ \(x86\)/CodeBlocks/MinGW/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/BridgeBeam.o BridgeBeam.cpp
 
 ${OBJECTDIR}/TrashBPkg.o: TrashBPkg.cpp 
 	${MKDIR} -p ${OBJECTDIR}

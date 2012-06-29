@@ -118,6 +118,42 @@ void Drawing::DrawRectangleWithTexture( GLdouble width,GLdouble height) {
 
 }
 
+void Drawing::DrawRectangleWithTextureXY( GLdouble width,GLdouble height) {
+    glBegin(GL_QUAD_STRIP);
+    {	
+	glTexCoord2f(0, 0);glVertex3f(0, 0, 0);
+	glTexCoord2f(1, 0);glVertex3f(0, width, 0);
+	glTexCoord2f(0, 1);glVertex3f(height, 0, 0);
+	glTexCoord2f(1, 1);glVertex3f(height, width, 0);
+    }
+    glEnd();
+
+}
+
+void Drawing::DrawBoxWithTexture(GLdouble height, GLdouble width1, GLdouble width2) {
+    glBegin(GL_QUAD_STRIP);
+    {
+	
+	glTexCoord2f(0, 0);glVertex3f(0, 0, 0);
+	glTexCoord2f(1, 0);glVertex3f(0, 0, height);
+	glTexCoord2f(0, 1);glVertex3f(width1, 0, 0);
+	glTexCoord2f(1, 1);glVertex3f(width1, 0, height);
+
+	
+	glTexCoord2f(0, 0);glVertex3f(width1, width2, 0);
+	glTexCoord2f(1, 0);glVertex3f(width1, width2, height);
+	glTexCoord2f(0, 1);glVertex3f(0, width2, 0);
+	glTexCoord2f(1, 1);glVertex3f(0, width2, height);
+
+	
+	glTexCoord2f(0, 0);glVertex3f(0, 0, 0);
+	glTexCoord2f(1, 0);glVertex3f(0, 0, height);
+	glTexCoord2f(0, 1);glVertex3f(width1, 0, 0);
+	glTexCoord2f(1, 1);glVertex3f(width1, 0, height);
+    }
+    glEnd();
+}
+
 void Drawing::DrawBox(GLdouble height, GLdouble width1, GLdouble width2) {
     glBegin(GL_QUAD_STRIP);
     {
