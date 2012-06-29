@@ -16,7 +16,7 @@ public:
 
     Resource() {
         delTheta = 0.01;
-        delStep = 0.1;
+        delStep = 0.5;
     }
 private:
 

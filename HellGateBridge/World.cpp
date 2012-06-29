@@ -64,6 +64,6 @@ void World::drawGrid() {
 
 void World::paint() {
     drawAxis();
-    drawGrid();
+//    drawGrid();
     glutSolidCube(10);
 }

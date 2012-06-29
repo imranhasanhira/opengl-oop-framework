@@ -37,14 +37,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/Pillar.o \
 	${OBJECTDIR}/Texture.o \
 	${OBJECTDIR}/drawing.o \
-	${OBJECTDIR}/TtrashC.o \
 	${OBJECTDIR}/World.o \
+	${OBJECTDIR}/TtrashC.o \
+	${OBJECTDIR}/Bridge.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Camera.o \
 	${OBJECTDIR}/Light.o \
 	${OBJECTDIR}/UIElement.o \
-	${OBJECTDIR}/TrashCPkg.o \
 	${OBJECTDIR}/Vector.o \
+	${OBJECTDIR}/TrashCPkg.o \
 	${OBJECTDIR}/Water.o \
 	${OBJECTDIR}/Element.o \
 	${OBJECTDIR}/BridgeBeamPkg.o \
@@ -97,15 +98,20 @@ ${OBJECTDIR}/drawing.o: drawing.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/drawing.o drawing.cpp
 
+${OBJECTDIR}/World.o: World.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/World.o World.cpp
+
 ${OBJECTDIR}/TtrashC.o: TtrashC.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TtrashC.o TtrashC.cpp
 
-${OBJECTDIR}/World.o: World.cpp 
+${OBJECTDIR}/Bridge.o: Bridge.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/World.o World.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Bridge.o Bridge.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -127,15 +133,15 @@ ${OBJECTDIR}/UIElement.o: UIElement.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/UIElement.o UIElement.cpp
 
-${OBJECTDIR}/TrashCPkg.o: TrashCPkg.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashCPkg.o TrashCPkg.cpp
-
 ${OBJECTDIR}/Vector.o: Vector.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
+
+${OBJECTDIR}/TrashCPkg.o: TrashCPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashCPkg.o TrashCPkg.cpp
 
 ${OBJECTDIR}/Water.o: Water.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="79">
+<configurationDescriptor version="80">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -37,6 +37,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Bridge.cpp</itemPath>
       <itemPath>BridgeBeamPkg.cpp</itemPath>
       <itemPath>Camera.cpp</itemPath>
       <itemPath>Element.cpp</itemPath>

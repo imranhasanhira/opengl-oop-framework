@@ -31,6 +31,7 @@
 #include "Pillar.h"
 
 #include "macros.h"
+#include "Bridge.h"
 
 
 
@@ -434,16 +435,19 @@ void display(void) {
      //   BridgeBeam bridgeBeam(21,100);
     //    bridgeBeam.render();
 
-       BridgeBeamPkg bridgeBeamPkg(21,400);
-        bridgeBeamPkg.render();
+//     BridgeBeamPkg bridgeBeamPkg(21,400);
+//     bridgeBeamPkg.render();
 
 
     //Pillar pillar;
     //pillar.render();
+    
+    Bridge bridge(200,100);
+    bridge.render();
 
 
-
-
+     
+	
 
 
 
