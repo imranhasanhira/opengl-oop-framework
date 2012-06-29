@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/TrashCPkg.o \
 	${OBJECTDIR}/Vector.o \
 	${OBJECTDIR}/TrashA.o \
+	${OBJECTDIR}/TrashBPkg.o \
 	${OBJECTDIR}/TrashB.o \
 	${OBJECTDIR}/Road.o \
 	${OBJECTDIR}/RoadPkg.o \
@@ -105,6 +106,11 @@ ${OBJECTDIR}/TrashA.o: TrashA.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashA.o TrashA.cpp
+
+${OBJECTDIR}/TrashBPkg.o: TrashBPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashBPkg.o TrashBPkg.cpp
 
 ${OBJECTDIR}/TrashB.o: TrashB.cpp 
 	${MKDIR} -p ${OBJECTDIR}

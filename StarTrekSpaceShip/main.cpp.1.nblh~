@@ -17,19 +17,11 @@
 #include "Logger.h"
 #include "World.h"
 #include "SpaceShip.h"
-#include "TrashA.h"
+#include "trashA.h"
 #include "TrashB.h"
-#include "TrashC.h"
-#include "TrashAPkg.h"
-#include "TrashBPkg.h"
-#include "TrashCPkg.h"
-#include "RoadPkg.h"
-
 #include "Camera.h"
 
 #include "Texture.h"
-
-
 
 using namespace std;
 
@@ -49,6 +41,8 @@ World world;
 Camera camera;
 SpaceShip spaceShip(10, 10, 0);
 
+TrashB trashB(10, 10, 0);
+
 void resize(int w, int h) {
 
     glViewport(0, 0, w, h);
@@ -59,13 +53,10 @@ void resize(int w, int h) {
     //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
 }
 
-void LoadTexture() {
+void LoadTexture(){
     
-    TrashA::texid = Texture::LoadMyBitmap("D:\\trashA.bmp");
-    TrashB::texid = Texture::LoadMyBitmap("D:\\trashB.bmp");
-    TrashC::texid = TrashA::texid;
-    Road::roadTexId = Texture::LoadMyBitmap("D:\\road.bmp");
-    Road::railTexId = Texture::LoadMyBitmap("D:\\rail.bmp");
+    char filename[100] = "D:\\trashA.bmp";
+    TrashA::texid = Texture::LoadMyBitmap(filename);
 }
 
 void handlekey() {
@@ -73,27 +64,28 @@ void handlekey() {
     /*  Start -- Spaceship step*/
     if (keys['w']) {
 	spaceShip.pitchClockWise();
-	//	trashA1.pitchClockWise();
+//	trashA1.pitchClockWise();
     }
     if (keys['s']) {
 	spaceShip.pitchCounterClockWise();
-	//	trashA1.pitchCounterClockWise();
+//	trashA1.pitchCounterClockWise();
     }
     if (keys['a']) {
 	spaceShip.roleLeft();
-	//	trashA1.roleLeft();
+//	trashA1.roleLeft();
     }
     if (keys['d']) {
 	spaceShip.roleRight();
-	//	trashA1.roleRight();
+//	trashA1.roleRight();
     }
     if (keys['q']) {
 	spaceShip.yowDown();
-	//	trashA1.yowDown();
+//	trashA1.yowDown();
     }
     if (keys['e']) {
-	spaceShip.yowUp();	
-	//	trashA1.yowUp();
+	spaceShip.yowUp();
+	trashB.yowUp();
+//	trashA1.yowUp();
     }
     /* END -- Spaceship Step */
 
@@ -102,27 +94,27 @@ void handlekey() {
     /*  Start -- Spaceship Rotation*/
     if (keys['i']) {
 	spaceShip.stepDown();
-	//	trashA1.stepDown();
+//	trashA1.stepDown();
     }
     if (keys['k']) {
 	spaceShip.stepUp();
-	//	trashA1.stepUp();
+//	trashA1.stepUp();
     }
     if (keys['j']) {
 	spaceShip.stepLeft();
-	//	trashA1.stepLeft();
+//	trashA1.stepLeft();
     }
     if (keys['l']) {
 	spaceShip.stepRight();
-	//	trashA1.stepRight();
+//	trashA1.stepRight();
     }
     if (keys['u']) {
 	spaceShip.stepForward();
-	//	trashA1.stepForward();
+//	trashA1.stepForward();
     }
     if (keys['o']) {
 	spaceShip.stepBackward();
-	//	trashA1.stepBackward();	
+//	trashA1.stepBackward();	
     }
     /* END -- Spaceship Rotation */
 
@@ -169,7 +161,7 @@ void handlekey() {
 
     if (keys['0']) {
 	camera.print();
-	//	trashA1.print();	
+//	trashA1.print();	
     }
 
     if (keys[VIRTUAL_KEY_DOWN]) {
@@ -331,39 +323,6 @@ void mousePassiveMotionListener(int x, int y) {
     cout << "Move : " << x << ", " << y << endl;
 }
 
-void TestGuassian(){
-    glPushMatrix();
-    {
-	glTranslatef(0,0,15);    
-	glScalef(5,0,5);
-	for (double x = -40.0; x < 40; x+=.01) {
-	    double y = Gauss(x);
-	    glBegin(GL_LINES);
-	    {	    	    
-		glVertex3f(x,10,y);
-		glVertex3f(x,10,y+.5);	    
-	    }
-	    glEnd();
-	}
-    }
-    glPopMatrix();
-
-    
-    glTranslatef(0,0,5);    
-    glScalef(5,0,0);
-    for (double i = 0; i < 180; i+=.1) {
-
-	double x = 40*cos(D2R(i));
-	double y = 20*sin(D2R(i));
-	glBegin(GL_LINE_STRIP);
-	{	    
-	    glVertex3f(x,0,y);
-	    glVertex3f(x,0,y+.5);	    
-	}
-	glEnd();
-    }
-}
-
 void display(void) {
     /* clear window */
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -376,38 +335,50 @@ void display(void) {
 
     //Exposing camera
     camera.expose();
-
+    
     //Drawing world details
     //world.drawGrid();
     world.drawAxis();
 
     //Drawing spaceship details
     //spaceShip.paintUIElement();
-//    glRotatef(90, 0, 0, 1);
-//    glTranslatef(0, -60, 0);
 
-//    world.drawBridgeTrashA();
-    
+//
+//    glColor3f(1,1,1);
+//    glEnable(GL_TEXTURE_2D);
+//    {
+//	glBindTexture(GL_TEXTURE_2D, texid); /*  texid isa variablecorrespondsto  the  image*/
+//	glNormal3f(0.0, -1.0, 0.0); //  Normal vector  to  the  polygon
+//	Drawing::DrawRectangleWithTexture(30, 100);
+////	glBegin(GL_QUAD_STRIP);
+////	{
+////	    glTexCoord2f(0, 0);glVertex3f(0, 0, 0);
+////	    glTexCoord2f(1, 0);glVertex3f(0, 0, 64);	    	    
+////	    glTexCoord2f(1, 1);glVertex3f(256, 0, 0);
+////	    glTexCoord2f(0, 1);glVertex3f(256, 0, 64);	    
+////	}
+//	glEnd();
+//    }
+//    glDisable(GL_TEXTURE_2D);
+
+    glPushMatrix();
+    {	
+	
+	TrashA trashA1(0, 0, 0, 20, 100);
+	trashA1.paintUIElement();
+	
+	
+	glTranslatef(0,10,0);
+	TrashA trashA2(0, 0, 0, 20, 100);
+	trashA2.paintUIElement();
+	
+    }
+    glPopMatrix();
+
     
 
-    glColor3f(1,0.5,.8);
-    
-//    TrashB trashB(40.0,40.0,3.0,30.0);
-//    trashB.paintUIElement();
-    
-//    TrashC trashC(20,60);
-//    trashC.paintUIElement();
-    
-    
-//    RoadPkg roadPkg(130,300);
-//    roadPkg.paintUIElement();
 
-    TrashBPkg trashBPkg(40,120);
-    trashBPkg.paintUIElement();
-    
-//    TrashCPkg trashCPkg(20,200);
-//    trashCPkg.paintUIElement();
-    
+
     glutSwapBuffers();
 
 }
@@ -419,12 +390,10 @@ void init() {
     glEnable(GL_DEPTH);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_SMOOTH);
     glEnable(GL_BLEND);
-    glEnable(GL_LINE_SMOOTH);
-    glEnable(GL_NORMALIZE);
+    //glEnable(GL_LINE_SMOOTH);
     glEnable(GL_COLOR_MATERIAL);
 
 
@@ -436,7 +405,7 @@ void init() {
     memset(keys, 0, sizeof (keys));
 
     LoadTexture();
-
+    
 
 }
 
@@ -446,7 +415,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(50, 0);
-    glutCreateWindow("Hell Gate");
+    glutCreateWindow("simple");
 
 
 

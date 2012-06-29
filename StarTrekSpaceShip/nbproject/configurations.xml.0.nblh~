@@ -9,16 +9,10 @@
       <itemPath>Element.h</itemPath>
       <itemPath>Logger.h</itemPath>
       <itemPath>Resource.h</itemPath>
-      <itemPath>Road.h</itemPath>
-      <itemPath>RoadPkg.h</itemPath>
       <itemPath>SpaceShip.h</itemPath>
-      <itemPath>Texture.h</itemPath>
+      <itemPath>Textures.h</itemPath>
       <itemPath>TrashA.h</itemPath>
-      <itemPath>TrashAPkg.h</itemPath>
       <itemPath>TrashB.h</itemPath>
-      <itemPath>TrashBPkg.h</itemPath>
-      <itemPath>TrashC.h</itemPath>
-      <itemPath>TrashCPkg.h</itemPath>
       <itemPath>UIElement.h</itemPath>
       <itemPath>Vector.h</itemPath>
       <itemPath>World.h</itemPath>
@@ -33,18 +27,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Road.cpp</itemPath>
-      <itemPath>RoadPkg.cpp</itemPath>
-      <itemPath>Texture.cpp</itemPath>
-      <itemPath>TrashA.cpp</itemPath>
-      <itemPath>TrashAPkg.cpp</itemPath>
-      <itemPath>TrashB.cpp</itemPath>
-      <itemPath>TrashBPkg.cpp</itemPath>
-      <itemPath>TrashCPkg.cpp</itemPath>
-      <itemPath>TtrashC.cpp</itemPath>
+      <itemPath>Textures.cpp</itemPath>
       <itemPath>Vector.cpp</itemPath>
       <itemPath>drawing.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>trashA.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
