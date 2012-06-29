@@ -28,6 +28,12 @@ void Pillar::paint(){
 	    glBindTexture(GL_TEXTURE_2D, this->baseTexId); /*  texid isa variablecorrespondsto  the  image*/
 	    
 	    Drawing::DrawBoxWithTexture(20,50,40);
+	    glTranslatef(0,0,20);
+	    Drawing::DrawBoxWithTexture(20,30,60);
+	    glTranslatef(0,0,20);
+	    Drawing::DrawBoxWithTexture(20,60,30);
+	    
+	    
 	    
 	}glDisable(GL_TEXTURE_2D);
     }
