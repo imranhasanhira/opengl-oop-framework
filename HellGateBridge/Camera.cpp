@@ -32,10 +32,6 @@ void Camera::expose() {
 
 void Camera::setFaceToOrigin() {
 
-    logger.prs(theta);
-    logger.prl(gamma);
-    position.showln();
-
     double rad = position.mag();
 
     position.x = rad * cos(theta) * cos(gamma);

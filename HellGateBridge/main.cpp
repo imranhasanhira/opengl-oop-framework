@@ -34,6 +34,7 @@
 
 
 
+
 using namespace std;
 
 
@@ -49,11 +50,13 @@ Resource resource;
 Logger logger;
 
 
-Camera camera(Vector(100, 100, 50), Vector(-100, -100, -20), Vector(0, 0, 1));
+Camera camera(Vector(20, -150, 50), Vector(10, 100, -20), Vector(0, 0, 1));
 World world;
 Light light(0, 0, 1, 100, 100);
 Water water(400, 400);
 SpaceShip spaceShip(10, 10, 0);
+Pillar pillar(Vector(0, 0, 0), 40, 20, 40);
+Pillar pillar2(Vector(0, 50, 0), 40, 20, 40);
 
 void resize(int w, int h) {
 
@@ -74,7 +77,8 @@ void LoadTexture() {
     Road::railTexId = Texture::LoadMyBitmap("images/rail.bmp");
     BridgeBeam::texid = Texture::LoadMyBitmap("images/beam.bmp");
     Water::texid = Texture::LoadMyBitmap("images/water.bmp");
-    Pillar::baseTexId = Texture::LoadMyBitmap("images/pillerBaseTexture.bmp");
+    //Pillar::textureID = Texture::LoadMyBitmap("images/water.bmp");
+    Pillar::textureID = Texture::LoadMyBitmap("images/pillar_b.bmp");
 
 }
 
@@ -350,7 +354,6 @@ void TestGuassian() {
         }
         glEnd();
     }
-
 }
 
 void animate() {
@@ -419,17 +422,13 @@ void display(void) {
     //   BridgeBeam bridgeBeam(21,100);
     //    bridgeBeam.render();
 
-    BridgeBeamPkg bridgeBeamPkg(21, 400);
-    bridgeBeamPkg.render();
-
-
-    //Pillar pillar;
-    //pillar.render();
+    //BridgeBeamPkg bridgeBeamPkg(21, 400);
+    //bridgeBeamPkg.render();
 
 
 
-
-
+//    pillar.render();
+//    pillar2.render();
 
 
     glutSwapBuffers();
@@ -455,7 +454,7 @@ void init() {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(50, 1.0f, 1.0f, 1000.0f);
+    gluPerspective(50, 1.0f, 1.0f, 10000.0f);
 
     glutIgnoreKeyRepeat(1);
 

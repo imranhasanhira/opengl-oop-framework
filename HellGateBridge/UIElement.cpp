@@ -4,6 +4,7 @@
 #include <GL/glut.h>
 
 void UIElement::paint() {
+    
 }
 
 UIElement::UIElement(double posX, double posY, double posZ) {
@@ -48,26 +49,5 @@ void UIElement::render() {
         }
     }
     glPopMatrix();
-
-
-    /*glBegin(GL_LINES);
-        {
-            //UP magenta
-            glColor3f(1, 0, 1);
-            glVertex3f(0, 0, 0);
-            glVertex3f(CO(up.scale(30)));
-
-            //forward yellow
-            glColor3f(1, 1, 0);
-            glVertex3f(0, 0, 0);
-            glVertex3f(CO(forward.scale(30)));
-
-            Vector along = forward * up;
-            glColor3f(0, 1, 1);
-            glVertex3f(0, 0, 0);
-            glVertex3f(CO(along.scale(30)));
-
-        }
-        glEnd();*/
 }
 

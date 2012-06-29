@@ -49,11 +49,11 @@ void World::drawGrid() {
         int i;
 
         for (i = -100; i < 100; i += 10) {
-            glColor3f(0.4, 0, 0);
+            glColor3f(0.1, 0, 0);
             glVertex3f(-100, i, 0);
             glVertex3f(100, i, 0);
 
-            glColor3f(0, 0.4, 0);
+            glColor3f(0, 0.1, 0);
             glVertex3f(i, -100, 0);
             glVertex3f(i, 100, 0);
 
@@ -65,5 +65,4 @@ void World::drawGrid() {
 void World::paint() {
     drawAxis();
     drawGrid();
-    glutSolidCube(10);
 }

@@ -13,6 +13,7 @@
 #include "Vector.h"
 #include "Element.h"
 #include "drawing.h"
+typedef Vector Point3f;
 
 using namespace std;
 
