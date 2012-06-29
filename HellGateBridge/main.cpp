@@ -338,24 +338,9 @@ void TestGuassian() {
     glPopMatrix();
 
 
-
-
-
-
-
-
-
-
     glTranslatef(0, 0, 5);
     glScalef(5, 0, 0);
     for (double i = 0; i < 180; i += .1) {
-
-
-
-
-
-
-
         double x = 40 * cos(D2R(i));
         double y = 20 * sin(D2R(i));
         glBegin(GL_LINE_STRIP);
@@ -389,8 +374,8 @@ void display(void) {
     //Exposing camera
     camera.expose();
     light.expose();
-    
-    
+
+
     //light.expose();
 
     // drawAxis();
@@ -423,19 +408,19 @@ void display(void) {
     //   RoadPkg roadPkg(130,300);
     //  roadPkg.render();
 
-        //TrashBPkg trashBPkg(40,120);
-        //trashBPkg.render();
+    //TrashBPkg trashBPkg(40,120);
+    //trashBPkg.render();
 
     //TrashCPkg trashCPkg(20,200);
     //trashCPkg.render();
 
     //    glRotatef(90,1,0,0);
     //    
-     //   BridgeBeam bridgeBeam(21,100);
+    //   BridgeBeam bridgeBeam(21,100);
     //    bridgeBeam.render();
 
-       BridgeBeamPkg bridgeBeamPkg(21,400);
-        bridgeBeamPkg.render();
+    BridgeBeamPkg bridgeBeamPkg(21, 400);
+    bridgeBeamPkg.render();
 
 
     //Pillar pillar;

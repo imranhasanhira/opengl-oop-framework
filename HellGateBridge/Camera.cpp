@@ -3,6 +3,8 @@
 #include <GL/glut.h>
 #include <math.h>
 #include "Resource.h"
+#include "Logger.h"
+extern Logger logger;
 extern Resource resource;
 
 Camera::Camera(Vector tPosition, Vector tForward, Vector tUp) {
@@ -30,7 +32,9 @@ void Camera::expose() {
 
 void Camera::setFaceToOrigin() {
 
-    //position.showln();
+    logger.prs(theta);
+    logger.prl(gamma);
+    position.showln();
 
     double rad = position.mag();
 
@@ -43,25 +47,23 @@ void Camera::setFaceToOrigin() {
 }
 
 void Camera::circularUp() {
-    gamma += resource.delTheta;
-    if (gamma >= 360) {
-        gamma = 0;
+    if (R2D(gamma) < 89) {
+        gamma += resource.delTheta;
     }
     setFaceToOrigin();
 }
 
 void Camera::circularDown() {
     setFaceToOrigin();
-    gamma -= resource.delTheta;
-    if (gamma < 0) {
-        gamma = 360;
+    if (R2D(gamma) > -89) {
+        gamma -= resource.delTheta;
     }
 }
 
 void Camera::circularLeft() {
     setFaceToOrigin();
     theta += resource.delTheta;
-    if (theta >= 360) {
+    if (theta >= 2 * M_PI) {
         theta = 0;
     }
 }
@@ -70,6 +72,6 @@ void Camera::circularRight() {
     setFaceToOrigin();
     theta -= resource.delTheta;
     if (theta < 0) {
-        theta = 360;
+        theta = 2 * M_PI;
     }
 }
