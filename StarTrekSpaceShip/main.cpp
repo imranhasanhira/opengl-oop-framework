@@ -447,7 +447,7 @@ void init() {
     glEnable(GL_LINE_SMOOTH);
     glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
-
+ 
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
