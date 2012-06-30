@@ -63,22 +63,22 @@ void Road::paint() {
     {
 	glEnable(GL_TEXTURE_2D);
 	{
-	    glBindTexture(GL_TEXTURE_2D, this->roadTexId); /*  texid isa variablecorrespondsto  the  image*/
-	    glNormal3f(0.0, 0.0, 1.0); //  Normal vector  to  the  polygon
+	    glBindTexture(GL_TEXTURE_2D, this->roadTexId); /*  texid isa variablecorrespondsto  the  image*/	   
 	    Drawing::DrawRectangleWithTexture(this->width, this->length);
 
+	}
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
+	{
 	    glBindTexture(GL_TEXTURE_2D, this->railTexId); /*  texid isa variablecorrespondsto  the  image*/
 	    
-	    glTranslatef(0, .5, 20);
-	    glNormal3f(0.0, 0.0, 1.0); //  Normal vector  to  the  polygon	    
+	    glTranslatef(0, 1, this->width/8);	    
 	    Drawing::DrawRectangleWithTexture(this->railWidth, this->length);
 	    
-	    glTranslatef(0, 0, 30);
-	    glNormal3f(0.0, 0.0, 1.0); //  Normal vector  to  the  polygon	    
+	    glTranslatef(0, 0, this->width/4);	    
 	    Drawing::DrawRectangleWithTexture(this->railWidth, this->length);
 	    
-	    glTranslatef(0, 0, 40);	    
-	    glNormal3f(0.0, 0.0, 1.0); //  Normal vector  to  the  polygon	    
+	    glTranslatef(0, 0, this->width/3);	    	    
 	    Drawing::DrawRectangleWithTexture(this->railWidth, this->length);
 	}
 	glDisable(GL_TEXTURE_2D);

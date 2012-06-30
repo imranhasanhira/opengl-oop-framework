@@ -31,7 +31,7 @@ void BridgeBeamPkg::paint() {
     {
         glRotatef(90, 1, 0, 0);
         for (int i = 0; i < this->unitCount; i++) {
-            BridgeBeam bridgeBeam(this->bridgeBeamWidth, this->bridgeBeamLength);
+            BridgeBeam bridgeBeam(this->bridgeBeamWidth, this->bridgeBeamLength,40);
             bridgeBeam.render();
             glTranslatef(this->bridgeBeamLength, 0, 0);
         }

@@ -21,7 +21,10 @@ public:
     void static DrawRectangleWithTexture(GLdouble width, GLdouble height);
     void static DrawRectangleWithTextureXY(GLdouble width, GLdouble height);
     void static DrawBoxWithTexture(GLdouble height, GLdouble width1, GLdouble width2);
-    void static DrawBoxCilinderWithTexture(GLdouble length, GLdouble width, GLdouble height, GLdouble upperLength, GLdouble upperWidth);
+    void static DrawRectangleWithTextureFixed(GLdouble width, GLdouble height);
+    void static DrawRectangleWithTextureRot90(GLdouble width, GLdouble height);
+
+    void static DrawSkyBoxWithTexture(GLdouble height, GLdouble width1, GLdouble width2);
 
     void static DrawCircle(GLdouble x, GLdouble y);
     void static DrawElipse(GLdouble x_radius, GLdouble y_radius, GLdouble height);
@@ -34,9 +37,12 @@ public:
     void static DrawWireSphare(GLdouble radius, GLint slices = 1000, GLint loops = 1000);
     void static DrawBox(GLdouble height, GLdouble width1, GLdouble width2);
     void static DrawRoundedBox(GLdouble radius, GLdouble height);
+    void static DrawBoxCilinderWithTexture(GLdouble length, GLdouble width, GLdouble height, GLdouble upperLength, GLdouble upperWidth);
 
-    void static DrawDoor(double l, double w, double h, int step) ;
-    };
+
+
+    void static DrawDoor(double l, double w, double h, int step);
+};
 
 
 

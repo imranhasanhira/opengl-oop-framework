@@ -11,6 +11,15 @@ Camera::Camera(Vector tPosition, Vector tForward, Vector tUp) {
     initialPosition = tPosition;
     initialForward = tForward;
     initialUp = tUp;
+    
+    initialPosition =  Vector(-7.65, 306.70, 70.16);
+    initialForward = Vector(13.57, -392.76, 1.17);
+     initialUp =  Vector(-0.00, 0.00, 1.00);
+
+    
+//    initialPosition = Vector(-309.74, -14.77, 22.31);
+//    initialForward = Vector(391.86, -4.08, 29.55);
+//    initialUp = Vector(-0.07, 0.10, 0.99);
 
     reset();
 }
@@ -19,7 +28,7 @@ void Camera::reset() {
     position = initialPosition;
     forward = initialForward;
     Vector along = CROSS(initialForward, initialUp);
-    up = CROSS(along, initialForward);
+    up = CROSS(along, initialForward).unit();
 }
 
 /**
@@ -73,4 +82,10 @@ void Camera::circularRight() {
     if (theta < 0) {
         theta = 360;
     }
+}
+void Camera::print(){
+    
+    position.showln();
+    forward.showln();
+    up.showln();    
 }

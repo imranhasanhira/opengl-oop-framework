@@ -12,19 +12,23 @@
 
 class BridgeBeam : public UIElement{
 public:
-    BridgeBeam(double width,double height);
+    BridgeBeam(double width,double length,double height);
     BridgeBeam(const BridgeBeam& orig);
     virtual ~BridgeBeam();
     void TestTexture();
     void Init();
     static GLuint texid;
     
+    
 protected:
+    void paintOne(bool horizontal=false);
     void paint();
+    
     
 private:
     double width;
     double length;    
+    double height;
 
 
 };

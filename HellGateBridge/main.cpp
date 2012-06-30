@@ -1,3 +1,4 @@
+
 /* 
  * File:   main.cpp
  * Author: Md Imran Hasan
@@ -21,6 +22,7 @@
 #include "TrashBPkg.h"
 #include "TrashCPkg.h"
 #include "RoadPkg.h"
+#include "Bridge.h"
 #include "BridgeBeamPkg.h"
 #include "Water.h"
 
@@ -33,6 +35,7 @@
 #include "macros.h"
 #include "BigPillar.h"
 
+#include "SkyBox.h"
 
 
 
@@ -52,9 +55,10 @@ Logger logger;
 
 
 Camera camera(Vector(20, -150, 50), Vector(10, 100, -20), Vector(0, 0, 1));
+//Camera camera(Vector(-8.57, -382.55, 89.60), Vector(8.57, 382.55, -89.60), Vector(767.51, 34275.08, 146421.71));
 World world;
 Light light(0, 0, 1, 100, 100);
-Water water(400, 400);
+Water water(resource.worldWidth,resource.worldWidth);
 SpaceShip spaceShip(10, 10, 0);
 Pillar pillar(Vector(0, 0, 0), 40, 20, 40);
 Pillar pillar2(Vector(0, 50, 0), 40, 20, 40);
@@ -64,7 +68,8 @@ void resize(int w, int h) {
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(50, w / (float) h, 1.0f, 1000.0f);
+//    gluPerspective(50, w / (float) h, 1.0f, 1000.0f);
+    gluPerspective(70, w / (float) h, 0.1f, 100000.0f);
 
     //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
 }
@@ -75,9 +80,16 @@ void LoadTexture() {
     TrashB::texid = Texture::LoadMyBitmap("images/trashB.bmp");
     TrashC::texid = TrashA::texid;
     Road::roadTexId = Texture::LoadMyBitmap("images/road.bmp");
-    Road::railTexId = Texture::LoadMyBitmap("images/rail.bmp");
-    BridgeBeam::texid = Texture::LoadMyBitmap("images/beam.bmp");
+    Road::railTexId = Texture::LoadMyBitmap("images/railRoad.bmp");
+    BridgeBeam::texid = Texture::LoadMyBitmap("images/beam1.bmp");
     Water::texid = Texture::LoadMyBitmap("images/water.bmp");
+
+
+    SkyBox::skyUpId = Texture::LoadMyBitmap("images/skyup1.bmp");
+    SkyBox::skyBackId = Texture::LoadMyBitmap("images/skyback1.bmp");
+    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/leftsky.bmp");
+    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/frontsky.bmp");
+    SkyBox::skyRightId = Texture::LoadMyBitmap("images/rightsky.bmp");
 
 }
 
@@ -162,6 +174,7 @@ void handlekey() {
 
     if (keys['1']) {
 
+        camera.print();
     }
 
     if (keys['/']) {
@@ -360,6 +373,30 @@ void animate() {
 
     glutPostRedisplay(); //Redraw the view port
 }
+//void drawmodel_box(void)
+//{
+//	// Load the model only if it hasn't been loaded before
+//	// If it's been loaded then pmodel1 should be a pointer to the model geometry data...otherwise it's null
+//    if (!pmodel1) 
+//	{
+//		// this is the call that actualy reads the OBJ and creates the model object
+//        pmodel1 = glmReadOBJ("train.obj");	
+//        if (!pmodel1) exit(0);
+//		// This will rescale the object to fit into the unity matrix
+//		// Depending on your project you might want to keep the original size and positions you had in 3DS Max or GMAX so you may have to comment this.
+//        glmUnitize(pmodel1);
+//		// These 2 functions calculate triangle and vertex normals from the geometry data.
+//		// To be honest I had some problem with very complex models that didn't look to good because of how vertex normals were calculated
+//		// So if you can export these directly from you modeling tool do it and comment these line
+//		// 3DS Max can calculate these for you and GLM is perfectly capable of loading them
+//        glmFacetNormals(pmodel1);        
+//		glmVertexNormals(pmodel1, 90.0);
+//    }
+//    // This is the call that will actualy draw the model
+//	// Don't forget to tell it if you want textures or not :))
+//    glmDraw(pmodel1, GLM_SMOOTH| GLM_TEXTURE);
+//	
+//}
 
 void display(void) {
     /* clear window */
@@ -380,6 +417,13 @@ void display(void) {
 
     //light.expose();
 
+    //    glPushMatrix();
+    //    {
+    //	glScalef(4,4,4);
+    //	drawmodel_box();
+    //    }
+    //    glPopMatrix();
+
     // drawAxis();
 
     //Drawing world details
@@ -397,7 +441,7 @@ void display(void) {
     //    world.drawBridgeTrashA();
 
 
-//    glTranslatef(0, 0, -8     0);
+    //    glTranslatef(0, 0, -8     0);
 
     glColor3f(1, 0.5, .8);
 
@@ -430,8 +474,32 @@ void display(void) {
     //        pillar.render();
     //        pillar2.render();
 
-    BigPillar bigPillar(Vector(0, 0, 0));
-    bigPillar.render();
+
+    glPushMatrix();
+    {
+        SkyBox skyBox(resource.worldWidth, resource.worldWidth);
+        skyBox.render();
+    }
+    glPopMatrix();
+
+    glPushMatrix();
+    {
+        glTranslatef(0, 0, -1000);
+        water.render();
+    }
+    glPopMatrix();
+
+
+    glColor4f(0.5, 0.5, 0.5, 0.0);
+    Bridge bridge(400, 800, 100);
+    bridge.render();
+
+
+    //BigPillar bigPillar(Vector(0, 0, 0));
+    //bigPillar.render();
+
+
+
 
 
     glutSwapBuffers();
@@ -444,7 +512,7 @@ void init() {
     glEnable(GL_DEPTH);
 
     glEnable(GL_SMOOTH);
-    glEnable(GL_BLEND);
+    //glEnable(GL_BLEND);
     glEnable(GL_LINE_SMOOTH);
 
     glEnable(GL_NORMALIZE);
@@ -453,11 +521,12 @@ void init() {
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glShadeModel(GL_SMOOTH);
 
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(50, 1.0f, 1.0f, 10000.0f);
+    gluPerspective(70, 1.0f, 0.1f, 100000.0f);
 
     glutIgnoreKeyRepeat(1);
 
@@ -468,6 +537,7 @@ void init() {
 
     LoadTexture();
     Texture::initTextures();
+
 
 }
 

@@ -64,7 +64,7 @@ void BigPillar::drawPillerLeft(double l, double w, double h) {
     Drawing::DrawBoxCilinderWithTexture(l, w, 5, l + 5, w + 5);
     glTranslatef(-2.5, -2.5, 5);
     glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_S04);
-    Drawing::DrawBoxCilinderWithTexture(l + 5, w + 5, 3, l + 5, w + 5);
+        Drawing::DrawBoxCilinderWithTexture(l + 5, w + 5, 3, l + 5, w + 5);
     glTranslatef(0, 0, 3);
     glBindTexture(GL_TEXTURE_2D, Texture::TEX_ASH_BRICK);
     Drawing::DrawRectangleWithTextureXY(w + 5, l + 5);

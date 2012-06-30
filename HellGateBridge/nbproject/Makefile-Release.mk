@@ -37,16 +37,20 @@ OBJECTFILES= \
 	${OBJECTDIR}/Pillar.o \
 	${OBJECTDIR}/Texture.o \
 	${OBJECTDIR}/drawing.o \
-	${OBJECTDIR}/TtrashC.o \
 	${OBJECTDIR}/World.o \
+	${OBJECTDIR}/TtrashC.o \
+	${OBJECTDIR}/Bridge.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Camera.o \
 	${OBJECTDIR}/Light.o \
 	${OBJECTDIR}/UIElement.o \
-	${OBJECTDIR}/TrashCPkg.o \
+	${OBJECTDIR}/glm.o \
+	${OBJECTDIR}/SkyBox.o \
 	${OBJECTDIR}/Vector.o \
+	${OBJECTDIR}/TrashCPkg.o \
 	${OBJECTDIR}/Water.o \
 	${OBJECTDIR}/Element.o \
+	${OBJECTDIR}/glmimg.o \
 	${OBJECTDIR}/BridgeBeamPkg.o \
 	${OBJECTDIR}/BigPillar.o \
 	${OBJECTDIR}/trashA.o \
@@ -56,7 +60,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/Road.o \
 	${OBJECTDIR}/RoadPkg.o \
 	${OBJECTDIR}/TrashAPkg.o \
-	${OBJECTDIR}/bridgeBeam.o
+	${OBJECTDIR}/bridgeBeam.o \
+	${OBJECTDIR}/Texture1.o
 
 
 # C Compiler Flags
@@ -98,15 +103,20 @@ ${OBJECTDIR}/drawing.o: drawing.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/drawing.o drawing.cpp
 
+${OBJECTDIR}/World.o: World.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/World.o World.cpp
+
 ${OBJECTDIR}/TtrashC.o: TtrashC.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TtrashC.o TtrashC.cpp
 
-${OBJECTDIR}/World.o: World.cpp 
+${OBJECTDIR}/Bridge.o: Bridge.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/World.o World.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Bridge.o Bridge.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -128,15 +138,25 @@ ${OBJECTDIR}/UIElement.o: UIElement.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/UIElement.o UIElement.cpp
 
-${OBJECTDIR}/TrashCPkg.o: TrashCPkg.cpp 
+${OBJECTDIR}/glm.o: glm.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashCPkg.o TrashCPkg.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/glm.o glm.cpp
+
+${OBJECTDIR}/SkyBox.o: SkyBox.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/SkyBox.o SkyBox.cpp
 
 ${OBJECTDIR}/Vector.o: Vector.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
+
+${OBJECTDIR}/TrashCPkg.o: TrashCPkg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TrashCPkg.o TrashCPkg.cpp
 
 ${OBJECTDIR}/Water.o: Water.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -147,6 +167,11 @@ ${OBJECTDIR}/Element.o: Element.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Element.o Element.cpp
+
+${OBJECTDIR}/glmimg.o: glmimg.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/glmimg.o glmimg.cpp
 
 ${OBJECTDIR}/BridgeBeamPkg.o: BridgeBeamPkg.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -197,6 +222,11 @@ ${OBJECTDIR}/bridgeBeam.o: bridgeBeam.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/bridgeBeam.o bridgeBeam.cpp
+
+${OBJECTDIR}/Texture1.o: Texture1.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Texture1.o Texture1.cpp
 
 # Subprojects
 .build-subprojects:

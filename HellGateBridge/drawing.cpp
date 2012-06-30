@@ -1,7 +1,5 @@
 
 #include "drawing.h"
-#include "Logger.h"
-extern Logger logger;
 
 void Drawing::DrawGrid() {
     glColor3f(0.3, 0.3, 0.3); //grey
@@ -17,6 +15,7 @@ void Drawing::DrawGrid() {
             //lines parallel to X-axis
             glVertex3f(-100, i * 10, 0);
             glVertex3f(100, i * 10, 0);
+
         }
     }
     glEnd();
@@ -65,6 +64,7 @@ void Drawing::DrawElipse(GLdouble x_radius, GLdouble y_radius, GLdouble higiht) 
         for (int i = 0; i < 360; i++) {
             glVertex3f(x_radius * cos(D2R(i)), y_radius * sin(D2R(i)), higiht);
             glVertex3f(x_radius * cos(D2R(i + .01)), y_radius * sin(D2R(i + .01)), higiht);
+
         }
     }
     glEnd();
@@ -98,6 +98,7 @@ void Drawing::DrawWireSphare(GLdouble radius, GLint slices, GLint stacks) {
 
 void Drawing::DrawRectangle(GLdouble width, GLdouble height) {
     glBegin(GL_QUAD_STRIP);
+
     {
         glVertex3f(0, 0, 0);
         glVertex3f(0, 0, width);
@@ -110,31 +111,93 @@ void Drawing::DrawRectangle(GLdouble width, GLdouble height) {
 
 void Drawing::DrawRectangleWithTexture(GLdouble width, GLdouble height) {
     glBegin(GL_QUAD_STRIP);
+
     {
+        glNormal3f(0, 1, 0);
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 0);
-        glVertex3f(0, 0, width);
         glTexCoord2f(0, 1);
+        glVertex3f(0, 0, width);
+        glTexCoord2f(1, 0);
         glVertex3f(height, 0, 0);
         glTexCoord2f(1, 1);
         glVertex3f(height, 0, width);
+
     }
     glEnd();
+
+}
+
+void Drawing::DrawRectangleWithTextureRot90(GLdouble width, GLdouble height) {
+    glBegin(GL_QUAD_STRIP);
+
+    {
+        glNormal3f(0, 1, 0);
+        glTexCoord2f(0, 0);
+        glVertex3f(0, 0, 0);
+
+        glTexCoord2f(1, 1);
+        glVertex3f(0, 0, width);
+
+        glTexCoord2f(1, 0);
+        glVertex3f(height, 0, 0);
+
+        glTexCoord2f(1, 1);
+        glVertex3f(height, 0, width);
+
+    }
+    glEnd();
+
+}
+
+void Drawing::DrawRectangleWithTextureFixed(GLdouble width, GLdouble height) {
+    glBegin(GL_QUAD_STRIP);
+
+
+    {
+        glNormal3f(0, 1, 0);
+        glTexCoord2f(0, 0);
+        glVertex3f(0, 0, 0);
+
+        glTexCoord2f(0, 1);
+        glVertex3f(0, 0, width);
+
+        glTexCoord2f(1, 1);
+        glVertex3f(height, 0, width);
+
+        glTexCoord2f(1, 0);
+        glVertex3f(height, 0, 0);
+
+
+    }
+    glEnd();
+
+
+
+
+
+
+
+
 
 }
 
 void Drawing::DrawRectangleWithTextureXY(GLdouble width, GLdouble height) {
     glBegin(GL_QUAD_STRIP);
     {
+        glNormal3f(0, 0, 1);
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
+
         glTexCoord2f(1, 0);
         glVertex3f(0, width, 0);
+
         glTexCoord2f(0, 1);
         glVertex3f(height, 0, 0);
+
         glTexCoord2f(1, 1);
         glVertex3f(height, width, 0);
+
     }
     glEnd();
 
@@ -144,18 +207,38 @@ void Drawing::DrawBoxWithTexture(GLdouble height, GLdouble width1, GLdouble widt
     glBegin(GL_QUAD_STRIP);
     {
 
+
+
+
+
+
+
+
+        glNormal3f(-1.0, 0.0, 0.0); //  Normal vector  to  the  polygon	    
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
+
+
+
+
+
+
+
         glTexCoord2f(1, 0);
         glVertex3f(0, 0, height);
+
         glTexCoord2f(0, 1);
         glVertex3f(width1, 0, 0);
+
         glTexCoord2f(1, 1);
         glVertex3f(width1, 0, height);
 
 
+
+        glNormal3f(0.0, -1.0, 0.0); //  Normal vector  to  the  polygon	    
         glTexCoord2f(0, 0);
         glVertex3f(width1, width2, 0);
+
         glTexCoord2f(1, 0);
         glVertex3f(width1, width2, height);
         glTexCoord2f(0, 1);
@@ -163,7 +246,7 @@ void Drawing::DrawBoxWithTexture(GLdouble height, GLdouble width1, GLdouble widt
         glTexCoord2f(1, 1);
         glVertex3f(0, width2, height);
 
-
+        glNormal3f(0.0, -1.0, 0.0); //  Normal vector  to  the  polygon	    
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
         glTexCoord2f(1, 0);
@@ -176,35 +259,67 @@ void Drawing::DrawBoxWithTexture(GLdouble height, GLdouble width1, GLdouble widt
     glEnd();
 }
 
-void Drawing::DrawBoxCilinderWithTexture(GLdouble length, GLdouble width, GLdouble height, GLdouble upperLength, GLdouble upperWidth) {
+void Drawing::DrawSkyBoxWithTexture(GLdouble height, GLdouble width1, GLdouble width2) {
     glBegin(GL_QUAD_STRIP);
     {
-        double dl = (upperLength - length) / 2;
-        double dw = (upperWidth - width) / 2;
 
+
+        glNormal3f(0.0, -1.0, 0.0); //  Normal vector  to  the  polygon	    
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
         glTexCoord2f(1, 0);
-        glVertex3f(-dl, -dw, height);
+        glVertex3f(0, 0, height);
         glTexCoord2f(0, 1);
-        glVertex3f(length, 0, 0);
+        glVertex3f(width1, 0, height);
         glTexCoord2f(1, 1);
-        glVertex3f(length + dl, -dw, height);
+        glVertex3f(width1, 0, 0);
 
 
+
+        glNormal3f(1.0, 0.0, 0.0); //  Normal vector  to  the  polygon	    
         glTexCoord2f(0, 0);
-        glVertex3f(length, width, 0);
+        glVertex3f(width1, 0, 0);
         glTexCoord2f(1, 0);
-        glVertex3f(length + dl, width + dw, height);
+        glVertex3f(width1, 0, height);
         glTexCoord2f(0, 1);
-        glVertex3f(0, width, 0);
+        glVertex3f(width1, width2, height);
         glTexCoord2f(1, 1);
-        glVertex3f(-dl, width + dw, height);
+        glVertex3f(width1, width2, 0);
 
+
+        glNormal3f(0.0, 1.0, 0.0); //  Normal vector  to  the  polygon	    
         glTexCoord2f(0, 0);
+        glVertex3f(width1, width2, 0);
+        glTexCoord2f(1, 0);
+        glVertex3f(width1, width2, height);
+        glTexCoord2f(0, 1);
+        glVertex3f(0, width2, height);
+        glTexCoord2f(1, 1);
+        glVertex3f(0, width2, 0);
+
+        glNormal3f(-1.0, 0.0, 0.0); //  Normal vector  to  the  polygon	    
+        glTexCoord2f(0, 0);
+        glVertex3f(0, width2, 0);
+
+        glTexCoord2f(1, 0);
+        glVertex3f(0, width2, height);
+        glTexCoord2f(0, 1);
+        glVertex3f(0, 0, height);
+        glTexCoord2f(1, 1);
         glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 0);
-        glVertex3f(-dl, -dw, height);
+
+        //	glNormal3f(0.0, 0.0, 1.0); //  Normal vector  to  the  polygon	    
+        //	glTexCoord2f(0, 0);glVertex3f(0, 0, height);
+        //	glTexCoord2f(1, 0);glVertex3f(width1, 0, height);
+        //	glTexCoord2f(0, 1);glVertex3f(width1, width2, height);
+        //	glTexCoord2f(1, 1);glVertex3f(0, 0, height);
+        //	
+        //	glNormal3f(0.0, 0.0, -1.0); //  Normal vector  to  the  polygon	    
+        //	glTexCoord2f(0, 0);glVertex3f(0, 0, 0);
+        //	glTexCoord2f(1, 0);glVertex3f(width1, 0, 0);
+        //	glTexCoord2f(0, 1);glVertex3f(width1, width2, 0);
+        //	glTexCoord2f(1, 1);glVertex3f(0, 0, 0);
+
 
     }
     glEnd();
@@ -213,11 +328,22 @@ void Drawing::DrawBoxCilinderWithTexture(GLdouble length, GLdouble width, GLdoub
 void Drawing::DrawBox(GLdouble height, GLdouble width1, GLdouble width2) {
     glBegin(GL_QUAD_STRIP);
     {
+
         glColor3f(.2, .4, .5);
+
+
         glVertex3f(0, 0, 0);
         glVertex3f(0, 0, height);
         glVertex3f(width1, 0, 0);
         glVertex3f(width1, 0, height);
+
+
+
+
+
+
+
+
 
         glColor3f(.2, .2, .2);
         glVertex3f(width1, width2, 0);
@@ -237,6 +363,8 @@ void Drawing::DrawBox(GLdouble height, GLdouble width1, GLdouble width2) {
 void Drawing::DrawRoundedBox(GLdouble radius, GLdouble height) {
     glBegin(GL_QUAD_STRIP);
     {
+
+
         for (int i = 0; i < 360; i++) {
             glColor3f(.2, .5, .2);
             GLdouble x = radius * cos(D2R(i));
@@ -253,12 +381,43 @@ void Drawing::DrawRoundedBox(GLdouble radius, GLdouble height) {
 void Drawing::DrawTriangles(GLdouble baseWidth, GLdouble height) {
     glBegin(GL_TRIANGLES);
     {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         glVertex3f(baseWidth / 2, 0, height);
         glVertex3f(baseWidth, 0, 0);
         glVertex3f(0, 0, 0);
 
+
+
+
+
+
+
+
+
+
+
+
+
     }
     glEnd();
+
+
 }
 
 void Drawing::DrawFlipedTriangles(GLdouble baseWidth, GLdouble height) {
@@ -271,12 +430,58 @@ void Drawing::DrawFlipedTriangles(GLdouble baseWidth, GLdouble height) {
     glEnd();
 }
 
+void Drawing::DrawBoxCilinderWithTexture(GLdouble length, GLdouble width, GLdouble height, GLdouble upperLength, GLdouble upperWidth) {
+
+    glBegin(GL_QUAD_STRIP);
+    {
+        double dl = (upperLength - length) / 2;
+        double dw = (upperWidth - width) / 2;
+
+        glTexCoord2f(0, 0);
+        glVertex3f(0, 0, 0);
+        glTexCoord2f(1, 0);
+        glVertex3f(-dl, -dw, height);
+
+
+        glTexCoord2f(0, 1);
+        glVertex3f(length, 0, 0);
+        glTexCoord2f(1, 1);
+        glVertex3f(length + dl, -dw, height);
+
+
+        glTexCoord2f(0, 0);
+        glVertex3f(length, width, 0);
+        glTexCoord2f(1, 0);
+        glVertex3f(length + dl, width + dw, height);
+        glTexCoord2f(0, 1);
+        glVertex3f(0, width, 0);
+        glTexCoord2f(1, 1);
+        glVertex3f(-dl, width + dw, height);
+
+
+
+        glTexCoord2f(0, 0);
+        glVertex3f(0, 0, 0);
+
+        glTexCoord2f(1, 0);
+        glVertex3f(-dl, -dw, height);
+
+
+
+
+
+
+    }
+    glEnd();
+}
+
 void Drawing::DrawDoor(double l, double w, double h, int step) {
 
     int totalStep = step;
 
     glPushMatrix();
     glTranslatef(l / 2, 0, 0);
+
 
     glBegin(GL_QUAD_STRIP);
     for (int theta = 0, i = 0; theta < 180; theta += 180.0 / totalStep, i++) {
@@ -296,6 +501,8 @@ void Drawing::DrawDoor(double l, double w, double h, int step) {
         glTexCoord2f(i % 2, 0);
         glVertex3f(lx1, 0, ly1);
         glTexCoord2f(i % 2, 1);
+
+
         glVertex3f(lx1, w, ly1);
     }
     glEnd();
@@ -309,8 +516,16 @@ void Drawing::DrawDoor(double l, double w, double h, int step) {
         glTexCoord2f(i % 2, 1);
         glVertex3f(lx1, w, h);
     }
+
     glEnd();
 
     glPopMatrix();
+
+
+
+
+
+
+
 
 }

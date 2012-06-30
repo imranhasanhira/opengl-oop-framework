@@ -14,9 +14,15 @@ public:
     double delTheta;
     double delStep;
 
+    double worldWidth;
+    double worldHeight;
+
     Resource() {
-        delTheta = 0.15;
-        delStep = 0.2;
+        delTheta = 0.5;
+        delStep = 0.8;
+
+	worldWidth = 20000;
+	worldHeight = 20000;
     }
 private:
 

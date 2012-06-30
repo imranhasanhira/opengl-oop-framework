@@ -22,7 +22,7 @@ TrashC::TrashC(double x, double y, double z, double w, double l) : UIElement(x, 
 }
 
 void TrashC::Init() {
-    this->trashWidth = 4;
+    this->trashWidth = 2;
     this->trashAngleLineLength = sqrt(S(this->length) + S(this->width - this->trashWidth));
     this->trashAngleLineAngle = R2D(atan((this->width - this->trashWidth) / this->length));
 }

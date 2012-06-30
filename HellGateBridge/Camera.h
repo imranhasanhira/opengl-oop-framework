@@ -31,6 +31,7 @@ public:
     void circularDown();
     void circularLeft();
     void circularRight();
+    void print();
 
 };
 

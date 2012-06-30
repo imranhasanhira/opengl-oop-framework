@@ -11,17 +11,20 @@
 #include "Road.h"
 
 class RoadPkg : public UIElement{
-public:
-    RoadPkg(double width,double height);
+public:    
+    RoadPkg(double width,double length);
     RoadPkg(const RoadPkg& orig);
     virtual ~RoadPkg();
+    void Init();
     
 protected:
     void paint();
     
 private:
     double width;
-    double height;
+    double length;
+    double unitCount;
+    double roadLength;
 
 };
 
