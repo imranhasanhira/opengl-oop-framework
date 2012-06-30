@@ -19,11 +19,12 @@ extern Resource resource;
 Light::Light(double posX, double posY, double posZ, double radiousA, double radiousB) {
 
     position = Vector(posX, posY, posZ);
-    if (position.x == 0) {
-        theta = 180;
-    } else {
-        theta = acos(position.y / position.x);
-    }
+    //    if (position.x == 0) {
+    //        theta = 180;
+    //    } else {
+    //        theta = acos(position.y / position.x);
+    //    }
+    theta = 0;
     this->radiousA = radiousA;
     this->radiousB = radiousB;
 }
@@ -33,7 +34,7 @@ Light::~Light() {
 }
 
 void Light::step() {
-    theta += resource.delTheta;
+    theta += 5;
     if (theta >= 360) {
         theta = 0;
     }
@@ -60,6 +61,6 @@ void Light::expose() {
     glColor3f(lightAmbiant[0], lightAmbiant[1], lightAmbiant[2]);
     glPushMatrix();
     glTranslatef(CO(position));
-    glutSolidSphere(1, 10, 10);
+    glutSolidSphere(100, 10, 10);
     glPopMatrix();
 }

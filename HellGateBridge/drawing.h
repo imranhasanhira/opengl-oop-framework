@@ -9,6 +9,8 @@
 #include <iostream>
 #include "Vector.h"
 
+using namespace std;
+
 class Drawing {
 public:
     GLint static slices;

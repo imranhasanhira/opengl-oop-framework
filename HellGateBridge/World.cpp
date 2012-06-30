@@ -64,5 +64,5 @@ void World::drawGrid() {
 
 void World::paint() {
     drawAxis();
-    drawGrid();
+    //drawGrid();
 }

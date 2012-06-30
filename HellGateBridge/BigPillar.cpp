@@ -10,8 +10,11 @@
 #include "Logger.h"
 extern Logger logger;
 
-BigPillar::BigPillar(Vector position) : UIElement(position) {
+BigPillar::BigPillar(Vector position, double length, double width, double height) : UIElement(position) {
 
+    this->length = length;
+    this->width = width;
+    this->height = height;
 }
 
 BigPillar::~BigPillar() {
@@ -54,69 +57,70 @@ void BigPillar::drawPillerLeft(double l, double w, double h) {
         Drawing::DrawDoor(0.4 * w, 0.3 * l, .5 * h, 100);
     }
     glPopMatrix();
+    glPushMatrix();
+    {
+        double dh = 0.05 * h;
+
+        glTranslatef(.3 * l, .1 * w, 0);
+        glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_S04);
+        Drawing::DrawBoxCilinderWithTexture(.05 * l, .1 * w, h + 8, .05 * l, .1 * w);
+        glTranslatef(-.3 * l, -.1 * w, h);
+        glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_S01);
+        Drawing::DrawBoxCilinderWithTexture(l, w, dh, l + dh, w + dh);
+        glTranslatef(-dh / 2, -dh / 2, dh);
+        glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_S04);
+        Drawing::DrawBoxCilinderWithTexture(l + dh, w + dh, dh, l + dh, w + dh);
+        glTranslatef(0, 0, dh);
+        glBindTexture(GL_TEXTURE_2D, Texture::TEX_ASH_BRICK);
+        Drawing::DrawRectangleWithTextureXY(w + dh, l + dh);
+        glTranslatef(2.5, 2.5, -h - 5 - 3);
+    }
+    glPopMatrix();
 
 
-    glTranslatef(.3 * l, .1 * w, 0);
-    glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_S04);
-    Drawing::DrawBoxCilinderWithTexture(.05 * l, .1 * w, h + 8, .05 * l, .1 * w);
-    glTranslatef(-.3 * l, -.1 * w, h);
-    glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_S01);
-    Drawing::DrawBoxCilinderWithTexture(l, w, 5, l + 5, w + 5);
-    glTranslatef(-2.5, -2.5, 5);
-    glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_S04);
-        Drawing::DrawBoxCilinderWithTexture(l + 5, w + 5, 3, l + 5, w + 5);
-    glTranslatef(0, 0, 3);
-    glBindTexture(GL_TEXTURE_2D, Texture::TEX_ASH_BRICK);
-    Drawing::DrawRectangleWithTextureXY(w + 5, l + 5);
-    glTranslatef(2.5, 2.5, -h - 5 - 3);
-    
-    
-    
 }
 
 void BigPillar::paint() {
 
-    double l = 40;
-    double w = 30;
-    double h = 30;
-    double dl = l * 0.1;
-    double dw = w * 0.1;
-
+    double dl = width * 0.05;
+    double dw = length * 0.05;
 
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_BIG);
-    Drawing::DrawBoxCilinderWithTexture(l + 4 * dl, w + 4 * dw, 5, l, w);
-    glTranslatef(2 * dl, 2 * dw, 5);
-    glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_SMALL);
-    Drawing::DrawBoxCilinderWithTexture(l, w, 3, l + 2 * dl, w + 2 * dw);
-    glTranslatef(-dl, -dw, 3);
 
     glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_BIG);
-    Drawing::DrawBoxCilinderWithTexture(l + 2 * dl, w + 2 * dw, 3, l, w);
+    Drawing::DrawBoxCilinderWithTexture(width + 4 * dl, length + 4 * dw, .1 * height, width, length);
+    glTranslatef(2 * dl, 2 * dw, .1 * height);
+    glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_SMALL);
+    Drawing::DrawBoxCilinderWithTexture(width, length, .1 * height, width + 2 * dl, length + 2 * dw);
+    glTranslatef(-dl, -dw, .1 * height);
+
+    glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_BIG);
+    Drawing::DrawBoxCilinderWithTexture(width + 2 * dl, length + 2 * dw, 3, width, length);
     glTranslatef(dl, dw, 3);
     glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_SMALL);
-    Drawing::DrawBoxCilinderWithTexture(l, w, 10, l - dl, w - dw);
+    Drawing::DrawBoxCilinderWithTexture(width, length, 10, width - dl, length - dw);
     glTranslatef(dl / 2, dw / 2, 10);
     glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_BIG);
-    Drawing::DrawBoxCilinderWithTexture(l - dl, w - dw, 30, l - dl, w - dw);
-    l -= dl;
-    w -= dw;
-    glTranslatef(0, 0, 30);
-    Drawing::DrawRectangleWithTextureXY(w, l);
+    Drawing::DrawBoxCilinderWithTexture(width - dl, length - dw, .5 * height, width - dl, length - dw);
+    width -= dl;
+    length -= dw;
+    glTranslatef(0, 0, .5 * height);
+    Drawing::DrawRectangleWithTextureXY(length, width);
+
+
 
     glBindTexture(GL_TEXTURE_2D, Texture::TEX_ASH_BRICK);
-
-    drawPillerLeft(0.3 * l, w, h);
+    drawPillerLeft(0.3 * width, length, height);
     glPushMatrix();
     {
-        glTranslatef(.3 * l, .1 * w, .6 * h);
-        Drawing::DrawDoor(0.4 * l, 0.8 * w, .4 * h + 8, 50);
-        glTranslatef(2.5, 0, .4 * h + 8);
-        Drawing::DrawRectangleWithTextureXY(0.8 * w, .4 * l - 5);
-        glTranslatef(-2.5, 0, -h - 8);
+        glTranslatef(.3 * width, .1 * length, .6 * height);
+        Drawing::DrawDoor(0.4 * width, 0.8 * length, .4 * height + 8, 100);
+        glTranslatef(2.5, 0, .4 * height + 8);
+        Drawing::DrawRectangleWithTextureXY(0.8 * length, .4 * width - 5);
+        glTranslatef(-2.5, 0, -height - 8);
         glRotatef(180, 0, 0, 1);
-        glTranslatef(-.7 * l, -.9 * w, 0);
-        drawPillerLeft(0.3 * l, w, h);
+        glTranslatef(-.7 * width, -.9 * length, 0);
+        drawPillerLeft(0.3 * width, length, height);
     }
     glPopMatrix();
 

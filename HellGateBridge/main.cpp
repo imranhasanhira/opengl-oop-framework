@@ -57,18 +57,16 @@ Logger logger;
 Camera camera(Vector(20, -150, 50), Vector(10, 100, -20), Vector(0, 0, 1));
 //Camera camera(Vector(-8.57, -382.55, 89.60), Vector(8.57, 382.55, -89.60), Vector(767.51, 34275.08, 146421.71));
 World world;
-Light light(0, 0, 1, 100, 100);
-Water water(resource.worldWidth,resource.worldWidth);
+Light light(0, 0, 1, 1000, 1000);
+Water water(resource.worldWidth, resource.worldWidth);
 SpaceShip spaceShip(10, 10, 0);
-Pillar pillar(Vector(0, 0, 0), 40, 20, 40);
-Pillar pillar2(Vector(0, 50, 0), 40, 20, 40);
 
 void resize(int w, int h) {
 
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-//    gluPerspective(50, w / (float) h, 1.0f, 1000.0f);
+    //    gluPerspective(50, w / (float) h, 1.0f, 1000.0f);
     gluPerspective(70, w / (float) h, 0.1f, 100000.0f);
 
     //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
@@ -412,8 +410,11 @@ void display(void) {
 
     //Exposing camera
     camera.expose();
-    light.expose();
 
+    light.expose();
+    if (keys['9']) {
+        light.step();
+    }
 
     //light.expose();
 
@@ -428,51 +429,9 @@ void display(void) {
 
     //Drawing world details
     world.render();
-    //spaceShip.render();
 
-    //water.render();
-    //Drawing spaceship details
-    //spaceShip.render();
-
-
-    //    glRotatef(90, 0, 0, 1);
-    //    glTranslatef(0, -60, 0);
-
-    //    world.drawBridgeTrashA();
-
-
-    //    glTranslatef(0, 0, -8     0);
 
     glColor3f(1, 0.5, .8);
-
-    //TrashB trashB(40.0,40.0,3.0,30.0);
-    //trashB.render();
-
-    //    TrashC trashC(20,60);
-    //    trashC.render();
-
-
-    //   RoadPkg roadPkg(130,300);
-    //  roadPkg.render();
-
-    //TrashBPkg trashBPkg(40,120);
-    //trashBPkg.render();
-
-    //TrashCPkg trashCPkg(20,200);
-    //trashCPkg.render();
-
-    //    glRotatef(90,1,0,0);
-    //    
-    //   BridgeBeam bridgeBeam(21,100);
-    //    bridgeBeam.render();
-
-    //BridgeBeamPkg bridgeBeamPkg(21, 400);
-    //bridgeBeamPkg.render();
-
-
-
-    //        pillar.render();
-    //        pillar2.render();
 
 
     glPushMatrix();
@@ -490,14 +449,41 @@ void display(void) {
     glPopMatrix();
 
 
-    glColor4f(0.5, 0.5, 0.5, 0.0);
-    Bridge bridge(400, 800, 100);
-    bridge.render();
 
+    glPushMatrix();
+    {
+        glRotatef(90, 0, 0, 1);
+        glColor4f(0.5, 0.5, 0.5, 0.0);
+        Bridge bridge(400, 1600, 100);
+        bridge.render();
 
-    //BigPillar bigPillar(Vector(0, 0, 0));
-    //bigPillar.render();
+    }
+    glPopMatrix();
 
+    glPushMatrix();
+    {
+        glColor3f(1, 1, 1);
+        BigPillar(Vector(-170, -260, -150), 150, 450, 200).render();
+
+        glRotatef(180, 0, 0, 1);
+        BigPillar(Vector(-360, -800, -150), 150, 450, 200).render();
+
+    }
+    glPopMatrix();
+
+    glPushMatrix();
+    Pillar(Vector(-30, -700, -155), 200, 100, 150).render();
+    Pillar(Vector(-30, -1200, -155), 200, 100, 150).render();
+    Pillar(Vector(-30, -1500, -155), 200, 100, 150).render();
+    glPopMatrix();
+
+    glPushMatrix();
+    glRotatef(180, 0, 0, 1);
+    glTranslatef(-190, -300, 0);
+    Pillar(Vector(-30, -700, -155), 200, 100, 150).render();
+    Pillar(Vector(-30, -1200, -155), 200, 100, 150).render();
+    Pillar(Vector(-30, -1500, -155), 200, 100, 150).render();
+    glPopMatrix();
 
 
 

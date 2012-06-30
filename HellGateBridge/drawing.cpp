@@ -477,6 +477,8 @@ void Drawing::DrawBoxCilinderWithTexture(GLdouble length, GLdouble width, GLdoub
 
 void Drawing::DrawDoor(double l, double w, double h, int step) {
 
+    double dh = min(l, h);
+    
     int totalStep = step;
 
     glPushMatrix();
@@ -486,7 +488,7 @@ void Drawing::DrawDoor(double l, double w, double h, int step) {
     glBegin(GL_QUAD_STRIP);
     for (int theta = 0, i = 0; theta < 180; theta += 180.0 / totalStep, i++) {
         double lx1 = l * cos(D2R(theta)) / 2;
-        double ly1 = l * sin(D2R(theta)) / 1.5;
+        double ly1 = dh * sin(D2R(theta)) / 1.5;
         glTexCoord2f(0, i % 2);
         glVertex3f(lx1, 0, ly1);
         glTexCoord2f(1, i % 2);
@@ -497,7 +499,7 @@ void Drawing::DrawDoor(double l, double w, double h, int step) {
     glBegin(GL_QUAD_STRIP);
     for (int theta = 0, i = 0; theta < 180; theta += 180.0 / totalStep, i++) {
         double lx1 = l * cos(D2R(theta)) / 2;
-        double ly1 = l * sin(D2R(theta)) / 1.5;
+        double ly1 = dh * sin(D2R(theta)) / 1.5;
         glTexCoord2f(i % 2, 0);
         glVertex3f(lx1, 0, ly1);
         glTexCoord2f(i % 2, 1);
@@ -510,7 +512,7 @@ void Drawing::DrawDoor(double l, double w, double h, int step) {
     glBegin(GL_QUAD_STRIP);
     for (int theta = 0, i = 0; theta < 180; theta += 180.0 / totalStep, i++) {
         double lx1 = l * cos(D2R(theta)) / 2;
-        double ly1 = l * sin(D2R(theta)) / 1.5;
+        double ly1 = dh * sin(D2R(theta)) / 1.5;
         glTexCoord2f(i % 2, 0);
         glVertex3f(lx1, w, ly1);
         glTexCoord2f(i % 2, 1);

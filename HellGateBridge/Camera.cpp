@@ -12,7 +12,7 @@ Camera::Camera(Vector tPosition, Vector tForward, Vector tUp) {
     initialForward = tForward;
     initialUp = tUp;
     
-    initialPosition =  Vector(-7.65, 306.70, 70.16);
+    initialPosition =  Vector(-20, 750, 175);
     initialForward = Vector(13.57, -392.76, 1.17);
      initialUp =  Vector(-0.00, 0.00, 1.00);
 

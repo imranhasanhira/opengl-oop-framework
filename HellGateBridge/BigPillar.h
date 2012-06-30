@@ -11,8 +11,14 @@
 
 class BigPillar : public UIElement {
 public:
-    BigPillar(Vector position);
+    BigPillar(Vector position, double length, double width, double height);
     virtual ~BigPillar();
+
+    double width;
+    double length;
+    double height;
+
+
 protected:
     void paint();
     void drawPillerLeft(double l, double w, double h);
