@@ -12,6 +12,11 @@ int Texture::num_texture = -1;
 GLuint Texture::TEX_ASH_BRICK = -1;
 GLuint Texture::TEX_PILLER_BIG = -1;
 GLuint Texture::TEX_PILLER_SMALL = -1;
+GLuint Texture::TEX_PILLER_S01 = -1;
+GLuint Texture::TEX_PILLER_S02 = -1;
+GLuint Texture::TEX_PILLER_S03 = -1;
+GLuint Texture::TEX_PILLER_S04 = -1;
+GLuint Texture::TEX_PILLER_S06 = -1;
 
 Texture::Texture() {
 
@@ -68,5 +73,12 @@ int Texture::LoadMyBitmap(char* filename) {
 void Texture::initTextures() {
     TEX_PILLER_SMALL = Texture::LoadMyBitmap("images/pillar_b.bmp");
     TEX_PILLER_BIG = Texture::LoadMyBitmap("images/pillar_base.bmp");
-//    TEX_ASH_BRICK = Texture::LoadMyBitmap("images/brick_ash.bmp");
+    TEX_ASH_BRICK = Texture::LoadMyBitmap("images/brick.bmp");
+    TEX_PILLER_S01 = Texture::LoadMyBitmap("images/s01.bmp");
+    TEX_PILLER_S02 = Texture::LoadMyBitmap("images/s02.bmp");
+    TEX_PILLER_S03 = Texture::LoadMyBitmap("images/s03.bmp");
+    TEX_PILLER_S04 = Texture::LoadMyBitmap("images/s04.bmp");
+    TEX_PILLER_S06 = Texture::LoadMyBitmap("images/s06.bmp");
+
+
 }

@@ -20,9 +20,9 @@ Light::Light(double posX, double posY, double posZ, double radiousA, double radi
 
     position = Vector(posX, posY, posZ);
     if (position.x == 0) {
-        theta = M_PI / 2;
+        theta = 180;
     } else {
-        theta = position.y / position.x;
+        theta = acos(position.y / position.x);
     }
     this->radiousA = radiousA;
     this->radiousB = radiousB;
@@ -37,9 +37,9 @@ void Light::step() {
     if (theta >= 360) {
         theta = 0;
     }
-    position.x = radiousA * cos(theta);
+    position.x = radiousA * cos(D2R(theta));
     position.y = 0;
-    position.z = radiousB * sin(theta);
+    position.z = radiousB * sin(D2R(theta));
 
     //logger.prs(radiousA);
     //logger.prs(radiousB);

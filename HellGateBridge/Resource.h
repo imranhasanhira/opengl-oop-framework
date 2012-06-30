@@ -15,8 +15,8 @@ public:
     double delStep;
 
     Resource() {
-        delTheta = 0.05;
-        delStep = 0.05;
+        delTheta = 0.15;
+        delStep = 0.2;
     }
 private:
 

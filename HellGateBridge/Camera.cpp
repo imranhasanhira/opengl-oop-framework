@@ -31,19 +31,22 @@ void Camera::expose() {
 }
 
 void Camera::setFaceToOrigin() {
+//
+//    logger.prs(theta);
+//    logger.prl(gamma);
 
     double rad = position.mag();
 
-    position.x = rad * cos(theta) * cos(gamma);
-    position.y = rad * sin(theta) * cos(gamma);
-    position.z = rad * sin(gamma);
+    position.x = rad * cos(D2R(theta)) * cos(D2R(gamma));
+    position.y = rad * sin(D2R(theta)) * cos(D2R(gamma));
+    position.z = rad * sin(D2R(gamma));
 
     forward = -position;
     up = CROSS(CROSS(forward, Vector(0, 0, 1)), forward);
 }
 
 void Camera::circularUp() {
-    if (R2D(gamma) < 89) {
+    if (gamma < 89) {
         gamma += resource.delTheta;
     }
     setFaceToOrigin();
@@ -51,7 +54,7 @@ void Camera::circularUp() {
 
 void Camera::circularDown() {
     setFaceToOrigin();
-    if (R2D(gamma) > -89) {
+    if (gamma > -89) {
         gamma -= resource.delTheta;
     }
 }
@@ -59,7 +62,7 @@ void Camera::circularDown() {
 void Camera::circularLeft() {
     setFaceToOrigin();
     theta += resource.delTheta;
-    if (theta >= 2 * M_PI) {
+    if (theta > 360) {
         theta = 0;
     }
 }
@@ -68,6 +71,6 @@ void Camera::circularRight() {
     setFaceToOrigin();
     theta -= resource.delTheta;
     if (theta < 0) {
-        theta = 2 * M_PI;
+        theta = 360;
     }
 }

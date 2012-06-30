@@ -397,6 +397,7 @@ void display(void) {
     //    world.drawBridgeTrashA();
 
 
+//    glTranslatef(0, 0, -8     0);
 
     glColor3f(1, 0.5, .8);
 
@@ -426,11 +427,11 @@ void display(void) {
 
 
 
-//        pillar.render();
-//        pillar2.render();
+    //        pillar.render();
+    //        pillar2.render();
 
     BigPillar bigPillar(Vector(0, 0, 0));
-    bigPillar.render(); 
+    bigPillar.render();
 
 
     glutSwapBuffers();

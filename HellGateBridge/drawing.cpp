@@ -275,6 +275,9 @@ void Drawing::DrawDoor(double l, double w, double h, int step) {
 
     int totalStep = step;
 
+    glPushMatrix();
+    glTranslatef(l / 2, 0, 0);
+
     glBegin(GL_QUAD_STRIP);
     for (int theta = 0, i = 0; theta < 180; theta += 180.0 / totalStep, i++) {
         double lx1 = l * cos(D2R(theta)) / 2;
@@ -307,5 +310,7 @@ void Drawing::DrawDoor(double l, double w, double h, int step) {
         glVertex3f(lx1, w, h);
     }
     glEnd();
+
+    glPopMatrix();
 
 }

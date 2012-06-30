@@ -57,24 +57,21 @@ Pillar::~Pillar() {
 void Pillar::drawPillerPartial() {
 
     int indices[] = {1, 13, 2, 14, 3, 14, 4, 15, 5, 15, 6, 15, 7, 16, 8, 16, 9, 16, 10, 17, 11, 17, 12, 18, 1, 13};
-    glEnable(GL_TEXTURE_2D);
+
+    glBegin(GL_QUADS);
     {
-        glBegin(GL_QUADS);
-        {
-            for (int i = 0; i < 23; i += 2) {
-                glTexCoord2f(0, 0);
-                glVertex3f(points[indices[i]].x, points[indices[i]].y, points[indices[i]].z);
-                glTexCoord2f(0, 1);
-                glVertex3f(points[indices[i + 1]].x, points[indices[i + 1]].y, points[indices[i + 1]].z);
-                glTexCoord2f(1, 0);
-                glVertex3f(points[indices[i + 3]].x, points[indices[i + 3]].y, points[indices[i + 3]].z);
-                glTexCoord2f(1, 1);
-                glVertex3f(points[indices[i + 2]].x, points[indices[i + 2]].y, points[indices[i + 2]].z);
-            }
+        for (int i = 0; i < 23; i += 2) {
+            glTexCoord2f(0, 0);
+            glVertex3f(points[indices[i]].x, points[indices[i]].y, points[indices[i]].z);
+            glTexCoord2f(0, 1);
+            glVertex3f(points[indices[i + 1]].x, points[indices[i + 1]].y, points[indices[i + 1]].z);
+            glTexCoord2f(1, 0);
+            glVertex3f(points[indices[i + 3]].x, points[indices[i + 3]].y, points[indices[i + 3]].z);
+            glTexCoord2f(1, 1);
+            glVertex3f(points[indices[i + 2]].x, points[indices[i + 2]].y, points[indices[i + 2]].z);
         }
-        glEnd();
     }
-    glDisable(GL_TEXTURE_2D);
+    glEnd();
 
 }
 
@@ -84,35 +81,35 @@ void Pillar::paint() {
     {
         glColor3f(1, 1, 1);
         glBindTexture(GL_TEXTURE_2D, Texture::TEX_PILLER_SMALL); /*  texid isa variablecorrespondsto  the  image*/
-
-        drawPillerPartial();
-        glPushMatrix();
-        {
-            glTranslatef(l + iel + d / 2, 0, 10);
-            Drawing::DrawDoor(d, w, h-10, 100);
-
-            glTranslatef(l + iel + d / 2, w, -10);
-            glRotatef(180, 0, 0, 1);
-            drawPillerPartial();
-        }
-        glPopMatrix();
-        glTranslatef(0, 0, h);
-
         glEnable(GL_TEXTURE_2D);
-        double len = 2 * l + 2 * iel + d;
-        Drawing::DrawBoxWithTexture(5, len, w);
+        {
+            drawPillerPartial();
+            glPushMatrix();
+            {
+                glTranslatef(l + iel, 0, 10);
+                Drawing::DrawDoor(d, w, h - 10, 100);
 
-        glBegin(GL_QUAD_STRIP);
-        glTexCoord2f(0, 0);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 0);
-        glVertex3f(0, w, 0);
-        glTexCoord2f(0, 1);
-        glVertex3f(len, 0, 0);
-        glTexCoord2f(1, 1);
-        glVertex3f(len, w, 0);
-        glEnd();
+                glTranslatef(l + iel + d, w, -10);
+                glRotatef(180, 0, 0, 1);
+                drawPillerPartial();
+            }
+            glPopMatrix();
+            glTranslatef(0, 0, h);
 
+            double len = 2 * l + 2 * iel + d;
+            Drawing::DrawBoxWithTexture(5, len, w);
+
+            glBegin(GL_QUAD_STRIP);
+            glTexCoord2f(0, 0);
+            glVertex3f(0, 0, 0);
+            glTexCoord2f(1, 0);
+            glVertex3f(0, w, 0);
+            glTexCoord2f(0, 1);
+            glVertex3f(len, 0, 0);
+            glTexCoord2f(1, 1);
+            glVertex3f(len, w, 0);
+            glEnd();
+        }
         glDisable(GL_TEXTURE_2D);
 
 
