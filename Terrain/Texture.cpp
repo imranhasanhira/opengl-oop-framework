@@ -7,6 +7,7 @@
 
 #include "Texture.h"
 
+
 int Texture::num_texture = -1;
 
 GLuint Texture::TEX_ASH_BRICK = -1;
@@ -70,6 +71,35 @@ int Texture::LoadMyBitmap(char* filename) {
     return (num_texture);
 }
 
+ImageHeader* Texture::LoadBitmapPixelData(char* filename) {
+    int i, j = 0;
+    FILE *l_file;
+    BITMAPFILEHEADER fileheader;
+    BITMAPINFOHEADER infoheader;
+    RGBTRIPLE rgb;
+    num_texture++;
+    if ((l_file = fopen(filename, "rb")) == NULL) {
+        printf("Exiting");
+        exit(0);
+        return NULL;
+    }
+    fread(&fileheader, sizeof (fileheader), 1, l_file);
+    fseek(l_file, sizeof (fileheader), SEEK_SET);
+    fseek(l_file, sizeof (fileheader), SEEK_SET);
+    fread(&infoheader, sizeof (infoheader), 1, l_file);
+
+    ImageHeader* imageHeader = ImageHeader::getNewInstance(infoheader.biWidth, infoheader.biHeight);
+//    exit(0);
+    for (i = 0; i < infoheader.biWidth; i++) {
+        for (j = 0; j < infoheader.biHeight; j++) {
+            fread(&rgb, sizeof (rgb), 1, l_file);
+            imageHeader->pixels[i][j] = ColorRGBA(rgb);
+        }
+    }
+    fclose(l_file);
+    return imageHeader;
+}
+
 void Texture::initTextures() {
     TEX_PILLER_SMALL = Texture::LoadMyBitmap("images/pillar_b.bmp");
     TEX_PILLER_BIG = Texture::LoadMyBitmap("images/pillar_base.bmp");
@@ -79,6 +109,5 @@ void Texture::initTextures() {
     TEX_PILLER_S03 = Texture::LoadMyBitmap("images/s03.bmp");
     TEX_PILLER_S04 = Texture::LoadMyBitmap("images/s04.bmp");
     TEX_PILLER_S06 = Texture::LoadMyBitmap("images/s06.bmp");
-
 
 }

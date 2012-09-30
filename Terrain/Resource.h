@@ -9,6 +9,8 @@
 #define	W_H
 
 class Resource {
+private:
+
 public:
 
     double delTheta;
@@ -18,13 +20,13 @@ public:
     double worldHeight;
 
     Resource() {
-        delTheta = 0.2;
-        delStep = 1;
+        delTheta = 2;
+        delStep = 50;
 
-	worldWidth = 20000;
-	worldHeight = 20000;
+        worldWidth = 20000;
+        worldHeight = 20000;
     }
-private:
+
 
 };
 

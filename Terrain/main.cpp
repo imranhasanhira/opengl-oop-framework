@@ -49,7 +49,7 @@ Water water(resource.worldWidth, resource.worldWidth);
 Camera camera(Vector(20, -150, 50), Vector(10, 100, -20), Vector(0, 0, 1));
 //Camera camera(Vector(-8.57, -382.55, 89.60), Vector(8.57, 382.55, -89.60), Vector(767.51, 34275.08, 146421.71));
 World world;
-Light light(0, 0, 1, 1000, 1000);
+Light light(0, 0, 1, 800, 800, 0.1);
 
 void resize(int w, int h) {
 
@@ -69,7 +69,7 @@ void LoadTexture() {
     SkyBox::skyLeftId = Texture::LoadMyBitmap("images/leftsky.bmp");
     SkyBox::skyFrontId = Texture::LoadMyBitmap("images/frontsky.bmp");
     SkyBox::skyRightId = Texture::LoadMyBitmap("images/rightsky.bmp");
-    
+
     Water::texid = Texture::LoadMyBitmap("images/water.bmp");
 
 }
@@ -159,10 +159,6 @@ void handlekey() {
     }
 
     if (keys['/']) {
-
-
-
-
 
     }
 
@@ -394,12 +390,11 @@ void display(void) {
     //Exposing camera
     camera.expose();
 
-    light.expose();
     if (keys['9']) {
         light.step();
     }
 
-    //light.expose();
+    light.expose();
 
     // drawAxis();
 
@@ -413,7 +408,7 @@ void display(void) {
     glPushMatrix();
     {
         skyBox.render();
-        
+
         glTranslatef(0, 0, -1000);
         water.render();
     }
@@ -430,7 +425,7 @@ void init() {
     glEnable(GL_DEPTH);
 
     glEnable(GL_SMOOTH);
-    //glEnable(GL_BLEND);
+    glEnable(GL_BLEND);
     glEnable(GL_LINE_SMOOTH);
 
     glEnable(GL_NORMALIZE);
@@ -461,6 +456,8 @@ void init() {
 
 int main(int argc, char** argv) {
 
+
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
@@ -482,6 +479,7 @@ int main(int argc, char** argv) {
 
     //ADD mouse listeners:
     glutMouseFunc(mouseListener);
+
 
 
     init();

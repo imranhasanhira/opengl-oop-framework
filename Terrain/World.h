@@ -14,8 +14,15 @@
 class World : public UIElement {
 public:
     World();
+    ~World();
     void drawAxis();
     void drawGrid();
+    int width, height;
+    double** heightMap;
+
+    GLuint terrainCallListId;
+
+    void generateTerrain();
 
 protected:
     void paint();
