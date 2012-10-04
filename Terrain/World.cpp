@@ -60,7 +60,8 @@ World::World() {
 
 
     srand(time(NULL));
-    //    generateTerrain();
+
+    generateTerrain();
 
     delete(imageHeader);
 }
@@ -129,53 +130,15 @@ void World::drawGrid() {
 }
 
 void World::generateTerrain() {
-    //starting displaylist
+    terrainCallListId = 0;
     terrainCallListId = glGenLists(1);
+    
     glNewList(terrainCallListId, GL_COMPILE);
 
-    glPushMatrix();
+    drawTerrain();
 
-    //starting drawing terrain
-    glTranslatef(-width * terrainScale / 2.0, -height * terrainScale / 2.0, 0);
-    glBindTexture(GL_TEXTURE_2D, Texture::ROCK_TILE);
-
-    for (int i = 0; i < height - 1; i++) {
-        glBegin(GL_TRIANGLE_STRIP);
-        for (int j = 0; j < width - 1; j++) {
-            glNormal3f(CO(normalValue[j][i]));
-            //            glColor3f(heightMap[j][i] / 255.0, heightMap[j][i] / 255.0, heightMap[j][i] / 255.0);
-            glTexCoord2f(0, 0);
-            glVertex3f(j * terrainScale, i * terrainScale, heightMap[j][i]);
-
-            glNormal3f(CO(normalValue[j][i + 1]));
-            //            glColor3f(heightMap[j][i + 1] / 255.0, heightMap[j][i + 1] / 255.0, heightMap[j][i + 1] / 255.0);
-            glTexCoord2f(0, 1);
-            glVertex3f(j * terrainScale, (i + 1) * terrainScale, heightMap[j][i + 1]);
-
-            glNormal3f(CO(normalValue[j + 1][i]));
-            //            glColor3f(heightMap[j + 1][i ] / 255.0, heightMap[j + 1][i ] / 255.0, heightMap[j + 1][i] / 255.0);
-            glTexCoord2f(1, 0);
-            glVertex3f((j + 1) * terrainScale, (i) * terrainScale, heightMap[j + 1][i ]);
-
-            glNormal3f(CO(normalValue[j + 1][i + 1]));
-            //            glColor3f(heightMap[j + 1][i + 1] / 255.0, heightMap[j + 1][i + 1] / 255.0, heightMap[j + 1][i + 1] / 255.0);
-            glTexCoord2f(1, 1);
-            glVertex3f((j + 1) * terrainScale, (i + 1) * terrainScale, heightMap[j + 1][i + 1]);
-
-
-        }
-        glEnd();
-    }
-
-    glDisable(GL_TEXTURE_2D);
-
-    glPopMatrix();
-
-    //finalizing displaylist
     glEndList();
-
     printf("list generated");
-
 }
 
 void World::drawTerrain() {
@@ -221,24 +184,11 @@ void World::drawTerrain() {
 }
 
 void World::paint() {
-
-
     drawAxis();
     //    drawGrid();
+    glCallList(terrainCallListId);
 
-    //    glCallList(terrainCallListId);
-
-    //    glColor3f(1, 1, 1);
-    //    glRotatef(45, 0, 1, 1);
-    //    glBindTexture(GL_TEXTURE_2D, SkyBox::skyLeftId);
-    //    Drawing::DrawRectangleWithTexture(200, 200);
-    //    return;
-
-    drawTerrain();
-
-    //    glTranslatef(-width * terrainScale / 2, height * terrainScale / 2, 0);
-    //    glRotatef(90, 1, 0, 0);
-    //    Drawing::DrawRectangle(width*terrainScale, height * terrainScale);
+//        drawTerrain();
 
 
 }

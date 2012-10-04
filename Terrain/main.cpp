@@ -19,14 +19,13 @@ using namespace std;
 #include "Logger.h"
 #include "World.h"
 
-#include "Camera.h"
-#include "Light.h"
+#include "camera.h"
+#include "light.h"
 #include "Texture.h"
 
 #include "macros.h"
 
 #include "SkyBox.h"
-
 #include "Water.h"
 
 
@@ -43,13 +42,12 @@ const int VIRTUAL_KEY_PAGE_DOWN = 155;
 Resource resource;
 Logger logger;
 
-SkyBox skyBox(resource.worldWidth, resource.worldWidth);
-Water water(resource.worldWidth, resource.worldWidth);
-
-Camera camera(Vector(20, -150, 50), Vector(10, 100, -20), Vector(0, 0, 1));
+SkyBox *skyBox;
+Water *water;
+Camera *camera;
 //Camera camera(Vector(-8.57, -382.55, 89.60), Vector(8.57, 382.55, -89.60), Vector(767.51, 34275.08, 146421.71));
-World world;
-Light light(0, 0, 1, 800, 800, 2);
+World *world;
+Light *light;
 
 void LoadTexture() {
 
@@ -69,52 +67,56 @@ void handlekey() {
 
     //step light
     if (keys['9']) {
-        light.step();
+        light->stepPlus();
+    }
+
+    if (keys['0']) {
+        light->stepMinus();
     }
 
 
     if (keys['w']) {
-        camera.stepForward();
+        camera->stepForward();
     }
     if (keys['s']) {
-        camera.stepBackward();
+        camera->stepBackward();
     }
     if (keys['a']) {
-        camera.pitchPlus();
+        camera->pitchPlus();
     }
     if (keys['d']) {
-        camera.pitchMinus();
+        camera->pitchMinus();
     }
     if (keys['q']) {
-        camera.stepUp();
+        camera->stepUp();
     }
     if (keys['e']) {
-        camera.stepDown();
+        camera->stepDown();
     }
 
 
     if (keys['i']) {
-        camera.yowUp();
+        camera->yowUp();
     }
     if (keys['k']) {
-        camera.yowDown();
+        camera->yowDown();
     }
     if (keys['j']) {
-        camera.stepRight();
+        camera->stepRight();
     }
     if (keys['l']) {
-        camera.stepLeft();
+        camera->stepLeft();
     }
     if (keys['u']) {
-        camera.rolePlus();
+        camera->rolePlus();
     }
     if (keys['o']) {
-        camera.roleMinus();
+        camera->roleMinus();
     }
 
 
     if (keys['R']) {
-        camera.reset();
+        camera->reset();
     }
 
 
@@ -142,7 +144,7 @@ void handlekey() {
 
     if (keys['1']) {
 
-        camera.print();
+        camera->print();
     }
 
     if (keys['/']) {
@@ -150,25 +152,29 @@ void handlekey() {
     }
 
     if (keys[VIRTUAL_KEY_DOWN]) {
-        camera.circularDown();
+        camera->circularDown();
+        printf("DOWN\n");
     }
     if (keys[VIRTUAL_KEY_UP]) {
-        camera.circularUp();
+        camera->circularUp();
+        printf("UP\n");
     }
 
     if (keys[VIRTUAL_KEY_RIGHT]) {
-        camera.circularLeft();
+        camera->circularLeft();
+        printf("right\n");
     }
 
     if (keys[VIRTUAL_KEY_LEFT]) {
-        camera.circularRight();
+        camera->circularRight();
+        printf("left\n");
     }
 
     if (keys[VIRTUAL_KEY_PAGE_UP]) {
-        light.step();
+        light->stepPlus();
     }
     if (keys[VIRTUAL_KEY_PAGE_DOWN]) {
-
+        light->stepMinus();
     }
 
 
@@ -338,6 +344,7 @@ void display(void) {
     /* clear window */
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glColor3f(1, 1, 1);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -345,20 +352,19 @@ void display(void) {
     handlekey();
 
     //Exposing camera
-    camera.expose();
+    camera->expose();
 
     //Light
-    light.expose();
+    light->expose();
 
     //World
-    world.render();
+    world->render();
 
-    glColor3f(1, 1, 1);
 
     //Skybox & Water
-//    skyBox.render();
-//    glTranslatef(0, 0, -1000);
-//    water.render();
+    //    skyBox.render();
+    //    glTranslatef(0, 0, -1000);
+    //    water.render();
 
 
     glutSwapBuffers();
@@ -385,6 +391,8 @@ void init() {
     glEnable(GL_BLEND);
     glEnable(GL_LINE_SMOOTH);
 
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Nice Perspective Correction
+
     glEnable(GL_NORMALIZE);
 
     //Lighting
@@ -392,6 +400,7 @@ void init() {
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);
+
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -435,73 +444,13 @@ int main(int argc, char** argv) {
     //ADD mouse listeners:
     glutMouseFunc(mouseListener);
 
+    skyBox = new SkyBox(resource.worldWidth, resource.worldWidth);
+    water = new Water(resource.worldWidth, resource.worldWidth);
+    camera = new Camera(Vector(-20, 750, 175), Vector(13.57, -392.76, 1.17), Vector(-0.00, 0.00, 1.00));
+    light = new Light(0, 0, 1, 800, 800, 2);
+
+    world = new World();
 
     glutMainLoop();
 
 }
-
-
-//GLuint cubelist; //we are going to hold our list in here
-//
-////create the cube display list
-//
-//void createcube(void) {
-//    cubelist = glGenLists(1); //set the cube list to Generate a List
-//    glNewList(cubelist, GL_COMPILE); //compile the new list
-//    glPushMatrix();
-//    glutSolidCube(1); //draw the cube
-//    glPopMatrix();
-//    glEndList(); //end the list
-//}
-//
-//void init(void) {
-//    glEnable(GL_DEPTH_TEST); //enable the depth testing
-//    glEnable(GL_LIGHTING); //enable the lighting
-//    glEnable(GL_LIGHT0); //enable LIGHT0, our Diffuse Light
-//    glShadeModel(GL_SMOOTH); //set the shader to smooth shader
-//
-//    createcube(); //call the command to create the cube
-//}
-//
-//void display(void) {
-//    glClearColor(0.0, 0.0, 0.0, 1.0); //clear the screen to black
-//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//    //clear the color buffer and the depth buffer
-//    glLoadIdentity();
-//    glTranslatef(0, 0, -5);
-//    glCallList(cubelist); //call the cube list
-//    glutSwapBuffers(); //swap the buffers
-//}
-//
-//void reshape(int w, int h) {
-//    glViewport(0, 0, (GLsizei) w, (GLsizei) h); //set the viewport to the current window specifications
-//    glMatrixMode(GL_PROJECTION); //set the matrix to projection
-//
-//    glLoadIdentity();
-//    gluPerspective(60, (GLfloat) w / (GLfloat) h, 1.0, 100.0); //set the perspective (angle of sight, width, height, , depth    )
-//    glMatrixMode(GL_MODELVIEW); //set the matrix back to model
-//
-//}
-//
-//void keyboard(unsigned char key, int x, int y) {
-//    if (key == 27) {
-//        glutLeaveGameMode(); //set the resolution how it was
-//        exit(0); //quit the program
-//    }
-//}
-//
-
-//int main(int argc, char **argv) {
-//    glutInit(&argc, argv);
-//    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH); //set     the display to Double buffer, with depth
-//    glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
-//    glutEnterGameMode(); //set glut to fullscreen using the settings in the line above
-//    init(); //call the init function
-//    glutDisplayFunc(display); //use the display function to draw everything
-//    glutIdleFunc(display); //update any variables in display, display can be changed to anyhing, as long as you move the variables to be updated, in this case, angle++;
-//    glutReshapeFunc(reshape); //reshape the window accordingly
-//
-//    glutKeyboardFunc(keyboardListener); //check the keyboard
-//    glutMainLoop(); //call the main loop
-//    return 0;
-//}

@@ -34,11 +34,7 @@ Light::~Light() {
 
 }
 
-void Light::step() {
-    theta += thetaStep;
-    if (theta >= 360) {
-        theta = 0;
-    }
+void Light::adjustTheta() {
     position.x = radiousA * cos(D2R(theta));
     position.y = 0;
     position.z = radiousB * sin(D2R(theta));
@@ -47,6 +43,20 @@ void Light::step() {
     //logger.prs(radiousB);
     //logger.prs(theta);
     //position.showln();
+}
+
+void Light::stepPlus() {
+    theta += thetaStep;
+    if (theta >= 360) {
+        theta = 0;
+    }
+}
+
+void Light::stepMinus() {
+    theta -= thetaStep;
+    if (theta < 0) {
+        theta = 359.99999;
+    }
 }
 
 void Light::expose() {

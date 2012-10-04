@@ -20,7 +20,9 @@ class Light {
 public:
     Light(double posX, double posY, double posZ, double radiousA, double radiousB, double thetaStep);
     virtual ~Light();
-    void step();
+    void stepPlus();
+    void stepMinus();
+    void adjustTheta();
     void expose();
 private:
 
