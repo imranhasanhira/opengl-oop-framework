@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include <iostream>
+using namespace std;
 
 #include "Resource.h"
 #include "Logger.h"
@@ -29,7 +30,6 @@
 #include "Water.h"
 
 
-using namespace std;
 
 
 bool keys[255] = {false};
@@ -49,18 +49,7 @@ Water water(resource.worldWidth, resource.worldWidth);
 Camera camera(Vector(20, -150, 50), Vector(10, 100, -20), Vector(0, 0, 1));
 //Camera camera(Vector(-8.57, -382.55, 89.60), Vector(8.57, 382.55, -89.60), Vector(767.51, 34275.08, 146421.71));
 World world;
-Light light(0, 0, 1, 800, 800, 0.1);
-
-void resize(int w, int h) {
-
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    //    gluPerspective(50, w / (float) h, 1.0f, 1000.0f);
-    gluPerspective(70, w / (float) h, 0.1f, 100000.0f);
-
-    //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
-}
+Light light(0, 0, 1, 800, 800, 2);
 
 void LoadTexture() {
 
@@ -71,12 +60,19 @@ void LoadTexture() {
     SkyBox::skyRightId = Texture::LoadMyBitmap("images/rightsky.bmp");
 
     Water::texid = Texture::LoadMyBitmap("images/water.bmp");
+    Texture::ROCK_TILE = Texture::LoadMyBitmap("images/rock.bmp");
 
 }
 
 void handlekey() {
 
-    /*  Start -- Spaceship step*/
+
+    //step light
+    if (keys['9']) {
+        light.step();
+    }
+
+
     if (keys['w']) {
         camera.stepForward();
     }
@@ -95,11 +91,8 @@ void handlekey() {
     if (keys['e']) {
         camera.stepDown();
     }
-    /* END -- Spaceship Step */
 
 
-
-    /*  Start -- Spaceship Rotation*/
     if (keys['i']) {
         camera.yowUp();
     }
@@ -118,37 +111,31 @@ void handlekey() {
     if (keys['o']) {
         camera.roleMinus();
     }
-    /* END -- Spaceship Rotation */
 
 
     if (keys['R']) {
         camera.reset();
     }
 
-    /* Start -- Camera Step */
+
     if (keys['f']) {
 
     }
-
     if (keys['h']) {
 
     }
-
     if (keys['t']) {
 
     }
     if (keys['g']) {
 
     }
-
     if (keys['r']) {
 
     }
-
     if (keys['y']) {
 
     }
-
 
 
 
@@ -191,10 +178,8 @@ void handlekey() {
 }
 
 void keyboardListener(unsigned char key, int x, int y) {
-
     //cout << "KEY PRESSED : (" << key << "(" << (int) key << "), " << x << ", " << y << ")" << endl;
     keys[key] = true;
-
 }
 
 void specialKeyListener(int key, int x, int y) {
@@ -346,41 +331,13 @@ void TestGuassian() {
 }
 
 void animate() {
-
-
     glutPostRedisplay(); //Redraw the view port
 }
-//void drawmodel_box(void)
-//{
-//	// Load the model only if it hasn't been loaded before
-//	// If it's been loaded then pmodel1 should be a pointer to the model geometry data...otherwise it's null
-//    if (!pmodel1) 
-//	{
-//		// this is the call that actualy reads the OBJ and creates the model object
-//        pmodel1 = glmReadOBJ("train.obj");	
-//        if (!pmodel1) exit(0);
-//		// This will rescale the object to fit into the unity matrix
-//		// Depending on your project you might want to keep the original size and positions you had in 3DS Max or GMAX so you may have to comment this.
-//        glmUnitize(pmodel1);
-//		// These 2 functions calculate triangle and vertex normals from the geometry data.
-//		// To be honest I had some problem with very complex models that didn't look to good because of how vertex normals were calculated
-//		// So if you can export these directly from you modeling tool do it and comment these line
-//		// 3DS Max can calculate these for you and GLM is perfectly capable of loading them
-//        glmFacetNormals(pmodel1);        
-//		glmVertexNormals(pmodel1, 90.0);
-//    }
-//    // This is the call that will actualy draw the model
-//	// Don't forget to tell it if you want textures or not :))
-//    glmDraw(pmodel1, GLM_SMOOTH| GLM_TEXTURE);
-//	
-//}
 
 void display(void) {
     /* clear window */
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -390,33 +347,33 @@ void display(void) {
     //Exposing camera
     camera.expose();
 
-    if (keys['9']) {
-        light.step();
-    }
-
+    //Light
     light.expose();
 
-    // drawAxis();
-
-    //Drawing world details
+    //World
     world.render();
 
+    glColor3f(1, 1, 1);
 
-    glColor3f(1, 0.5, .8);
-
-
-    glPushMatrix();
-    {
-        skyBox.render();
-
-        glTranslatef(0, 0, -1000);
-        water.render();
-    }
-    glPopMatrix();
+    //Skybox & Water
+//    skyBox.render();
+//    glTranslatef(0, 0, -1000);
+//    water.render();
 
 
     glutSwapBuffers();
 
+}
+
+void reshape(int w, int h) {
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    //    gluPerspective(50, w / (float) h, 1.0f, 1000.0f);
+    gluPerspective(70, w / (float) h, 0.1f, 100000.0f);
+
+    //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
+    glMatrixMode(GL_MODELVIEW); //set the matrix back to model
 }
 
 void init() {
@@ -436,37 +393,35 @@ void init() {
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);
 
-
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(70, 1.0f, 0.1f, 100000.0f);
 
     glutIgnoreKeyRepeat(1);
 
-
-
-
     memset(keys, 0, sizeof (keys));
-
     LoadTexture();
-    Texture::initTextures();
-
 
 }
 
 int main(int argc, char** argv) {
 
-
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
-    glutInitWindowSize(800, 600);
-    glutInitWindowPosition(50, 0);
-    glutCreateWindow("Hell Gate");
+
+    //    glutInitWindowSize(800, 600);
+    //    glutInitWindowPosition(50, 0);
+    //    glutCreateWindow("Hell Gate");
+
+    glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
+    glutEnterGameMode(); //set glut to fullscreen using the settings in the line above
+
+    init(); //call the init function
+
 
     glutDisplayFunc(display);
     glutIdleFunc(animate);
-    glutReshapeFunc(resize);
+    glutReshapeFunc(reshape);
 
 
     //ADD keyboard listeners:
@@ -481,8 +436,72 @@ int main(int argc, char** argv) {
     glutMouseFunc(mouseListener);
 
 
-
-    init();
     glutMainLoop();
 
 }
+
+
+//GLuint cubelist; //we are going to hold our list in here
+//
+////create the cube display list
+//
+//void createcube(void) {
+//    cubelist = glGenLists(1); //set the cube list to Generate a List
+//    glNewList(cubelist, GL_COMPILE); //compile the new list
+//    glPushMatrix();
+//    glutSolidCube(1); //draw the cube
+//    glPopMatrix();
+//    glEndList(); //end the list
+//}
+//
+//void init(void) {
+//    glEnable(GL_DEPTH_TEST); //enable the depth testing
+//    glEnable(GL_LIGHTING); //enable the lighting
+//    glEnable(GL_LIGHT0); //enable LIGHT0, our Diffuse Light
+//    glShadeModel(GL_SMOOTH); //set the shader to smooth shader
+//
+//    createcube(); //call the command to create the cube
+//}
+//
+//void display(void) {
+//    glClearColor(0.0, 0.0, 0.0, 1.0); //clear the screen to black
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    //clear the color buffer and the depth buffer
+//    glLoadIdentity();
+//    glTranslatef(0, 0, -5);
+//    glCallList(cubelist); //call the cube list
+//    glutSwapBuffers(); //swap the buffers
+//}
+//
+//void reshape(int w, int h) {
+//    glViewport(0, 0, (GLsizei) w, (GLsizei) h); //set the viewport to the current window specifications
+//    glMatrixMode(GL_PROJECTION); //set the matrix to projection
+//
+//    glLoadIdentity();
+//    gluPerspective(60, (GLfloat) w / (GLfloat) h, 1.0, 100.0); //set the perspective (angle of sight, width, height, , depth    )
+//    glMatrixMode(GL_MODELVIEW); //set the matrix back to model
+//
+//}
+//
+//void keyboard(unsigned char key, int x, int y) {
+//    if (key == 27) {
+//        glutLeaveGameMode(); //set the resolution how it was
+//        exit(0); //quit the program
+//    }
+//}
+//
+
+//int main(int argc, char **argv) {
+//    glutInit(&argc, argv);
+//    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH); //set     the display to Double buffer, with depth
+//    glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
+//    glutEnterGameMode(); //set glut to fullscreen using the settings in the line above
+//    init(); //call the init function
+//    glutDisplayFunc(display); //use the display function to draw everything
+//    glutIdleFunc(display); //update any variables in display, display can be changed to anyhing, as long as you move the variables to be updated, in this case, angle++;
+//    glutReshapeFunc(reshape); //reshape the window accordingly
+//
+//    glutKeyboardFunc(keyboardListener); //check the keyboard
+//    glutMainLoop(); //call the main loop
+//    return 0;
+//}

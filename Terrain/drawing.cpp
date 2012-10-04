@@ -206,22 +206,9 @@ void Drawing::DrawRectangleWithTextureXY(GLdouble width, GLdouble height) {
 void Drawing::DrawBoxWithTexture(GLdouble height, GLdouble width1, GLdouble width2) {
     glBegin(GL_QUAD_STRIP);
     {
-
-
-
-
-
-
-
-
         glNormal3f(-1.0, 0.0, 0.0); //  Normal vector  to  the  polygon	    
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
-
-
-
-
-
 
 
         glTexCoord2f(1, 0);
@@ -232,7 +219,6 @@ void Drawing::DrawBoxWithTexture(GLdouble height, GLdouble width1, GLdouble widt
 
         glTexCoord2f(1, 1);
         glVertex3f(width1, 0, height);
-
 
 
         glNormal3f(0.0, -1.0, 0.0); //  Normal vector  to  the  polygon	    
@@ -336,14 +322,6 @@ void Drawing::DrawBox(GLdouble height, GLdouble width1, GLdouble width2) {
         glVertex3f(0, 0, height);
         glVertex3f(width1, 0, 0);
         glVertex3f(width1, 0, height);
-
-
-
-
-
-
-
-
 
         glColor3f(.2, .2, .2);
         glVertex3f(width1, width2, 0);
@@ -478,7 +456,7 @@ void Drawing::DrawBoxCilinderWithTexture(GLdouble length, GLdouble width, GLdoub
 void Drawing::DrawDoor(double l, double w, double h, int step) {
 
     double dh = min(l, h);
-    
+
     int totalStep = step;
 
     glPushMatrix();

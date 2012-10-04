@@ -84,16 +84,8 @@ public:
     static int LoadMyBitmap(char* filename);
     static ImageHeader* LoadBitmapPixelData(char* filename);
     virtual ~Texture();
-    char* filename;
 
-    static GLuint TEX_ASH_BRICK;
-    static GLuint TEX_PILLER_SMALL;
-    static GLuint TEX_PILLER_BIG;
-    static GLuint TEX_PILLER_S01;
-    static GLuint TEX_PILLER_S02;
-    static GLuint TEX_PILLER_S03;
-    static GLuint TEX_PILLER_S04;
-    static GLuint TEX_PILLER_S06;
+    static GLuint ROCK_TILE;
 
     static void initTextures();
 

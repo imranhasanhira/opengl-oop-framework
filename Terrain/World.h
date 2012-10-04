@@ -19,10 +19,14 @@ public:
     void drawGrid();
     int width, height;
     double** heightMap;
+    Vector** normalValue;
 
     GLuint terrainCallListId;
+    double terrainScale;
 
     void generateTerrain();
+
+    void drawTerrain();
 
 protected:
     void paint();
