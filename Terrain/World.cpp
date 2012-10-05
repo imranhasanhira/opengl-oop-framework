@@ -142,7 +142,7 @@ void World::drawTerrain() {
     glTranslatef(-width * terrainScale / 2.0, -height * terrainScale / 2.0, 0);
     glBindTexture(GL_TEXTURE_2D, Texture::ROCK_TILE);
 
-//    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
     glColor3f(1, 1, 1);
     for (int i = 0; i < height - 1; i++) {
         glBegin(GL_TRIANGLE_STRIP);
