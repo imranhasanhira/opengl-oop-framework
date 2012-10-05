@@ -28,6 +28,8 @@ Light::Light(double posX, double posY, double posZ, double radiousA, double radi
     this->radiousB = radiousB;
     this->theta = 0;
     this->thetaStep = thetaStep;
+
+    adjustTheta();
 }
 
 Light::~Light() {
@@ -50,6 +52,7 @@ void Light::stepPlus() {
     if (theta >= 360) {
         theta = 0;
     }
+    adjustTheta();
 }
 
 void Light::stepMinus() {
@@ -57,6 +60,7 @@ void Light::stepMinus() {
     if (theta < 0) {
         theta = 359.99999;
     }
+    adjustTheta();
 }
 
 void Light::expose() {
@@ -72,6 +76,7 @@ void Light::expose() {
     glColor3f(lightAmbiant[0], lightAmbiant[1], lightAmbiant[2]);
     glPushMatrix();
     glTranslatef(CO(position));
+    glColor3f(1, 0, 0);
     glutSolidSphere(10, 10, 10);
     glPopMatrix();
 }

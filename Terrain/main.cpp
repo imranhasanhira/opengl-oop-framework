@@ -48,6 +48,8 @@ Camera *camera;
 //Camera camera(Vector(-8.57, -382.55, 89.60), Vector(8.57, 382.55, -89.60), Vector(767.51, 34275.08, 146421.71));
 World *world;
 Light *light;
+double fps;
+int previousTime, frameCount;
 
 void LoadTexture() {
 
@@ -153,21 +155,21 @@ void handlekey() {
 
     if (keys[VIRTUAL_KEY_DOWN]) {
         camera->circularDown();
-        printf("DOWN\n");
+        //        printf("DOWN\n");
     }
     if (keys[VIRTUAL_KEY_UP]) {
         camera->circularUp();
-        printf("UP\n");
+        //        printf("UP\n");
     }
 
     if (keys[VIRTUAL_KEY_RIGHT]) {
         camera->circularLeft();
-        printf("right\n");
+        //        printf("right\n");
     }
 
     if (keys[VIRTUAL_KEY_LEFT]) {
         camera->circularRight();
-        printf("left\n");
+        //        printf("left\n");
     }
 
     if (keys[VIRTUAL_KEY_PAGE_UP]) {
@@ -340,7 +342,50 @@ void animate() {
     glutPostRedisplay(); //Redraw the view port
 }
 
+//-------------------------------------------------------------------------
+// Calculates the frames per second
+//-------------------------------------------------------------------------
+
+void calculateFPS() {
+    //  Increase frame count
+    frameCount++;
+
+    //  Get the number of milliseconds since glutInit called
+    //  (or first call to glutGet(GLUT ELAPSED TIME)).
+    int currentTime = glutGet(GLUT_ELAPSED_TIME);
+
+    //  Calculate time passed
+    int timeInterval = currentTime - previousTime;
+
+    if (timeInterval > 1000) {
+        //  calculate the number of frames per second
+        fps = frameCount / (timeInterval / 1000.0f);
+
+        //  Set time
+        previousTime = currentTime;
+
+        //  Reset frame count
+        frameCount = 0;
+    }
+}
+
+void RenderString(float x, float y, void *font, const char* string) {
+    char *c;
+
+    glColor3f(1, 0, 0);
+    glRasterPos2f(x, y);
+    for (int i = 0; string[i] != 0; i++) {
+        glColor3f(1, 0, 0);
+        glutBitmapCharacter(font, string[i]);
+    }
+}
+
 void display(void) {
+
+    //calculateFPS();
+    //printf("%f\n", fps);
+    //RenderString(100.0f, 100.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Hello");
+
     /* clear window */
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -447,7 +492,7 @@ int main(int argc, char** argv) {
     skyBox = new SkyBox(resource.worldWidth, resource.worldWidth);
     water = new Water(resource.worldWidth, resource.worldWidth);
     camera = new Camera(Vector(-20, 750, 175), Vector(13.57, -392.76, 1.17), Vector(-0.00, 0.00, 1.00));
-    light = new Light(0, 0, 1, 800, 800, 2);
+    light = new Light(0, 0, 1, 1000, 1000, 2);
 
     world = new World();
 

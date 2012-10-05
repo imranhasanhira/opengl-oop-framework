@@ -19,6 +19,7 @@ void Camera::reset() {
     forward = initialForward;
     Vector along = CROSS(initialForward, initialUp);
     up = CROSS(along, initialForward).unit();
+    theta = gamma = 0;
 }
 
 /**
@@ -30,9 +31,8 @@ void Camera::expose() {
 }
 
 void Camera::setFaceToOrigin() {
-    //
-    //    logger.prs(theta);
-    //    logger.prl(gamma);
+//    logger.prs(theta);
+//    logger.prl(gamma);
 
     double rad = position.mag();
 

@@ -55,14 +55,8 @@ World::World() {
         normalValue[width - 1][i] = Vector(0, 0, 1);
     }
 
-
-
-
-
+        generateTerrain();
     srand(time(NULL));
-
-    generateTerrain();
-
     delete(imageHeader);
 }
 
@@ -132,7 +126,7 @@ void World::drawGrid() {
 void World::generateTerrain() {
     terrainCallListId = 0;
     terrainCallListId = glGenLists(1);
-    
+
     glNewList(terrainCallListId, GL_COMPILE);
 
     drawTerrain();
@@ -148,7 +142,7 @@ void World::drawTerrain() {
     glTranslatef(-width * terrainScale / 2.0, -height * terrainScale / 2.0, 0);
     glBindTexture(GL_TEXTURE_2D, Texture::ROCK_TILE);
 
-    glEnable(GL_TEXTURE_2D);
+//    glEnable(GL_TEXTURE_2D);
     glColor3f(1, 1, 1);
     for (int i = 0; i < height - 1; i++) {
         glBegin(GL_TRIANGLE_STRIP);
@@ -184,11 +178,10 @@ void World::drawTerrain() {
 }
 
 void World::paint() {
-    drawAxis();
     //    drawGrid();
-    glCallList(terrainCallListId);
-
-//        drawTerrain();
+        glCallList(terrainCallListId);
+//    drawAxis();
+//    drawTerrain();
 
 
 }
