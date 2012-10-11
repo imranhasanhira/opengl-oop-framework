@@ -61,9 +61,9 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibLibItem>opengl32</linkerLibLibItem>
             <linkerLibLibItem>glu32</linkerLibLibItem>
-            <linkerLibLibItem>glut32</linkerLibLibItem>
+            <linkerLibLibItem>freeglut</linkerLibLibItem>
+            <linkerLibLibItem>opengl32</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>

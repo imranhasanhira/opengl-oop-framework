@@ -2,7 +2,6 @@
 #define __DRAWING_IS_INCLUDED__
 
 #include "cmath"
-#include <windows.h>
 #include <GL/glut.h>         /* glut.h includes gl.h and glu.h*/
 
 #include <stdio.h>

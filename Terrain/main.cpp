@@ -6,8 +6,9 @@
  * Created on May 17, 2012, 12:44 PM
  */
 
+#define PLATFORM_WINDOWS
+
 #include "cmath"
-#include <windows.h>
 #include <GL/glut.h>         /* glut.h includes gl.h and glu.h*/
 
 
@@ -463,12 +464,12 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
 
-    //    glutInitWindowSize(800, 600);
-    //    glutInitWindowPosition(50, 0);
-    //    glutCreateWindow("Hell Gate");
+        glutInitWindowSize(800, 600);
+        glutInitWindowPosition(50, 0);
+        glutCreateWindow("Hell Gate");
 
-    glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
-    glutEnterGameMode(); //set glut to fullscreen using the settings in the line above
+    //glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
+    //glutEnterGameMode(); //set glut to fullscreen using the settings in the line above
 
     init(); //call the init function
 

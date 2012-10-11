@@ -1,4 +1,3 @@
-#include <windows.h>
 #include <GL/glut.h>
 #include "World.h"
 #include "Texture.h"

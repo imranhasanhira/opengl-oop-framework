@@ -1,5 +1,4 @@
 #include "Camera.h"
-#include <windows.h>
 #include <GL/glut.h>
 #include <math.h>
 #include "Resource.h"

@@ -5,7 +5,6 @@
  * Created on June 27, 2012, 4:00 PM
  */
 #include <iostream>
-#include <windows.h>
 #include <stdio.h>
 #include <GL/glut.h>  
 

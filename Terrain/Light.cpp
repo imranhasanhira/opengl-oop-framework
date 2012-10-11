@@ -6,7 +6,6 @@
  */
 #include "Light.h"
 
-#include <windows.h>
 #include <GL/glut.h>
 #include "Resource.h"
 #include <math.h>

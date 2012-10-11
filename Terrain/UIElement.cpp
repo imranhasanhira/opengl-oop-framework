@@ -1,6 +1,5 @@
 #include "UIElement.h"
 
-#include <windows.h>
 #include <GL/glut.h>
 
 void UIElement::paint() {

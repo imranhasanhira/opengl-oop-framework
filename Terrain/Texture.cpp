@@ -36,7 +36,7 @@ int Texture::LoadMyBitmap(char* filename) {
     fseek(l_file, sizeof (fileheader), SEEK_SET);
     fseek(l_file, sizeof (fileheader), SEEK_SET);
     fread(&infoheader, sizeof (infoheader), 1, l_file);
-    l_texture = (byte*) malloc(infoheader.biWidth * infoheader.biHeight * 4);
+    l_texture = (unsigned char *) malloc(infoheader.biWidth * infoheader.biHeight * 4);
     memset(l_texture, 0, infoheader.biWidth * infoheader.biHeight * 4);
     for (i = 0; i < infoheader.biWidth * infoheader.biHeight; i++) {
         fread(&rgb, sizeof (rgb), 1, l_file);
