@@ -7,6 +7,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <GL/glut.h>  
+#include <GL/glext.h>
 
 #ifndef Texture_H
 #define	Texture_H

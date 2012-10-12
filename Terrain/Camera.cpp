@@ -21,6 +21,10 @@ void Camera::reset() {
     theta = gamma = 0;
 }
 
+Vector Camera::getPosition() {
+    return position;
+}
+
 /**
  * Exposes the camera with gluLookAt function
  */
@@ -30,8 +34,8 @@ void Camera::expose() {
 }
 
 void Camera::setFaceToOrigin() {
-//    logger.prs(theta);
-//    logger.prl(gamma);
+    //    logger.prs(theta);
+    //    logger.prl(gamma);
 
     double rad = position.mag();
 

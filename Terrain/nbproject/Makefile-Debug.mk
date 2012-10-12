@@ -14,11 +14,11 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc
-CCC=g++
-CXX=g++
+CC=gcc.exe
+CCC=g++.exe
+CXX=g++.exe
 FC=gfortran
-AS=as
+AS=as.exe
 
 # Macros
 CND_PLATFORM=MinGW-Windows
@@ -74,57 +74,57 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/terrain.exe: ${OBJECTFILES}
 ${OBJECTDIR}/Texture.o: Texture.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Texture.o Texture.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/Texture.o Texture.cpp
 
 ${OBJECTDIR}/drawing.o: drawing.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/drawing.o drawing.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/drawing.o drawing.cpp
 
 ${OBJECTDIR}/World.o: World.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/World.o World.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/World.o World.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/Camera.o: Camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Camera.o Camera.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/Camera.o Camera.cpp
 
 ${OBJECTDIR}/Light.o: Light.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Light.o Light.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/Light.o Light.cpp
 
 ${OBJECTDIR}/UIElement.o: UIElement.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/UIElement.o UIElement.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/UIElement.o UIElement.cpp
 
 ${OBJECTDIR}/SkyBox.o: SkyBox.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/SkyBox.o SkyBox.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/SkyBox.o SkyBox.cpp
 
 ${OBJECTDIR}/Vector.o: Vector.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/Vector.o Vector.cpp
 
 ${OBJECTDIR}/Water.o: Water.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Water.o Water.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/Water.o Water.cpp
 
 ${OBJECTDIR}/Element.o: Element.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/Element.o Element.cpp
+	$(COMPILE.cc) -g -I/C/MinGW/include/GL -MMD -MP -MF $@.d -o ${OBJECTDIR}/Element.o Element.cpp
 
 # Subprojects
 .build-subprojects:

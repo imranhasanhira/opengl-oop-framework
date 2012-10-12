@@ -13,12 +13,12 @@
 
 class World : public UIElement {
 public:
-    World();
+    World(Vector position,int skyBoxWidth);
     ~World();
     void drawAxis();
     void drawGrid();
-    int width, height;
-    double** heightMap;
+    int terrainWidth, terrainHeight;
+    double** terrainHeightMap;
     Vector** normalValue;
 
     GLuint terrainCallListId;

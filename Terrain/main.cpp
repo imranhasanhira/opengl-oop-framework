@@ -54,16 +54,152 @@ int previousTime, frameCount;
 
 void LoadTexture() {
 
-    SkyBox::skyUpId = Texture::LoadMyBitmap("images/skyup1.bmp");
-    SkyBox::skyBackId = Texture::LoadMyBitmap("images/skyback1.bmp");
-    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/leftsky.bmp");
-    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/frontsky.bmp");
-    SkyBox::skyRightId = Texture::LoadMyBitmap("images/rightsky.bmp");
+//    SkyBox::skyUpId = Texture::LoadMyBitmap("images/skyup1.bmp");
+//    SkyBox::skyBackId = Texture::LoadMyBitmap("images/skyback1.bmp");
+//    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/leftsky.bmp");
+//    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/frontsky.bmp");
+//    SkyBox::skyRightId = Texture::LoadMyBitmap("images/rightsky.bmp");
 
+    SkyBox::skyTopId = Texture::LoadMyBitmap("images/hexagon_top.bmp");    
+    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/hexagon_left.bmp");
+    SkyBox::skyRightId = Texture::LoadMyBitmap("images/hexagon_right.bmp");
+    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/hexagon_front.bmp");
+    SkyBox::skyBackId = Texture::LoadMyBitmap("images/hexagon_back.bmp");
+    
+//    SkyBox::skyTopId = Texture::LoadMyBitmap("images/oasisday_top.bmp");    
+//    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/oasisday_left.bmp");
+//    SkyBox::skyRightId = Texture::LoadMyBitmap("images/oasisday_right.bmp");
+//    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/oasisday_front.bmp");
+//    SkyBox::skyBackId = Texture::LoadMyBitmap("images/oasisday_back.bmp");
+    
+    
     Water::texid = Texture::LoadMyBitmap("images/water.bmp");
     Texture::ROCK_TILE = Texture::LoadMyBitmap("images/rock.bmp");
 
 }
+
+//void handlekey() {
+//
+//
+//    //step light
+//    if (keys['9']) {
+//        light->stepPlus();
+//    }
+//
+//    if (keys['0']) {
+//        light->stepMinus();
+//    }
+//
+//
+//    if (keys['w']) {
+//        camera->stepForward();
+//    }
+//    if (keys['s']) {
+//        camera->stepBackward();
+//    }
+//    if (keys['a']) {
+//        camera->stepRight();
+//    }
+//    if (keys['d']) {
+//        camera->stepLeft();        
+//    }
+//    if (keys['q']) {
+//        camera->stepUp();
+//    }
+//    if (keys['e']) {
+//        camera->stepDown();
+//    }
+//
+//
+//    if (keys['i']) {
+//        camera->yowUp();
+//    }
+//    if (keys['k']) {
+//        camera->yowDown();
+//    }
+//    if (keys['j']) {
+//        camera->stepRight();
+//    }
+//    if (keys['l']) {
+//        camera->stepLeft();
+//    }
+//    if (keys['u']) {
+//        camera->rolePlus();
+//    }
+//    if (keys['o']) {
+//        camera->roleMinus();
+//    }
+//
+//
+//    if (keys['R']) {
+//        camera->reset();
+//    }
+//
+//
+//    if (keys['f']) {
+//
+//    }
+//    if (keys['h']) {
+//
+//    }
+//    if (keys['t']) {
+//
+//    }
+//    if (keys['g']) {
+//
+//    }
+//    if (keys['r']) {
+//
+//    }
+//    if (keys['y']) {
+//
+//    }
+//
+//
+//
+//
+//    if (keys['1']) {
+//
+//        camera->print();
+//    }
+//
+//    if (keys['/']) {
+//
+//    }
+//
+//    if (keys[VIRTUAL_KEY_DOWN]) {
+////        camera->circularDown();
+//        camera->yowUp();
+//        //        printf("DOWN\n");
+//    }
+//    if (keys[VIRTUAL_KEY_UP]) {
+////        camera->circularUp();
+//        camera->yowDown();
+//        //        printf("UP\n");
+//    }
+//
+//    if (keys[VIRTUAL_KEY_RIGHT]) {
+//        camera->pitchMinus();
+//        //        printf("right\n");
+//    }
+//
+//    if (keys[VIRTUAL_KEY_LEFT]) {
+//        camera->pitchPlus();
+//        //        printf("left\n");
+//    }
+//
+//    if (keys[VIRTUAL_KEY_PAGE_UP]) {
+//        light->stepPlus();
+//    }
+//    if (keys[VIRTUAL_KEY_PAGE_DOWN]) {
+//        light->stepMinus();
+//    }
+//
+//
+//    if (keys[27]) {
+//        exit(0);
+//    }
+//}
 
 void handlekey() {
 
@@ -266,12 +402,16 @@ void specialKeyUpListener(int key, int x, int y) {
             keys[VIRTUAL_KEY_PAGE_DOWN] = false;
             break;
 
-        case GLUT_KEY_INSERT:
+        case GLUT_KEY_INSERT:            
             break;
 
         case GLUT_KEY_HOME:
+            glEnable(GL_LIGHTING);
+            glEnable(GL_DEPTH_TEST);
             break;
         case GLUT_KEY_END:
+            glDisable(GL_LIGHTING);
+            glDisable(GL_DEPTH_TEST);
             break;
 
         default:
@@ -397,20 +537,27 @@ void display(void) {
 
     handlekey();
 
+    
     //Exposing camera
     camera->expose();
 
     //Light
     light->expose();
 
+    glColor3f(1, 1, 1);
+//    Drawing::DrawAxies();
+    
+    
+    glColor3f(1, 1, 1);    
+    //Skybox & Water
+    skyBox->setPosition(camera->getPosition());
+    skyBox->render();
+//        glTranslatef(0, 0, -1000);
+//        water->render();
+
+
     //World
     world->render();
-
-
-    //Skybox & Water
-    //    skyBox.render();
-    //    glTranslatef(0, 0, -1000);
-    //    water.render();
 
 
     glutSwapBuffers();
@@ -422,7 +569,7 @@ void reshape(int w, int h) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     //    gluPerspective(50, w / (float) h, 1.0f, 1000.0f);
-    gluPerspective(70, w / (float) h, 0.1f, 100000.0f);
+    gluPerspective(70, w / (float) h, 0.1f, 400000.0f);
 
     //glOrtho(0, 0, 1000, 1000, 1.0f, 1000.0f);
     glMatrixMode(GL_MODELVIEW); //set the matrix back to model
@@ -450,7 +597,7 @@ void init() {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(70, 1.0f, 0.1f, 100000.0f);
+    gluPerspective(70, 1.0f, 0.1f, 400000.0f);
 
     glutIgnoreKeyRepeat(1);
 
@@ -490,12 +637,14 @@ int main(int argc, char** argv) {
     //ADD mouse listeners:
     glutMouseFunc(mouseListener);
 
-    skyBox = new SkyBox(resource.worldWidth, resource.worldWidth);
+    
     water = new Water(resource.worldWidth, resource.worldWidth);
-    camera = new Camera(Vector(-20, 750, 175), Vector(13.57, -392.76, 1.17), Vector(-0.00, 0.00, 1.00));
+//    camera = new Camera(Vector(-20, 750, 175), Vector(13.57, -392.76, 1.17), Vector(-0.00, 0.00, 1.00));
+    camera = new Camera(Vector(7593,29000,-50), Vector(-28,-390,12), Vector(-0.00, 0.00, 1.00));
+    skyBox = new SkyBox(10000, 10000,camera->getPosition());
     light = new Light(0, 0, 1, 1000, 1000, 2);
 
-    world = new World();
+    world = new World(Vector(0,0,-60000),100);
 
     glutMainLoop();
 

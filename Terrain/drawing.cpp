@@ -23,25 +23,31 @@ void Drawing::DrawGrid() {
 
 void Drawing::DrawAxies() {
 
+
     glBegin(GL_LINES);
     {
-        glColor3f(1, 1, 1); //100% white
-        //Y axis
-        glVertex3f(0, -150, 0); // intentionally extended to -150 to 150, no big deal
-        glVertex3f(0, 150, 0);
-
-        glColor3f(1, 1, 0); //100% white
+        glColor3f(1, 0, 0); //100% white
         //X axis
-        glVertex3f(-150, 0, 0);
-        glVertex3f(150, 0, 0);
+        //        glVertex3f(-150, 0, 0);
+        glVertex3f(0, 0, 0);
+        glVertex3f(1000, 0, 0);
 
-        glColor3f(0, 1, 1); //100% white
+        glColor3f(0, 1, 0); //100% white
+        //Y axis
+        //        glVertex3f(0, -150, 0); // intentionally extended to -150 to 150, no big deal
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, 1000, 0);
+
+
+
+        glColor3f(0, 0, 1); //100% white
         //Z axis
-        //glVertex3f(0, 0, -150);
-        //glVertex3f(0, 0, 150);
+        //        glVertex3f(0, 0, -150);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, 0, 1000);
     }
     glEnd();
-
+    glColor3f(1, 1, 1);
     /*
     for(int i=-150;i<150;i+=5)
     {
@@ -113,13 +119,15 @@ void Drawing::DrawRectangleWithTexture(GLdouble width, GLdouble height) {
     glBegin(GL_QUAD_STRIP);
 
     {
-        glNormal3f(0, 1, 0);
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
+
         glTexCoord2f(0, 1);
         glVertex3f(0, 0, width);
+
         glTexCoord2f(1, 0);
         glVertex3f(height, 0, 0);
+
         glTexCoord2f(1, 1);
         glVertex3f(height, 0, width);
 

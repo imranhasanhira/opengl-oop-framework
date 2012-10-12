@@ -20,8 +20,8 @@ public:
     double worldHeight;
 
     Resource() {
-        delTheta = 2;
-        delStep = 70;
+        delTheta = .5;
+        delStep = 10;
 
         worldWidth = 20000;
         worldHeight = 20000;

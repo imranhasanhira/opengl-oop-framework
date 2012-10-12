@@ -26,7 +26,7 @@ public:
     Camera(Vector tEye, Vector tForward, Vector tUp);
     void reset();
     void expose();
-
+    Vector getPosition();
     void circularUp();
     void circularDown();
     void circularLeft();

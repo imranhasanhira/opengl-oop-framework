@@ -16,17 +16,24 @@ extern Resource resource;
 
 class SkyBox : public UIElement{
 public:
-    SkyBox(double width,double height);
+    SkyBox(double width,double height,Vector cameraPosition);
     SkyBox(const SkyBox& orig);
     virtual ~SkyBox();
     
-    static GLuint skyUpId;
+    static GLuint skyTopId;
     static GLuint skyLeftId;
     static GLuint skyRightId;
     static GLuint skyFrontId;
-    static GLuint skyBackId;
+    static GLuint skyBackId;    
+    
+    
+    void setPosition(Vector position);
 protected :
 	void paint();
+        void top();
+        void leftRight();
+        void frontBack();        
+        
 private:
     double width;
     double height;
