@@ -4,14 +4,17 @@
 #include "SkyBox.h"
 #include "time.h"
 
-World::World(Vector position,int skyBoxWidth) {
-    
-    
+World::World(Vector position, int skyBoxWidth) {
+
+
     this->position = position;
     ImageHeader* imageHeader = Texture::LoadBitmapPixelData("images/hm.bmp");
     //    imageHeader->pr();
     terrainWidth = imageHeader->width;
     terrainHeight = imageHeader->height;
+
+    terrainScale = skyBoxWidth / (double) terrainWidth;
+
     terrainHeightMap = new double*[terrainWidth];
     for (int i = 0; i < terrainWidth; i++) {
         terrainHeightMap[i] = new double[terrainHeight];
@@ -55,10 +58,11 @@ World::World(Vector position,int skyBoxWidth) {
     }
 
     generateTerrain();
-    srand(time(NULL));    
+    srand(time(NULL));
     delete(imageHeader);
-    
-    terrainScale = skyBoxWidth/(double)terrainWidth;
+
+
+
 }
 
 World::~World() {
@@ -137,6 +141,7 @@ void World::generateTerrain() {
 }
 
 void World::drawTerrain() {
+
     glPushMatrix();
 
     //starting drawing terrain
@@ -144,45 +149,50 @@ void World::drawTerrain() {
     glBindTexture(GL_TEXTURE_2D, Texture::ROCK_TILE);
 
     glEnable(GL_TEXTURE_2D);
-    glColor3f(1, 1, 1);
-    for (int i = 0; i < terrainHeight - 1; i++) {
-        glBegin(GL_TRIANGLE_STRIP);
-        for (int j = 0; j < terrainWidth - 1; j++) {
-            glNormal3f(CO(normalValue[j][i]));
-            //            glColor3f(heightMap[j][i] / 255.0, heightMap[j][i] / 255.0, heightMap[j][i] / 255.0);
-            glTexCoord2f(0, 0);
-            glVertex3f(j * terrainScale, i * terrainScale, terrainHeightMap[j][i]);
+    {
+        glColor3f(1, 1, 1);
+        for (int i = 0; i < terrainHeight - 1; i++) {
+            glBegin(GL_TRIANGLE_STRIP);
+            {
+                for (int j = 0; j < terrainWidth - 1; j++) {
+                    glNormal3f(CO(normalValue[j][i]));
+                    //            glColor3f(heightMap[j][i] / 255.0, heightMap[j][i] / 255.0, heightMap[j][i] / 255.0);
+                    glTexCoord2f(0, 0);
+                    glVertex3f(j * terrainScale, i * terrainScale, terrainHeightMap[j][i]);
 
-            glNormal3f(CO(normalValue[j][i + 1]));
-            //            glColor3f(heightMap[j][i + 1] / 255.0, heightMap[j][i + 1] / 255.0, heightMap[j][i + 1] / 255.0);
-            glTexCoord2f(0, 1);
-            glVertex3f(j * terrainScale, (i + 1) * terrainScale, terrainHeightMap[j][i + 1]);
+                    glNormal3f(CO(normalValue[j][i + 1]));
+                    //            glColor3f(heightMap[j][i + 1] / 255.0, heightMap[j][i + 1] / 255.0, heightMap[j][i + 1] / 255.0);
+                    glTexCoord2f(0, 1);
+                    glVertex3f(j * terrainScale, (i + 1) * terrainScale, terrainHeightMap[j][i + 1]);
 
-            glNormal3f(CO(normalValue[j + 1][i]));
-            //            glColor3f(heightMap[j + 1][i ] / 255.0, heightMap[j + 1][i ] / 255.0, heightMap[j + 1][i] / 255.0);
-            glTexCoord2f(1, 0);
-            glVertex3f((j + 1) * terrainScale, (i) * terrainScale, terrainHeightMap[j + 1][i ]);
+                    glNormal3f(CO(normalValue[j + 1][i]));
+                    //            glColor3f(heightMap[j + 1][i ] / 255.0, heightMap[j + 1][i ] / 255.0, heightMap[j + 1][i] / 255.0);
+                    glTexCoord2f(1, 0);
+                    glVertex3f((j + 1) * terrainScale, (i) * terrainScale, terrainHeightMap[j + 1][i ]);
 
-            glNormal3f(CO(normalValue[j + 1][i + 1]));
-            //            glColor3f(heightMap[j + 1][i + 1] / 255.0, heightMap[j + 1][i + 1] / 255.0, heightMap[j + 1][i + 1] / 255.0);
-            glTexCoord2f(1, 1);
-            glVertex3f((j + 1) * terrainScale, (i + 1) * terrainScale, terrainHeightMap[j + 1][i + 1]);
+                    glNormal3f(CO(normalValue[j + 1][i + 1]));
+                    //            glColor3f(heightMap[j + 1][i + 1] / 255.0, heightMap[j + 1][i + 1] / 255.0, heightMap[j + 1][i + 1] / 255.0);
+                    glTexCoord2f(1, 1);
+                    glVertex3f((j + 1) * terrainScale, (i + 1) * terrainScale, terrainHeightMap[j + 1][i + 1]);
 
 
+                }
+            }
+            glEnd();
         }
-        glEnd();
-    }
 
+    }
     glDisable(GL_TEXTURE_2D);
 
     glPopMatrix();
+
 }
 
 void World::paint() {
-    //    drawGrid();
-        glCallList(terrainCallListId);
-    drawAxis();
-//    drawTerrain();
+    //    drawAxis();
+    //        drawGrid();
+    glCallList(terrainCallListId);
+    //    drawTerrain();
 
 
 }

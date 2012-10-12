@@ -54,25 +54,25 @@ int previousTime, frameCount;
 
 void LoadTexture() {
 
-//    SkyBox::skyUpId = Texture::LoadMyBitmap("images/skyup1.bmp");
-//    SkyBox::skyBackId = Texture::LoadMyBitmap("images/skyback1.bmp");
-//    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/leftsky.bmp");
-//    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/frontsky.bmp");
-//    SkyBox::skyRightId = Texture::LoadMyBitmap("images/rightsky.bmp");
+    //    SkyBox::skyUpId = Texture::LoadMyBitmap("images/skyup1.bmp");
+    //    SkyBox::skyBackId = Texture::LoadMyBitmap("images/skyback1.bmp");
+    //    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/leftsky.bmp");
+    //    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/frontsky.bmp");
+    //    SkyBox::skyRightId = Texture::LoadMyBitmap("images/rightsky.bmp");
 
-    SkyBox::skyTopId = Texture::LoadMyBitmap("images/hexagon_top.bmp");    
+    SkyBox::skyTopId = Texture::LoadMyBitmap("images/hexagon_top.bmp");
     SkyBox::skyLeftId = Texture::LoadMyBitmap("images/hexagon_left.bmp");
     SkyBox::skyRightId = Texture::LoadMyBitmap("images/hexagon_right.bmp");
     SkyBox::skyFrontId = Texture::LoadMyBitmap("images/hexagon_front.bmp");
     SkyBox::skyBackId = Texture::LoadMyBitmap("images/hexagon_back.bmp");
-    
-//    SkyBox::skyTopId = Texture::LoadMyBitmap("images/oasisday_top.bmp");    
-//    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/oasisday_left.bmp");
-//    SkyBox::skyRightId = Texture::LoadMyBitmap("images/oasisday_right.bmp");
-//    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/oasisday_front.bmp");
-//    SkyBox::skyBackId = Texture::LoadMyBitmap("images/oasisday_back.bmp");
-    
-    
+
+    //    SkyBox::skyTopId = Texture::LoadMyBitmap("images/oasisday_top.bmp");    
+    //    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/oasisday_left.bmp");
+    //    SkyBox::skyRightId = Texture::LoadMyBitmap("images/oasisday_right.bmp");
+    //    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/oasisday_front.bmp");
+    //    SkyBox::skyBackId = Texture::LoadMyBitmap("images/oasisday_back.bmp");
+
+
     Water::texid = Texture::LoadMyBitmap("images/water.bmp");
     Texture::ROCK_TILE = Texture::LoadMyBitmap("images/rock.bmp");
 
@@ -274,7 +274,7 @@ void handlekey() {
     if (keys['r']) {
 
     }
-    if (keys['y']) {
+    if (keys['z']) {
 
     }
 
@@ -402,7 +402,7 @@ void specialKeyUpListener(int key, int x, int y) {
             keys[VIRTUAL_KEY_PAGE_DOWN] = false;
             break;
 
-        case GLUT_KEY_INSERT:            
+        case GLUT_KEY_INSERT:
             break;
 
         case GLUT_KEY_HOME:
@@ -527,6 +527,8 @@ void display(void) {
     //printf("%f\n", fps);
     //RenderString(100.0f, 100.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Hello");
 
+
+
     /* clear window */
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -537,28 +539,42 @@ void display(void) {
 
     handlekey();
 
-    
     //Exposing camera
+    glColor3f(1, 1, 1);
     camera->expose();
 
     //Light
+    glColor3f(1, 1, 1);
     light->expose();
 
+
+    //    glDisable(GL_LIGHTING);
+    //    glDisable(GL_DEPTH_TEST);
+
+
     glColor3f(1, 1, 1);
-//    Drawing::DrawAxies();
-    
-    
-    glColor3f(1, 1, 1);    
-    //Skybox & Water
     skyBox->setPosition(camera->getPosition());
     skyBox->render();
-//        glTranslatef(0, 0, -1000);
-//        water->render();
-
 
     //World
+    glColor3f(1, 1, 1);
     world->render();
 
+
+
+
+    //    Drawing::DrawAxies();
+
+
+
+
+
+    //        glTranslatef(0, 0, -1000);
+    //        water->render();
+
+
+    //    glEnable(GL_LIGHTING);
+    //    glEnable(GL_DEPTH_TEST);
 
     glutSwapBuffers();
 
@@ -611,16 +627,17 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);
 
-        glutInitWindowSize(800, 600);
-        glutInitWindowPosition(50, 0);
-        glutCreateWindow("Hell Gate");
+    glutInitWindowSize(800, 600);
+    glutInitWindowPosition(50, 0);
+    glutCreateWindow("Hell Gate");
 
-    //glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
-    //glutEnterGameMode(); //set glut to fullscreen using the settings in the line above
+    
 
     init(); //call the init function
 
-
+//    glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
+//    glutEnterGameMode(); //set glut to fullscreen using the settings in the line above         
+    
     glutDisplayFunc(display);
     glutIdleFunc(animate);
     glutReshapeFunc(reshape);
@@ -637,14 +654,14 @@ int main(int argc, char** argv) {
     //ADD mouse listeners:
     glutMouseFunc(mouseListener);
 
-    
+
     water = new Water(resource.worldWidth, resource.worldWidth);
-//    camera = new Camera(Vector(-20, 750, 175), Vector(13.57, -392.76, 1.17), Vector(-0.00, 0.00, 1.00));
-    camera = new Camera(Vector(7593,29000,-50), Vector(-28,-390,12), Vector(-0.00, 0.00, 1.00));
-    skyBox = new SkyBox(10000, 10000,camera->getPosition());
+    //    camera = new Camera(Vector(-20, 750, 175), Vector(13.57, -392.76, 1.17), Vector(-0.00, 0.00, 1.00));
+    camera = new Camera(Vector(1000, 1000, -50), Vector(-28, -390, 12), Vector(-0.00, 0.00, 1.00));
+    skyBox = new SkyBox(1000, 1000, camera->getPosition());
     light = new Light(0, 0, 1, 1000, 1000, 2);
 
-    world = new World(Vector(0,0,-60000),100);
+    world = new World(Vector(0, 0, 0), 1000);
 
     glutMainLoop();
 
