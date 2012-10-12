@@ -556,9 +556,14 @@ void display(void) {
     skyBox->setPosition(camera->getPosition());
     skyBox->render();
 
-    //World
-    glColor3f(1, 1, 1);
-    world->render();
+    glPushMatrix();
+    {
+        //World
+        glTranslatef(0,0,-1000);
+        glColor3f(1, 1, 1);
+        world->render();
+    }
+    glPopMatrix();
 
 
 
@@ -631,13 +636,13 @@ int main(int argc, char** argv) {
     glutInitWindowPosition(50, 0);
     glutCreateWindow("Hell Gate");
 
-    
+
 
     init(); //call the init function
 
-//    glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
-//    glutEnterGameMode(); //set glut to fullscreen using the settings in the line above         
-    
+    //    glutGameModeString("1366x768:32@75"); //the settings for fullscreen mode
+    //    glutEnterGameMode(); //set glut to fullscreen using the settings in the line above         
+
     glutDisplayFunc(display);
     glutIdleFunc(animate);
     glutReshapeFunc(reshape);
