@@ -1,3 +1,6 @@
 /Terrain/build
+/Terrain/build/*
 /Terrain/dist
+/Terrain/dist/*
 /Terrain/nbproject
+/Terrain/nbproject/*

@@ -43,10 +43,9 @@ const int VIRTUAL_KEY_PAGE_DOWN = 155;
 Resource resource;
 Logger logger;
 
-SkyBox *skyBox;
+//SkyBox *skyBox;
 Water *water;
 Camera *camera;
-//Camera camera(Vector(-8.57, -382.55, 89.60), Vector(8.57, 382.55, -89.60), Vector(767.51, 34275.08, 146421.71));
 World *world;
 Light *light;
 double fps;
@@ -60,11 +59,11 @@ void LoadTexture() {
     //    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/frontsky.bmp");
     //    SkyBox::skyRightId = Texture::LoadMyBitmap("images/rightsky.bmp");
 
-    SkyBox::skyTopId = Texture::LoadMyBitmap("images/hexagon_top.bmp");
-    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/hexagon_left.bmp");
-    SkyBox::skyRightId = Texture::LoadMyBitmap("images/hexagon_right.bmp");
-    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/hexagon_front.bmp");
-    SkyBox::skyBackId = Texture::LoadMyBitmap("images/hexagon_back.bmp");
+    //    SkyBox::skyTopId = Texture::LoadMyBitmap("images/hexagon_top.bmp");
+    //    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/hexagon_left.bmp");
+    //    SkyBox::skyRightId = Texture::LoadMyBitmap("images/hexagon_right.bmp");
+    //    SkyBox::skyFrontId = Texture::LoadMyBitmap("images/hexagon_front.bmp");
+    //    SkyBox::skyBackId = Texture::LoadMyBitmap("images/hexagon_back.bmp");
 
     //    SkyBox::skyTopId = Texture::LoadMyBitmap("images/oasisday_top.bmp");    
     //    SkyBox::skyLeftId = Texture::LoadMyBitmap("images/oasisday_left.bmp");
@@ -447,38 +446,6 @@ void mousePassiveMotionListener(int x, int y) {
     //cout << "Move : " << x << ", " << y << endl;
 }
 
-void TestGuassian() {
-    glPushMatrix();
-    {
-        glTranslatef(0, 0, 15);
-        glScalef(5, 0, 5);
-        for (double x = -40.0; x < 40; x += .01) {
-            double y = Gauss(x);
-            glBegin(GL_LINES);
-            {
-                glVertex3f(x, 10, y);
-                glVertex3f(x, 10, y + .5);
-            }
-            glEnd();
-        }
-    }
-    glPopMatrix();
-
-
-    glTranslatef(0, 0, 5);
-    glScalef(5, 0, 0);
-    for (double i = 0; i < 180; i += .1) {
-        double x = 40 * cos(D2R(i));
-        double y = 20 * sin(D2R(i));
-        glBegin(GL_LINE_STRIP);
-        {
-            glVertex3f(x, 0, y);
-            glVertex3f(x, 0, y + .5);
-        }
-        glEnd();
-    }
-}
-
 void animate() {
     glutPostRedisplay(); //Redraw the view port
 }
@@ -528,7 +495,6 @@ void display(void) {
     //RenderString(100.0f, 100.0f, GLUT_BITMAP_TIMES_ROMAN_24, "Hello");
 
 
-
     /* clear window */
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -540,46 +506,18 @@ void display(void) {
     handlekey();
 
     //Exposing camera
-    glColor3f(1, 1, 1);
     camera->expose();
 
     //Light
-    glColor3f(1, 1, 1);
     light->expose();
 
 
-    //    glDisable(GL_LIGHTING);
-    //    glDisable(GL_DEPTH_TEST);
+    //    skyBox->setPosition(camera->getPosition());
+    //    skyBox->render();
 
+    //World
+    world->render();
 
-    glColor3f(1, 1, 1);
-    skyBox->setPosition(camera->getPosition());
-    skyBox->render();
-
-    glPushMatrix();
-    {
-        //World
-        glTranslatef(0,0,-1000);
-        glColor3f(1, 1, 1);
-        world->render();
-    }
-    glPopMatrix();
-
-
-
-
-    //    Drawing::DrawAxies();
-
-
-
-
-
-    //        glTranslatef(0, 0, -1000);
-    //        water->render();
-
-
-    //    glEnable(GL_LIGHTING);
-    //    glEnable(GL_DEPTH_TEST);
 
     glutSwapBuffers();
 
@@ -634,7 +572,7 @@ int main(int argc, char** argv) {
 
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(50, 0);
-    glutCreateWindow("Hell Gate");
+    glutCreateWindow("Terrain");
 
 
 
@@ -662,11 +600,11 @@ int main(int argc, char** argv) {
 
     water = new Water(resource.worldWidth, resource.worldWidth);
     //    camera = new Camera(Vector(-20, 750, 175), Vector(13.57, -392.76, 1.17), Vector(-0.00, 0.00, 1.00));
-    camera = new Camera(Vector(1000, 1000, -50), Vector(-28, -390, 12), Vector(-0.00, 0.00, 1.00));
-    skyBox = new SkyBox(1000, 1000, camera->getPosition());
-    light = new Light(0, 0, 1, 1000, 1000, 2);
+    camera = new Camera(Vector(1000, 1000, -50), Vector(0, 0, 0), Vector(-0.00, 0.00, 1.00));
+    //    skyBox = new SkyBox(1000, 1000, camera->getPosition());
+    light = new Light(0, 0, 1, 10000, 10000, 2);
 
-    world = new World(Vector(0, 0, 0), 1000);
+    world = new World(Vector(0, 0, 0), 4000);
 
     glutMainLoop();
 

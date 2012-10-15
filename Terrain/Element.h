@@ -29,6 +29,9 @@ protected:
 
 
 public:
+    
+    void drawAxis();
+    void drawGrid();
 
     void pitchPlus(double angle = resource.delTheta);
 

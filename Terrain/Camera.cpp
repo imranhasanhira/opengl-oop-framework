@@ -29,8 +29,11 @@ Vector Camera::getPosition() {
  * Exposes the camera with gluLookAt function
  */
 void Camera::expose() {
+    
     Vector target = position + forward;
     gluLookAt(CO(position), CO(target), CO(up));
+    
+    drawAxis();
 }
 
 void Camera::setFaceToOrigin() {
@@ -55,30 +58,29 @@ void Camera::circularUp() {
 }
 
 void Camera::circularDown() {
-    setFaceToOrigin();
     if (gamma > -89) {
         gamma -= resource.delTheta;
     }
+    setFaceToOrigin();
 }
 
 void Camera::circularLeft() {
-    setFaceToOrigin();
     theta += resource.delTheta;
     if (theta > 360) {
         theta = 0;
     }
+    setFaceToOrigin();
 }
 
 void Camera::circularRight() {
-    setFaceToOrigin();
     theta -= resource.delTheta;
     if (theta < 0) {
         theta = 360;
     }
+    setFaceToOrigin();
 }
 
 void Camera::print() {
-
     position.showln();
     forward.showln();
     up.showln();

@@ -9,6 +9,8 @@
 #include <GL/glut.h>  
 #include <GL/glext.h>
 
+#include "Vector.h"
+
 #ifndef Texture_H
 #define	Texture_H
 
@@ -32,6 +34,14 @@ public:
 
     void pr() {
         printf("(%d, %d, %d, %d) ", r, g, b, a);
+    }
+
+    Vector v() {
+        return Vector(r, g, b);
+    }
+
+    Vector norm() {
+        return Vector(r, g, b) / 255;
     }
 };
 
@@ -82,7 +92,7 @@ class Texture {
 public:
     Texture();
     static int LoadMyBitmap(char* filename);
-    static ImageHeader* LoadBitmapPixelData(char* filename);
+    static ImageHeader* LoadBitmapPixelData(const char* filename);
     virtual ~Texture();
 
     static GLuint ROCK_TILE;

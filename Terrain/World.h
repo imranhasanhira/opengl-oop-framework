@@ -10,16 +10,18 @@
 
 
 #include "UIElement.h"
+#include "Texture.h"
+#include "stdlib.h"
 
 class World : public UIElement {
 public:
-    World(Vector position,int skyBoxWidth);
+    World(Vector position, int skyBoxWidth);
     ~World();
-    void drawAxis();
-    void drawGrid();
     int terrainWidth, terrainHeight;
     double** terrainHeightMap;
+    ColorRGBA** terrainColorMap;
     Vector** normalValue;
+    int numberOfTextureImage;
 
     GLuint terrainCallListId;
     double terrainScale;
@@ -28,6 +30,9 @@ public:
 
     void drawTerrain();
 
+    ColorRGBA blend(ImageHeader** textures, int i, int j);
+
+    
 protected:
     void paint();
 

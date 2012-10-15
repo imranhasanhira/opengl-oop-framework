@@ -66,7 +66,8 @@ int Texture::LoadMyBitmap(char* filename) {
     return (num_texture);
 }
 
-ImageHeader* Texture::LoadBitmapPixelData(char* filename) {
+ImageHeader* Texture::LoadBitmapPixelData(const char* filename) {
+    printf("Reading file : %s\n", filename);
     int i, j = 0;
     FILE *l_file;
     BITMAPFILEHEADER fileheader;
